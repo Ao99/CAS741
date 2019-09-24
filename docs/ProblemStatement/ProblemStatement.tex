@@ -3,11 +3,11 @@
 \usepackage{tabularx}
 \usepackage{booktabs}
 
-\title{CAS 741: Problem Statement\\Title of Project}
+\title{CAS 741: Problem Statement\\Medical Imaging Applications}
 
-\author{Author name and macid}
+\author{Ao Dong\\400282335}
 
-\date{}
+\date{22-09-2019}
 
 \input{../Comments}
 
@@ -21,19 +21,39 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+Sep 22 & Ao Dong & Initial draft\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-Put your problem statement here.  Comments to you can be added, like this:
+\section*{Problem}
+Traditionally, when a patient goes through a single time of MRI or CT scan, there usually will be dozens if not hundreds of medical images produced. This fact can cause several problems:
 
-\wss{comment}
+\begin{itemize}
+\item The radiologists and doctors may have to carefully check every angle and intersection of the big number of images, which is time consuming.
+\item Human mistakes are more likely to happen while dealing with tremendous data of 2d images representing 3d human body or organs.
+\item Medical researchers, especially medical students lacking clinical experience, may face the same difficulties of viewing, studying and researching these images.
+\item Despite the large amount of data, if additional views are needed after the scan is done, the patient may still be called back for re-scanning.
+\end{itemize}
 
-You can also leave comments for yourself, like this:
+\section*{Proposed Solution}
+To solve the problems, software can be developed to display and analyze medical images. Additionally, although MRI and CT scans may be produced as 2D data set, they can be transformed into 3D through the software, then rendered images can be viewed in 3D.
 
-\an{comment}
+\medskip
+This kind of software can greatly reduce processing time and increase efficiency. Moreover, the analysis functions and increased cognitive awareness can reduce human mistakes. The software can also rebuild additional views from the original data without calling back the patient.
+
+\section*{Context}
+ \subsection*{Environment}
+The software should be able to run with Windows 10, macOS 10.14, and Ubuntu Linux 18.04. It is also expected to be compatible with other versions of Windows, macOS and Linux, but the compatibility will not be guaranteed nor tested.
+
+ \subsection*{Stakeholders}
+Specific stakeholders include:
+\begin{itemize}
+\item Dr. Spencer Smith
+\item Dr. Jacques Carette
+\item Peter Michalski
+\item Students of CAS741 
+\item Individuals studying or working in fields related to medical imaging
+\end{itemize}
 
 \end{document}
