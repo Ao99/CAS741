@@ -22,6 +22,7 @@
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
 Sep 22 & Ao Dong & Initial draft\\
+Sep 29 & Ao Dong & Revised according to Prof. Smith's suggestion\\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -37,10 +38,10 @@ Traditionally, when a patient goes through a single time of MRI or CT scan, ther
 \end{itemize}
 
 \section*{Proposed Solution}
-To solve the problems, software can be developed to display and analyze medical images. Additionally, although MRI and CT scans may be produced as 2D data set, they can be transformed into 3D through the software, then rendered images can be viewed in 3D.
+To solve the problems, software can be developed to display and analyze medical images. There are several existing libraries providing medical image processing services. We can rely on one of the libraries to build our applications.
 
 \medskip
-This kind of software can greatly reduce processing time and increase efficiency. Moreover, the analysis functions and increased cognitive awareness can reduce human mistakes. The software can also rebuild additional views from the original data without calling back the patient.
+ A family of applications can be built base on the previous idea. For example, although MRI and CT scans may be produced as 2D data sets, some software can have the functions of transforming them into 3D data, then rendered images can be viewed in 3D. This kind of software can greatly reduce processing time and increase efficiency. Moreover, some software may have the analysis functions, therefore the increased cognitive awareness can reduce human mistakes. Another example is that a software can also be able to rebuild additional views from the original data without calling back the patient.
 
 \section*{Context}
  \subsection*{Environment}
@@ -49,8 +50,9 @@ The software should be able to run with Windows 10, macOS 10.14, and Ubuntu Linu
  \subsection*{Stakeholders}
 Specific stakeholders include:
 \begin{itemize}
-\item Dr. Spencer Smith
-\item Dr. Jacques Carette
+\item Dr.\ Spencer Smith
+\item Dr.\ Jacques Carette
+\item Dr.\ Michael Noseworthy
 \item Peter Michalski
 \item Students of CAS741 
 \item Individuals studying or working in fields related to medical imaging
