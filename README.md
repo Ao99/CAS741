@@ -1,6 +1,6 @@
-# Project Name
+# Medical Imaging Applications
 
-Developer Name:
+Developer Name: Ao Dong
 
 This project is a reimplementation of ...
 
