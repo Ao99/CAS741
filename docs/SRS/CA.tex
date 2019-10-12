@@ -16,7 +16,9 @@
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
-
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+\usepackage{multirow}
 \usepackage[round]{natbib}
 
 %\usepackage{refcheck}
@@ -72,14 +74,24 @@
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
 
-\newcommand{\famname}{FamName} % PUT YOUR PROGRAM NAME HERE
+\newcommand{\famname}{MIA} % PUT YOUR PROGRAM NAME HERE
 
 \usepackage{fullpage}
 
+%tikstyle commands
+% Define block styles
+\tikzstyle{context} = [rectangle, rounded corners,  text width=2.5cm, minimum size=2.5cm,text centered, draw=black, fill=white!30]
+\tikzstyle{strategy} = [trapezium, trapezium left angle=70, trapezium right angle=110, text width=3cm, minimum height=1cm, text centered, draw=black, fill=white!30]
+\tikzstyle{subclaim} = [rectangle, text width=3cm, minimum height=1cm, text centered, draw=black, fill=white!30]
+\tikzstyle{goal} = [rectangle, text width=5cm, minimum height=1cm, text centered, draw=black, fill=white!30]
+\tikzstyle{assumption} = [ellipse, text width=3cm, minimum height=1cm, text centered, draw=black, fill=white!30]
+\tikzstyle{evidence} = [circle, text width=2cm, minimum size=2cm, text centered, draw=black, fill=white!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
 \begin{document}
 
-\title{Program Family Title \wss{\famname should appear in the title}} 
-\author{Author Name}
+\title{Commonalities Analysis for Medical Imaging Applications} 
+\author{Ao Dong}
 \date{\today}
 
 \maketitle
@@ -93,8 +105,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Oct 11 & 1.0 & Initial draft\\
 \bottomrule
 \end{tabularx}
 
@@ -118,20 +129,11 @@ description of the unit and the SI name.
     \toprule		
     \textbf{symbol} & \textbf{unit} & \textbf{SI}\\
     \midrule 
-    \si{\metre} & length & metre\\
-    \si{\kilogram} & mass	& kilogram\\
-    \si{\second} & time & second\\
-    \si{\celsius} & temperature & centigrade\\
-    \si{\joule} & energy & Joule\\
-    \si{\watt} & power & Watt (W = \si{\joule\per\second})\\
+    N/A\\
     \bottomrule
   \end{tabular}
   %	\caption{Provide a caption}
 %\end{table}
-
-\wss{Only include the units that your CA actually uses.  If there are no units
-  for your problem, like for a general purpose library, you should still include
-the heading, with the content ``not applicable'' (or similar).}
 
 \subsection{Table of Symbols}
 
@@ -145,15 +147,76 @@ systems.  The symbols are listed in alphabetical order.
 \noindent \begin{longtable*}{l l p{12cm}} \toprule
 \textbf{symbol} & \textbf{unit} & \textbf{description}\\
 \midrule 
-$A_C$ & \si[per-mode=symbol] {\square\metre} & coil surface area
+$a$ & N/A & dimension of spatial coordinates
 \\
-$A_\text{in}$ & \si[per-mode=symbol] {\square\metre} & surface area over 
-which heat is transferred in
+$b$ & N/A & dimension of feature values
+\\
+$C_{1}$ & N/A & the first class with pixels in $[0, k]$
+\\
+$C_{2}$ & N/A & the second class with pixels in $[k+1, L-1]$
+\\
+$f$ & N/A & function defining an input image
+\\
+$F$ & N/A & input medical image
+\\
+$g$ & N/A & function defining an output image
+\\
+$G$ & N/A & output segmentation image
+\\
+$h$ & N/A & function defining a mathematical image
+\\
+$H$ & N/A & 2D digital grayscale image
+\\
+$i$ & N/A & intensity value
+\\
+$k$ & N/A & threshold value in Otsu' Method
+\\
+$k_{1}$ & N/A & threshold value in Otsu' Method with multiple thresholds
+\\
+$k_{2}$ & N/A & threshold value in Otsu' Method with multiple thresholds
+\\
+$k^{\star}$ & N/A & optimal  threshold  value found by Otsu' Method
+\\
+$k^{\star}_{1}$ & N/A & optimal  threshold  value found by Otsu' Method with multiple thresholds
+\\
+$k^{\star}_{2}$ & N/A & optimal  threshold  value found by Otsu' Method with multiple thresholds
+\\
+$L$ & N/A & number  of  the  discrete  levels  of  the  feature value
+\\
+$m_{1}$ & N/A & mean intensity of the pixels in $C_{1}$
+\\
+$m_{2}$ & N/A & mean intensity of the pixels in $C_{2}$
+\\
+$m_{3}$ & N/A & mean intensity of the pixels in the third class
+\\
+$m_{G}$ & N/A & mean global intensity
+\\
+$p_{i}$ & N/A & normalized histogram
+\\
+$P_{1}$ & N/A & probability of the first class $C_{1}$
+\\
+$P_{2}$ & N/A & probability of the second class $C_{2}$
+\\
+$P_{3}$ & N/A & probability of the third class
+\\
+$\mathbb{R}$ & N/A & set of all real numbers
+\\
+$\sigma_{B}$ & N/A & between-class variance
+\\
+$T_{h}$ & N/A & threshold value for segmentation
+\\
+$x$ & N/A & x-axial coordinate of a image
+\\
+$y$ & N/A & y-axial coordinate of a image
+\\
+$X$ & N/A & x-axial pixel length of an image
+\\
+$Y$ & N/A & y-axial pixel length of an image
+\\
+$\mathbb{Z}$ & N/A & set of all integers
 \\ 
 \bottomrule
 \end{longtable*}
-\wss{Use your problems actual symbols.  The si package is a good idea to use for
-  units.}
 
 \subsection{Abbreviations and Acronyms}
 
@@ -162,21 +225,22 @@ which heat is transferred in
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  2D & Two-Dimensional\\
+  3D & Three-Dimensional\\
   A & Assumption\\
+  CA & Commonalities Analysis\\
   DD & Data Definition\\
   GD & General Definition\\
   GS & Goal Statement\\
   IM & Instance Model\\
   LC & Likely Change\\
+  \famname & Medical Image Applications\\
   PS & Physical System Description\\
   R & Requirement\\
-  SRS & Software Requirements Specification\\
-  \famname{} & \wss{put your famram name here}\\
   T & Theoretical Model\\
+  VTK & the Visualization Toolkit\\
   \bottomrule
 \end{tabular}\\
-
-\wss{Add any other abbreviations or acronyms that you add}
 
 \newpage
 
@@ -188,22 +252,64 @@ which heat is transferred in
 
 \section{Introduction}
 
-\wss{This CA template is based on \citet{Smith2006}.  It
-  will get you started, but you will have to make changes.  Any changes to
-  section headings should be approved by the instructor, since that implies a
-  deviation from the template.  Although the bits shown below do not include
-  type information, you may need to add this information for your problem.}
+Medical imaging technologies in medical diagnoses have become essential and effective tools for professionals in medicine. Computers are also widely used to generate, process, and visualize medical images. There is a big family of computer software developed to serve these purposes.
 
-\wss{Feel free to change the appearance of the report by modifying the LaTeX
-  commands.}
+The following sections provide an overview of the Commonalities Analysis (CA) for the family of Medical Imaging Applications (\famname). This section explains the purpose of this document, the scope of the family, the characteristics of the intended reader, and the organization of the document. 
 
 \subsection{Purpose of Document}
 
+The major purpose of this document is to describe some commonalities of \famname. Goals, assumptions, theoretical models, definitions, and other model derivation information are specified, allowing the reader to fully understand and verify the purpose and scientific basis of \famname. This CA will remain abstract, describing what problem is being solved, but not how to solve it.
+
+This document will be used as a starting point for subsequent development phases, including writing the design specification and the software verification and validation plan. The design document will show how the requirements are to be realized, including decisions
+on the numerical algorithms and programming environment. The verification and validation plan will show the steps that will be used to increase confidence in the software documentation and the implementation. Although the CA fits in a series of documents that follow the so-called waterfall model, the actual development process is not constrained in any way. Even when the waterfall model is not followed, as \cite{ParnasAndClements1986} point out, the most logical way to present the documentation is still to “fake” a rational design process.
+
 \subsection{Scope of the Family} 
+
+According to \cite{Bankman2000}, \famname{} deal with 6 different basic problems, while \cite{Angenent2006} pointed out that 4 fundamental problems are solved by \famname. While both mentioned Segmentation, Registration and Visualization of medical images, Bankman also included Enhancement, Quantification and a section covering some other functions~\cite{Bankman2000}. On the other hand, Angenent's team included Simulation~\cite{Angenent2006}. According to \cite{wiki:001}, \famname{} have major functions in categories such as Segmentation, Registration, Visualization (including the basic display, reformatted views and 3D volume rendering), Statistical Analysis, Image-based Physiological Modelling, etc. As \cite{Kim2011} describe, the general steps of medical image analysis after obtaining digital data include Enhancement, Segmentation, Feature Extraction, Classification and Interpretation.
+
+The major functions of \famname{} can be divided into several sections and sub sections as shown in Figure \ref{fg_miafunctions}.
+
+\begin{center}
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept color=orange!40, 
+	level 1/.append style={level distance=5cm,sibling angle=90},
+	level 2/.append style={level distance=3cm,sibling angle=90},
+	level 3/.style={level distance=3cm,sibling angle=60}]
+\node{\famname}
+	child[concept color=teal!40] { node {Enhancement}}
+	child[concept color=teal!40] { node {Analysis}
+	    child[concept color=purple!50,] { node {Segmentation}}
+    	child[concept color=blue!30] { node {Registration}}
+	    child[concept color=blue!30] { node {Statistical Analysis}
+	        child { node {Feature Extraction}}
+	        child { node {Classification}}
+	        child { node {Interpretation}}
+	}}
+	child[concept color=teal!40] { node {Simulation/\\Modeling}}
+    child[concept color=teal!40] { node {Visualization}
+	    child[concept color=blue!30] { node {2D Display}}
+	    child[concept color=blue!30] { node {3D Rendering}}
+	    child[concept color=blue!30] { node {Reformatted Views}}
+    	}
+;
+\end{tikzpicture}
+\captionof{figure}{Major functions of \famname}
+\label{fg_miafunctions}
+\end{center}
+
+In this project, the scope of the family is limited to the software with the Segmentation functions.
 
 \subsection{Characteristics of Intended Reader} 
 
+Reviewers of this documentation should have an understanding of heat transfer theory from
+level 3 or 4 mechanical engineering and differential equations from level 1 and 2 calculus.
+The users of MIA can have a lower level of expertise, as explained in Section \ref{sec_UserCharacteristics}.
+
+
 \subsection{Organization of Document}
+
+The organization of this document follows the template for an CA for scientific computing software proposed by \cite{Parnas1972} and \cite{ParnasAndClements1986}. The presentation follows the standard pattern of presenting goals, theories, definitions, and assumptions. For readers that would like a more bottom up approach, they can start reading the instance
+models in Section \ref{sec_instance} and trace back to find any additional information they require.
+The goal statements (Section \ref{sec_goalstatements}) are refined to the theoretical models and the theoretical models (Section \ref{sec_theoretical}) to the instance models (Section \ref{sec_instance}). The instance models to be solved are referred to as \iref{IM_otsufindk}, \iref{IM_globaloutput}, \iref{IM_multifindk}, \iref{IM_multioutput}.
 
 \section{General System Description}
 
@@ -213,34 +319,71 @@ constraints.
 
 \subsection{Potential System Contexts}
 
-\wss{Your system context will likely include an explicit list of user and system
-  responsibilities}
+Figure \ref{fg_syscontext} shows the system context. A circle represents an external entity outside the software, the user in this case. A rectangle represents the software system itself (\famname).
+Arrows are used to show the data flow between the system and its environment.
+\famname{} are mostly self-contained. The only external interaction is through the user interface. The responsibilities of the user and the system are as follows:
 
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item 
+\item Provide the input data to the system, ensuring no errors in the data entry
+\item Take care that consistent units are used for input variables
 \end{itemize}
 \item \famname{} Responsibilities:
 \begin{itemize}
-\item Detect data type mismatch, such as a string of characters instead of a
-  floating point number
-\item 
+\item Detect data type mismatch, such as a text file instead of a image file
+\item Determine if the inputs satisfy the required mathematical and software constraints
+\item Calculate the required outputs
 \end{itemize}
 \end{itemize}
 
-\subsection{Potential User Characteristics} \label{SecUserCharacteristics}
+\begin{center}
+\begin{tikzpicture}
+    \node (n1) [evidence] {User};
+    \node (n2) [context ,right of= n1, node distance = 2.1in] {\famname};
+    \node (n3) [evidence, right of= n2, node distance = 4.4in] {User};
+    \draw [arrow] (n1.0)  -- node[above]{Medical Image}  (n2.180);
+    \draw [arrow] (n2.0)  -- node[above]{Optimal threshold values, segmentation image}  (n3.180);
+\end{tikzpicture}
+\captionof{figure}{System Context}
+\label{fg_syscontext}
+\end{center}
+
+\subsection{Potential User Characteristics} \label{sec_UserCharacteristics}
 
 The end user of \famname{} should have an understanding of undergraduate Level
 1 Calculus and Physics.
 
 \subsection{Potential System Constraints}
 
-\wss{You may not have any system constraints}
+There are no system constraints.
 
 \section{Commonalities}
+This section first presents the background overview, which gives a high-level view of the
+problem to be solved. This is followed by the solution characteristics specification, which
+presents the assumptions, theories, definitions and finally the instance models.
 
-\subsection{Background Overview} \label{Sec_Background}
+\subsection{Background Overview} \label{sec_Background}
+Segmentation, separation of structures of interest from the background and from each other~\cite{Bankman2000}. Image segmentation is the process of partitioning an image into different meaningful segments. In medical imaging, these segments often correspond to different tissue classes, organs, pathologies, or other biologically relevant structures~\cite{Forouzanfar2010}. Image segmentation is one of the most interesting and challenging problems in computer vision generally and medical imaging applications specifically~\cite{Elnakib2011}.
+
+Regarding the different medical image segmentation methods, \cite{Withey2007} suggested that they can be divided into 3 generations from low-level to high-level technologies as shown in table \ref{fg_segmethods}.
+
+This document is focusing on the Intensity Threshold method.
+
+\begin{center}
+\begin{table}[h]
+\begin{tabular}{|c|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{Generation}} & \multicolumn{3}{c|}{\textbf{Category}} \\ \cline{2-4} 
+ & \multicolumn{1}{c|}{\textbf{Region-based}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Boundary\\ Following\end{tabular}}} & \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Pixel\\ Classification\end{tabular}}} \\ \hline
+\textbf{$1^{st}$} & • Region growing & \begin{tabular}[c]{@{}l@{}}• Edge tracing\\ (heuristic)\end{tabular} & • Intensity threshold \\ \hline
+\textbf{$2^{nd}$} & \begin{tabular}[c]{@{}l@{}}• Deformable models\\ • Graph search\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Minimal path\\ • Target tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means clustering\\ • Neural networks\\ • Multiresolution\end{tabular} \\ \hline
+\textbf{$3^{rd}$} & \begin{tabular}[c]{@{}l@{}}• Shape models\\ • Appearance models\\ • Rule-based\\ • Coupled surfaces\end{tabular} &  & \begin{tabular}[c]{@{}l@{}}• Atlas-based\\ • Rule-based\end{tabular} \\ \hline
+\end{tabular}
+\caption{Segmentation Methods~\cite{Withey2007}}
+\label{fg_segmethods}
+\end{table}
+\end{center}
 
 \subsection{Terminology and  Definitions}
 
@@ -250,15 +393,22 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item 
-
+\item Image: in Mathematics, an image is defined as a function $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$.
+\item Digital image: When the spatial coordinates and the function value are finite and discrete, the image is called digital, shown as $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.
+\item Grayscale image: In digital photography, computer-generated imagery, and colorimetry, a grayscale or greyscale image is one in which the value of each pixel is a single sample representing only an amount of light, that is, it carries only intensity information.
+\item 2D Digital Image: the computer-based generation of digital images - mostly from two-dimensional models (such as 2D geometric models, text, and digital images) and by techniques specific to them.
+\item Medical Image: visual representations of the interior of a body for clinical analysis and medical intervention, as well as visual representation of the function of some organs or tissues (physiology).
+\item Grayscale Intensity: represents gray levels, where the intensity 0 usually represents black and the intensity 255 usually represents full intensity, or white.
+\item Shades of Gray: variations of gray or grey include achromatic grayscale shades, which lie exactly between white and black, and nearby colors with low colorfulness.
+\item Coordinates: in geometry, a coordinate system is a system that uses one or more numbers, or coordinates, to uniquely determine the position of the points or other geometric elements on a manifold such as Euclidean space.
+\item Histogram: a histogram is an accurate representation of the distribution of numerical data. It is an estimate of the probability distribution of a continuous variable.
+\item Pixel: in digital imaging, a pixel, pel, or picture element is a physical point in a raster image, or the smallest addressable element in an all points addressable display device; so it is the smallest controllable element of a picture represented on the screen.
+\item VTK: the Visualization Toolkit is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and 2D plotting.
 \end{itemize}
 
 \subsection{Data Definitions} \label{sec_datadef}
 
-This section collects and defines all the data needed to build the instance
-models. The dimension of each quantity is also given.  \wss{Modify the examples
-  below for your problem, and add additional definitions as appropriate.}
+This section collects and defines all the data needed to build the instance models. The dimension of each quantity is also given.
 
 ~\newline
 
@@ -268,54 +418,266 @@ models. The dimension of each quantity is also given.  \wss{Modify the examples
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
 \hline
 \rowcolor[gray]{0.9}
-Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{FluxCoil}\\
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_digitalimage}\\
 \hline
-Label& \bf Heat flux out of coil\\
+Label& \bf Digital Image\\
 \hline
-Symbol &$q_C$\\
+Symbol & N/A\\
 \hline
 % Units& $Mt^{-3}$\\
 % \hline
-  SI Units & \si{\watt\per\square\metre}\\
+  SI Units & N/A\\
   \hline
-  Equation&$q_C(t) = h_C (T_C - T_W(t))$, over area $A_C$\\
+  Equation & $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$\\
   \hline
   Description & 
-                $T_C$ is the temperature of the coil (\si{\celsius}).  $T_W$ is the temperature of the water (\si{\celsius}).  
-                The heat flux out of the coil, $q_C$ (\si{\watt\per\square\metre}), is found by
-                assuming that Newton's Law 
-                of Cooling applies (\aref{A_Newt_coil}).  This law (\dref{NL}) is used on the surface of
-                the coil, which has area $A_C$ (\si{\square\metre}) and heat 
-                transfer coefficient $h_C$
-                (\si{\watt\per\square\metre\per\celsius}).  This equation
-                assumes that the temperature of the coil is constant over time (\aref{A_tcoil}) and that it does not vary along the length
-                of the coil (\aref{A_tlcoil}).
+    In Mathematics, an image is defined as a function $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$. Usually, $a = 2$ and, in the simplest case, $b = 1$. When the spatial coordinates and the function value are finite and discrete, the image is called digital, shown as $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.      
   \\
   \hline
-  Sources& Citation here\\
+  Sources& \cite{Ferrari2018a}\\
   \hline
-  Ref.\ By & \iref{ewat}\\
+  Ref.\ By & \ddref{DD_2Dimage}\\
   \hline
 \end{tabular}
 \end{minipage}\\
 
-\subsection{Goal Statements}
+~\newline
 
-\noindent Given the \wss{inputs}, the goal statements are:
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_2Dimage}\\
+\hline
+Label& \bf 2D Digital Grayscale Image\\
+\hline
+Symbol & $H$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $H_{X \times Y} = [h(x,y)]_{X \times Y}$\\
+  \hline
+  Description & 
+    In this project, we only consider 2D grayscale images, as stated in \aref{A_2Dgrayscale}. The images can be defined as $h : \mathbb{Z}^{2} \rightarrow \mathbb{Z}$, or the above equation. $X \times Y$ is the size of the image. $(x,y)$ denotes the 2D spatial coordinates, where $x \in [0,X-1]$ and $y \in [0,Y-1]$
+  \\
+  \hline
+  Sources& \cite{Pal1993}\\
+  \hline
+  Ref.\ By & \ddref{DD_inoutimage}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_inoutimage}\\
+\hline
+Label& \bf Input and Output Medical Image\\
+\hline
+Symbol & $F$ and $G$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $F_{X \times Y} = [f(x,y)]_{X \times Y}$ and $G_{X \times Y} = [g(x,y)]_{X \times Y}$\\
+  \hline
+  Description & 
+    F and G denote the input and output medical image respectively, which are both 2D Digital Grayscale. $X \times Y$ is the size of the image. $(x,y)$ denotes the 2D spatial coordinates, where $x \in [0,X-1]$ and $y \in [0,Y-1]$
+  \\
+  \hline
+  Sources& \cite{Pal1993}\\
+  \hline
+  Ref.\ By & \tref{T_globalthres} \tref{T_multithres} \iref{IM_otsufindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_featurevalue}\\
+\hline
+Label& \bf Input and Output Image Feature Value\\
+\hline
+Symbol & $f$ and $g$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $f(x,y), g(x,y) \in \{0,1,...,L-1\}$\\
+  \hline
+  Description & 
+    $(x,y)$ denotes the 2D spatial coordinates and $f(x,y)$, $g(x,y)$ the feature values at $(x,y)$ of the input and output image respectively. Depending on the type of image, the feature value could be light intensity, depth, intensity of radio wave or temperature. $\{0,1,...,L-1\}$ is the set of discrete levels of the feature value, and $L$ is the number of the levels. In this project, we refer to $f(x,y)$ and $g(x,y)$ as gray intensity value (or intensity) at $(x,y)$.
+  \\
+  \hline
+  Sources& \cite{Pal1993}\\
+  \hline
+  Ref.\ By & \ddref{DD_inoutimage} \ddref{DD_betweenvariance} \tref{T_globalthres} \tref{T_multithres} \iref{IM_otsufindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_numberofshadesgray}\\
+\hline
+Label& \bf Number of the shades of gray\\
+\hline
+Symbol & $L$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $L = 256$\\
+  \hline
+    Description & 
+    $L$ is the number of the shades of gray, also referred as number of intensity levels, where $L=2^{8}=256$, as stated in \aref{A_8bitinteger}.
+  \\
+  \hline
+  Sources& \url{https://homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm}\\
+  \hline
+  Ref.\ By & \ddref{DD_featurevalue} \ddref{DD_thresvalue} \ddref{DD_betweenvariance} \tref{T_globalthres} \tref{T_multithres} \tref{T_otsu} \iref{IM_otsufindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_thresvalue}\\
+\hline
+Label& \bf Threshold Value\\
+\hline
+Symbol & $T_{h}$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $T_{h} \in \{1,...,L-2\}$\\
+  \hline
+  Description & 
+    In this project, we refer to $f(x,y)$ and $g(x,y)$ as gray intensity value (or intensity) at $(x,y)$. Then, $T_{h} \in [1,254]$.
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b}\\
+  \hline
+  Ref.\ By & \ddref{DD_betweenvariance} \tref{T_globalthres} \tref{T_multithres} \iref{IM_otsufindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+\hline
+\rowcolor[gray]{0.9}
+Number& DD\refstepcounter{datadefnum}\thedatadefnum \label{DD_betweenvariance}\\
+\hline
+Label& \bf Between-class Variance\\
+\hline
+Symbol & $\sigma^{2}_{B}$\\
+\hline
+% Units& $Mt^{-3}$\\
+% \hline
+  SI Units & N/A\\
+  \hline
+  Equation & $\sigma^{2}_{B} = P_{1}(m_{1} - m_{G})^{2} + P_{2}(m_{2} - m_{G})^{2}$\\
+  \hline
+  Description &
+    $n_{i}$ is the number of pixels of intensity $i$, where $i \in \{0,1,...,L-1\}.$
+    
+    $p_{i}$ is the normalized histogram, where
+    
+    $p_{i} = \frac{n_{i}}{\sum_{i=1}^{L-1} n_{i}}$.
+    
+    Using $k, 0 < k < L - 1$, as threshold, there are two classes: $C_{1}$ (pixels in $[0, k]$) and $C_{2}$ (pixels in $[k + 1, L - 1]$).
+
+    $P_{1}$ is the probability of the class $C_{1}$, where 
+    
+    $P_{1} = P(C_{1}) = \sum_{i=1}^{k} p_{i}$.
+    
+    $P_{2}$ is the probability of the class $C_{2}$, where 
+    
+    $P_{2} = P(C_{2}) = \sum_{i=k+1}^{L-1} p_{i} = 1 - P_{1}$.
+    
+    $m_{1}$ is the mean intensity of the pixels in $C_{1}$, where
+    
+    $m_{1} = \sum_{i=1}^{k} i \cdot P(i | C_{1}) = \sum_{i=1}^{k} i \cdot \frac{P(C_{1}|i)P(i)}{P(C_{1})} = \frac{1}{P_{1}}\sum_{i=1}^{k} i \cdot p_{i}$, since $P(C_{1}|i)=1, P(i)=p_{i}$, and $P(C_{1})=P_{1}$.
+    
+    $m_{2}$ is the mean intensity of the pixels in $C_{2}$, similarly
+    
+    $m_{2} = \frac{1}{P_{2}}\sum_{i=k}^{L-1} i \cdot p_{i}$.
+    
+    $m_{G}$ is the mean global intensity, where
+    
+    $m_{G} = \sum_{i=1}^{L-1} i \cdot p_{i}$.
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b}\\
+  \hline
+  Ref.\ By & \tref{T_otsu} \iref{IM_otsufindk} \iref{IM_multifindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\subsection{Goal Statements}
+\label{sec_goalstatements}
+\noindent Given the medical images as inputs, the goal statements are:
 
 \begin{itemize}
 
-\item[GS\refstepcounter{goalnum}\thegoalnum \label{G_meaningfulLabel}:] \wss{One
-    sentence description of the goal.  There may be more than one.  Each Goal
-    should have a meaningful label.}
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_calk}:]
+Calculate the optimal threshold value $k^{\star}$ with Otsu’s Method.
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_outputimage}:]
+Output the processed images representing the segmentation results with one threshold.
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_multicalk}:]
+Calculate multiple optimal thresholds value $k^{\star}_{1}$ and $k^{\star}_{2}$ with Otsu’s Method.
+
+\item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_multioutputimage}:]
+Output the processed images representing the segmentation results with multiple thresholds.
 
 \end{itemize}
 
 \subsection{Theoretical Models} \label{sec_theoretical}
 
-This section focuses on the general equations and laws that \famname{} is based
-on.  \wss{Modify the examples below for your problem, and add additional models
-  as appropriate.}
+This section focuses on the general equations and laws that \famname{} is based on.
 
 ~\newline
 
@@ -325,50 +687,297 @@ on.  \wss{Modify the examples below for your problem, and add additional models
 \begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
   \hline
   \rowcolor[gray]{0.9}
-  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_COE}\\
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_mathimage}\\
   \hline
-  Label&\bf Conservation of thermal energy\\
+  Label&\bf Mathematical Image\\
   \hline
-  Equation&  $-{\bf \nabla \cdot q} + g$ = $\rho C \frac{\partial T}{\partial t}$\\
+  Equation&  $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$\\
   \hline
   Description & 
-                The above equation gives the conservation of energy for transient heat transfer in a material
-                of specific heat capacity $C$ (\si{\joule\per\kilogram\per\celsius}) and density $\rho$ 
-                (\si{\kilogram\per\cubic\metre}), where $\bf q$ is the thermal flux vector (\si{\watt\per\square\metre}),
-                $g$ is the volumetric heat generation
-                (\si{\watt\per\cubic\metre}), $T$ is the temperature
-                (\si{\celsius}),  $t$ is time (\si{\second}), and $\nabla$ is
-                the gradient operator.  For this equation to apply, other forms
-                of energy, such as mechanical energy, are assumed to be negligible in the
-                system (\aref{A_OnlyThermalEnergy}).  In general, the material properties ($\rho$ and $C$) depend on temperature.\\
+    In Mathematics, an image is defined as a function $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$, where $\mathbb{R}^{a}$ denotes the set of a-dimensional spatial coordinates and $\mathbb{R}^{b}$ the set of b-dimensional feature values.\\ 
   \hline
-  Source &
-           \url{http://www.efunda.com/formulae/heat_transfer/conduction/overview_cond.cfm}\\
+  Source &  \cite{Ferrari2018a}\\
   % The above web link should be replaced with a proper citation to a publication
   \hline
-  Ref.\ By & \dref{ROCT}\\
+  Ref.\ By & \ddref{DD_digitalimage}\\
   \hline
 \end{tabular}
 \end{minipage}\\
 
 ~\newline
 
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_globalthres}\\
+  \hline
+  Label&\bf Global Threshold Method\\
+  \hline
+  Equation&  $g(x,y)=\left\{
+\begin{aligned}
+&L-1,\ &if\ f(x,y)>T_{h} \\
+&0,\ &if\ f(x,y)\leq T_{h}
+\end{aligned}
+\right.$\\
+  \hline
+  Description & 
+    $f(x,y)$ and $g(x,y)$ are the feature values at $(x,y)$ of the input and output image respectively. $L$ is the number of the discrete levels of the feature value. $T_{h}$ is the threshold value.\\
+  \hline
+  Source &  \cite{Ferrari2018b}\\
+  % The above web link should be replaced with a proper citation to a publication
+  \hline
+  Ref.\ By & \ddref{DD_betweenvariance} \tref{T_multithres} \iref{IM_globaloutput}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_multithres}\\
+  \hline
+  Label&\bf Multiple Threshold Method\\
+  \hline
+  Equation&  $g(x,y)=\left\{
+\begin{aligned}
+&L-1,\ &if\ f(x,y) > T_{h2} \\
+&L/2,\ &if\ T_{h1} < f(x,y) \leq T_{h2}\\
+&0,\ &if\ f(x,y) \leq T_{h1}
+\end{aligned}
+\right.$\\
+  \hline
+  Description & 
+    $f(x,y)$ and $g(x,y)$ are the feature values at $(x,y)$ of the input and output image respectively. $L$ is the number of the discrete levels of the feature value. $T_{h1}$ and $T_{h2}$ are the threshold values.\\
+  \hline
+  Source &  \cite{Ferrari2018b}\\
+  % The above web link should be replaced with a proper citation to a publication
+  \hline
+  Ref.\ By & \iref{IM_multifindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& T\refstepcounter{theorynum}\thetheorynum \label{T_otsu}\\
+  \hline
+  Label&\bf Otsu's Method\\
+  \hline
+  Equation&  $\sigma^{2}_{B}(k^{\star}) = \underset{0<k<L-1}{max}\sigma^{2}_{B}(k)$\\
+  \hline
+  Description & 
+    Otsu’s method is aimed in finding the optimal value for the global threshold $T$. The optimal threshold value, $k^{\star}$, satisfies the above equation, where using $k$ as threshold to divide all pixels of the image into two classes: $C_{1}$ (pixels in $[0, k]$) and $C_{2}$ (pixels in $[k + 1, L - 1]$). $\sigma_{B}$ is the between-class variance.\\ 
+  \hline
+  Source &  \cite{Ferrari2018b}\\
+  % The above web link should be replaced with a proper citation to a publication
+  \hline
+  Ref.\ By & \iref{IM_otsufindk} \iref{IM_multifindk}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\subsection{Instance Models} \label{sec_instance}    
+
+This section transforms the problem defined in Section~\ref{sec_Background} into
+one which is expressed in mathematical terms. It uses concrete symbols defined 
+in Section~\ref{sec_datadef} to replace the abstract symbols in the models identified in Sections~\ref{sec_theoretical}.
+
+Medical image segmentation by Threshold Method can be solved by \tref{T_globalthres}, \tref{T_otsu}, \ddref{DD_inoutimage}, \ddref{DD_featurevalue}, \ddref{DD_thresvalue}
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_otsufindk}\\
+  \hline
+  Label& \bf Otsu's Method to find the optimal threshold value $k^{\star}$\\
+  \hline
+  Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $\sigma_{B}$, k, $P_{1}$, $P_{2}$, $m_{1}$, $m_{2}$, $m_{G}$ from \ddref{DD_betweenvariance}\\
+  \hline
+  Output& $k^{\star}$, such that\\
+  & $\sigma^{2}_{B}(k^{\star}) = \underset{0<k<L-1}{max}\sigma^{2}_{B}(k)$\\
+  \hline
+  Description&
+        Since $P_{1}m_{1} + P_{2}m_{2} = m_{G}$ and $P_{1} + P_{2} = 1$,
+        
+        $\sigma^{2}_{B} = P_{1}(m_{1} - m_{G})^{2} + P_{2}(m_{2} - m_{G})^{2} = P_{1}P_{2}(m_{1} - m_{2})^{2}$
+        
+        Hence, for each value of $k$, $\sigma_{B}$ can be computed, where 
+        
+        $\sigma^{2}_{B}(k) = P_{1}(k)P_{2}(k)(m_{1}(k) - m_{2}(k))^{2}$
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b} \\
+  \hline
+  Ref.\ By & \iref{IM_globaloutput}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_globaloutput}\\
+  \hline
+  Label& \bf Use Otsu's Method to output segmentation image\\
+  \hline
+  Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $k^{\star}$ from \iref{IM_otsufindk}\\
+  \hline
+  Output& $G_{X \times Y}$, such that for pixel at each $(x,y)$,
+  
+  $g(x,y)=\left\{
+\begin{aligned}
+&255,\ &if\ f(x,y)>k^{\star} \\
+&0,\ &if\ f(x,y)\leq k^{\star}
+\end{aligned}
+\right.$\\
+  \hline
+  Description&
+        The output image $G_{X \times Y}$ has the same size and format as the input image $F_{X \times Y}$. As a piece of 8-bit grayscale image, all of its pixels are with intensity of either 255 or 0, so it only shows the same information as a binary image.
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b} \\
+  \hline
+  Ref.\ By &\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_multifindk}\\
+  \hline
+  Label& \bf Otsu's Method to find multiple optimal threshold values $k^{\star}_{1}$ and $k^{\star}_{2}$\\
+  \hline
+  Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $\sigma_{B}$, k, $P_{1}$, $P_{2}$, $m_{1}$, $m_{2}$, $m_{G}$ from \ddref{DD_betweenvariance}\\
+  \hline
+  Output& $k^{\star}_{1}$ and $k^{\star}_{2}$, such that\\
+  & $\sigma^{2}_{B}(k^{\star}_{1}, k^{\star}_{2}) = \underset{0<k_{1}<k_{2}<L-1}{max}\sigma^{2}_{B}(k_{1}, k_{2})$\\
+  \hline
+  Description&
+        Similarly as the normal Otsu's Method,
+        
+        $\sigma^{2}_{B}(k_{1}, k_{2}) = P_{1}(k_{1})(m_{1}(k_{1}) - m_{G})^{2} + P_{2}(k_{2})(m_{2}(k_{2}) - m_{G})^{2} + P_{3}(k_{3})(m_{3}(k_{3}) - m_{G})^{2}$
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b} \\
+  \hline
+  Ref.\ By & \iref{IM_globaloutput}\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+~\newline
+
+\noindent
+\begin{minipage}{\textwidth}
+\renewcommand*{\arraystretch}{1.5}
+\begin{tabular}{| p{\colAwidth} | p{\colBwidth}|}
+  \hline
+  \rowcolor[gray]{0.9}
+  Number& IM\refstepcounter{instnum}\theinstnum \label{IM_multioutput}\\
+  \hline
+  Label& \bf Use multiple thresholds to output segmentation image\\
+  \hline
+  Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $k^{\star}_{1}$ and $k^{\star}_{2}$ from \iref{IM_multifindk}\\
+  \hline
+  Output& $G_{X \times Y}$, such that for pixel at each $(x,y)$,
+  
+  $g(x,y)=\left\{
+\begin{aligned}
+&255,\ &if\ f(x,y) > k^{\star}_{2} \\
+&128,\ &if\ k^{\star}_{1} < f(x,y) \leq k^{\star}_{2}\\
+&0,\ &if\ f(x,y) \leq k^{\star}_{1}
+\end{aligned}
+\right.$\\
+  \hline
+  Description&
+        The output image $G_{X \times Y}$ has the same size and format as the input image $F_{X \times Y}$. As a piece of 8-bit grayscale image, all of its pixels are with intensity of 255, 188 or 0, so it shows more information than a binary image.
+  \\
+  \hline
+  Sources& \cite{Ferrari2018b} \\
+  \hline
+  Ref.\ By &\\
+  \hline
+\end{tabular}
+\end{minipage}\\
+
+%~\newline
 \section{Variabilities}
 
 \subsection{Assumptions}
 
 \begin{itemize}
 
-\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_meaningfulLabel}:]
-  \wss{Short description of each assumption.  Each assumption
-    should have a meaningful label.  Use cross-references to identify the
-    appropriate traceability to T, GD, DD etc., using commands like dref, ddref etc.}
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_2Dgrayscale}:]
+The images are 2D and grayscale.
+
+\item[A\refstepcounter{assumpnum}\theassumpnum \label{A_8bitinteger}:]
+The pixel format of images is the byte image, where the feature value is the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. 
 
 \end{itemize}
 
 \subsection{Calculation} \label{sec_Calculation}
 
-\subsection{Output} \label{sec_Output}    
+\begin{table}[h]
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Variabilities} & \multicolumn{1}{l|}{\textbf{Parameter of Variation}} \\ \hline
+Allowed input & \begin{tabular}[c]{@{}c@{}}set of \{digital image, \\ binary data representing the image\}\end{tabular} \\ \hline
+Dimension of spatial coordinates ($a$) & $\mathbb{N}$ \\ \hline
+Dimension of feature values ($b$) & $\mathbb{N}$ \\ \hline
+Number  of  the  discrete  levels  of  the  feature value ($L$) & $\mathbb{N}$ \\ \hline
+Calculate methods & \begin{tabular}[c]{@{}c@{}}set of \{Global threshold method, \\ multiple threshold method\}\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Number of threshold values in Otsu’ Method\\  with multiple thresholds (number of $k_{1}, k_{2}, ...$)\end{tabular} & set of $\{1, 2, 3, ..., L-2\}$ \\ \hline
+\end{tabular}
+\caption{Calculation Variabilities}
+\label{Tb_calvar}
+\end{table}
+
+\subsection{Output} \label{sec_Output} 
+\begin{table}[h]
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Variabilities} & \multicolumn{1}{l|}{\textbf{Parameter of Variation}} \\ \hline
+Output & \begin{tabular}[c]{@{}c@{}}set of \{digital image, \\ binary data representing the image\}\end{tabular} \\ \hline
+Optimal threshold value ($k^{\star}$) & set of $\{1, 2, 3, ..., L-2\}$ \\ \hline
+Optimal threshold values ($k^{\star}_{1}$ and $k^{\star}_{2}$) & set of $[1, k^{\star}_{2}-2]$ and $[k^{\star}_{1}+2,L-2]$ \\ \hline
+\begin{tabular}[c]{@{}l@{}}Number of optimal threshold values in Otsu’ Method\\  (number of $k^{\star}_{1}, k^{\star}_{2}, ...$)\end{tabular} & set of $\{1, 2, 3, ..., L-2\}$ \\ \hline
+\end{tabular}
+\caption{Output Variabilities}
+\label{Tb_outvar}
+\end{table}
 
 \section{Requirements}
 
@@ -380,72 +989,81 @@ qualities that the software is expected to exhibit.
 
 \noindent \begin{itemize}
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \wss{Requirements
-    for the inputs that are supplied by the user.  This information has to be
-    explicit.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] 
+The user shall make sure that the input image must be 2D 8-bit grayscale medical image, the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. The user shall also decide which method to use, global threshold or multiple threshold.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \wss{It isn't
-    always required, but often echoing the inputs as part of the output is a
-    good idea.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] 
+\famname shall guarantee that the output file is the same format and size as the input file.
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \wss{Calculation
-    related requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
+The user shall provide correct calculate according to Instance Models.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-  \wss{Verification related requirements.}
+\famname shall verify that the input data are valid and meet \rref{R_Inputs}. 
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Output}:] \wss{Output related
-    requirements.}
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
+\famname shall output the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. \famname shall also output segmentation image $G_{X \times Y}$.
 
 \end{itemize}
 
 \subsection{Nonfunctional Requirements}
 
-\wss{List your nonfunctional requirements.  You may consider using a fit
-  criterion to make them verifiable.}
+\begin{itemize}
+\item Correctness: The output image will be generally similar to the output from VTK.
+\item Maintainability: \famname{} shall be documented with an SRS, VnV, MG, and MIS.
+\item Performance: \famname{} shall be able to calculate the output not much slower then VTK.
+\item Reliability: The mean time between failures (MTBF) will be longer than the average MTBF of a sample of the OTS solutions.
+\item Robustness: The system will not crash when a user provides invalid input.
+\item Usability: \famname{} should be easy and satisfying for users to learn and use.
+\end{itemize}
 
 \section{Likely Changes}    
 
 \noindent \begin{itemize}
 
-\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_meaningfulLabel}:] \wss{If
-    there is a ranking of variabilities, or combinations of variabilities, that
-    are more likely, this information can be included here.}
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_morek}:]This document only describes multi-threshold method with 2 thresholds. It could list more Instance Models with more thresholds in the future.
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_allmethods}:]This document only specifies one segmentation method. It could list specifications for all the methods in Table \ref{fg_segmethods} in the future.
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_allanalysis}:]This document only describes segmentation. It could list specifications for all the sections in analysis in Figure \ref{fg_miafunctions} in the future.
 
 \end{itemize}
 
 \section{Traceability Matrices and Graphs}
 
-\wss{You will have to add tables.}
+The purpose of the traceability matrices is to provide easy references on what has to be additionally modified if a certain component is changed.  Every time a component is changed, the items in the column of that component that are marked with an ``X'' may have to be modified as well.  Table~\ref{Table:trace} shows the
+dependencies of theoretical models, general definitions, data definitions, and instance models with each other.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline        
+	& \tref{T_mathimage}& \tref{T_globalthres}& \tref{T_multithres}& \tref{T_otsu}& \ddref{DD_digitalimage} & \ddref{DD_2Dimage}& \ddref{DD_inoutimage} & \ddref{DD_featurevalue}& \ddref{DD_numberofshadesgray}& \ddref{DD_thresvalue}& \ddref{DD_betweenvariance}& \iref{IM_otsufindk}& \iref{IM_globaloutput}& \iref{IM_multifindk}& \iref{IM_multioutput} \\
+\hline
+\tref{T_mathimage}     & & & & & & & & & & & & & & & \\ \hline
+\tref{T_globalthres}     & & & & & & &X &X &X &X & & & & & \\ \hline
+\tref{T_multithres}     & &X & & & & &X &X &X &X & & & & & \\ \hline
+\tref{T_otsu}        & & & & & & & & &X & &X & & & & \\ \hline
+\ddref{DD_digitalimage}      &X & & & & & & & & & & & & & & \\ \hline
+\ddref{DD_2Dimage} & & & & &X & & & & & & & & & & \\ \hline
+\ddref{DD_inoutimage}  & & & & & &X & &X & & & &X &X &X &X \\ \hline
+\ddref{DD_featurevalue}    & & & & & & & & &X & & &X &X &X &X \\ \hline
+\ddref{DD_numberofshadesgray}     & & & & & & & & & & & &X &X &X &X \\ \hline
+\ddref{DD_thresvalue}    & & & & & & & & &X & & & & & & \\ \hline
+\ddref{DD_betweenvariance}     & &X & & & & & &X &X &X & &X & &X & \\ \hline
+\iref{IM_otsufindk}      & & & &X & & &X &X &X &X &X & &X & & \\ \hline
+\iref{IM_globaloutput}      & &X & & & & & & & & & &X & &X & \\ \hline
+\iref{IM_multifindk}    & & &X &X & & & & & & &X & & & &X \\ \hline
+\iref{IM_multioutput}    & & & & & & & & & & & & & & & \\
+\hline
+\end{tabular}
+\caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
+\label{Table:trace}
+\end{table}
 
 \newpage
 
 \bibliographystyle {plainnat}
 \bibliography {../../refs/References}
-
-\newpage
-
-\section{Appendix}
-
-\wss{Your report may require an appendix.  For instance, this is a good point to
-show the values of the symbolic parameters introduced in the report.}
-
-\subsection{Symbolic Parameters}
-
-\wss{The definition of the requirements will likely call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
-
-\noindent \wss{Advice on using the template:
-\begin{itemize}
-\item Assumptions have to be invoked somewhere
-\item ``Referenced by'' implies that there is an explicit reference
-\item Think of traceability matrix, list of assumption invokations and list of
-  reference by fields as automatically generatable
-\item If you say the format of the output (plot, table etc), then your
-  requirement could be more abstract
-\item For families the notion of binding time should be introduced
-\item Think of families as a library, not as a single program
-\end{itemize}
-}
 
 \end{document}
