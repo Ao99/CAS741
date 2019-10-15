@@ -106,6 +106,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Oct 11 & 1.0 & Initial draft\\
+Oct 15 & 1.1 & Revised according to GitHub issues\\
 \bottomrule
 \end{tabularx}
 
@@ -191,6 +192,10 @@ $m_{3}$ & N/A & mean intensity of the pixels in the third class
 \\
 $m_{G}$ & N/A & mean global intensity
 \\
+$n_{i}$ & N/A & number of pixels of intensity $i$
+\\
+$\mathbb{N}$ & N/A & set of all natural numbers
+\\
 $p_{i}$ & N/A & normalized histogram
 \\
 $P_{1}$ & N/A & probability of the first class $C_{1}$
@@ -234,11 +239,14 @@ $\mathbb{Z}$ & N/A & set of all integers
   GS & Goal Statement\\
   IM & Instance Model\\
   LC & Likely Change\\
+  MG & Module Guide\\
   \famname & Medical Image Applications\\
+  MIS & Module Interface Specification\\
   PS & Physical System Description\\
   R & Requirement\\
   T & Theoretical Model\\
   VTK & the Visualization Toolkit\\
+  VnV & Verification and Validation\\
   \bottomrule
 \end{tabular}\\
 
@@ -300,8 +308,8 @@ In this project, the scope of the family is limited to the software with the Seg
 
 \subsection{Characteristics of Intended Reader} 
 
-Reviewers of this documentation should have an understanding of heat transfer theory from
-level 3 or 4 mechanical engineering and differential equations from level 1 and 2 calculus.
+Reviewers of this documentation should have an understanding of functions, sets and binary numbers in discrete math from level 1 or 2 computer science and probability from level 1 and 2 calculus.
+
 The users of MIA can have a lower level of expertise, as explained in Section \ref{sec_UserCharacteristics}.
 
 
@@ -326,8 +334,8 @@ Arrows are used to show the data flow between the system and its environment.
 \begin{itemize}
 \item User Responsibilities:
 \begin{itemize}
-\item Provide the input data to the system, ensuring no errors in the data entry
-\item Take care that consistent units are used for input variables
+\item Provide the input data to the system
+\item Given two or more options by the system, decide to use which calculation method
 \end{itemize}
 \item \famname{} Responsibilities:
 \begin{itemize}
@@ -990,19 +998,19 @@ qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] 
-The user shall make sure that the input image must be 2D 8-bit grayscale medical image, the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. The user shall also decide which method to use, global threshold or multiple threshold.
+\famname{} shall verify that the input data are valid. A valid in put image must be 2D 8-bit grayscale medical image and the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. An error message shall be displayed if input data are invalid.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] 
-\famname shall guarantee that the output file is the same format and size as the input file.
+\famname{} shall guarantee that the output file is the same format and size as the input file.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
-The user shall provide correct calculate according to Instance Models.
+\famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, global threshold or multiple threshold.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-\famname shall verify that the input data are valid and meet \rref{R_Inputs}. 
+\famname{} shall verify that the output data are valid and meet the same format standards as \rref{R_Inputs}. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
-\famname shall output the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. \famname shall also output segmentation image $G_{X \times Y}$.
+\famname{} shall output the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. \famname{} shall also output segmentation image $G_{X \times Y}$.
 
 \end{itemize}
 
@@ -1010,9 +1018,8 @@ The user shall provide correct calculate according to Instance Models.
 
 \begin{itemize}
 \item Correctness: The output image will be generally similar to the output from VTK.
-\item Maintainability: \famname{} shall be documented with an SRS, VnV, MG, and MIS.
+\item Maintainability: \famname{} shall be documented with an CA, VnV, MG, and MIS.
 \item Performance: \famname{} shall be able to calculate the output not much slower then VTK.
-\item Reliability: The mean time between failures (MTBF) will be longer than the average MTBF of a sample of the OTS solutions.
 \item Robustness: The system will not crash when a user provides invalid input.
 \item Usability: \famname{} should be easy and satisfying for users to learn and use.
 \end{itemize}
