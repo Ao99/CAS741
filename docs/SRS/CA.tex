@@ -6,33 +6,22 @@
 \usepackage{graphicx}
 \usepackage{colortbl}
 \usepackage{xr}
-\usepackage{hyperref}
 \usepackage{longtable}
 \usepackage{xfrac}
-\usepackage{tabularx}
 \usepackage{float}
 \usepackage{siunitx}
-\usepackage{booktabs}
 \usepackage{caption}
 \usepackage{pdflscape}
 \usepackage{afterpage}
 \usepackage{tikz}
 \usetikzlibrary{mindmap}
 \usepackage{multirow}
-\usepackage[round]{natbib}
+\usepackage{fullpage}
 
 %\usepackage{refcheck}
 
-\hypersetup{
-    bookmarks=true,         % show bookmarks bar?
-      colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=red,          % color of internal links (change box color with linkbordercolor)
-    citecolor=green,        % color of links to bibliography
-    filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
-}
-
 \input{../Comments}
+\input{../Common}
 
 % For easy change of table widths
 \newcommand{\colZwidth}{1.0\textwidth}
@@ -74,10 +63,6 @@
 \newcommand{\lthelcnum}{LC\thelcnum}
 \newcommand{\lcref}[1]{LC\ref{#1}}
 
-\newcommand{\famname}{MIA} % PUT YOUR PROGRAM NAME HERE
-
-\usepackage{fullpage}
-
 %tikstyle commands
 % Define block styles
 \tikzstyle{context} = [rectangle, rounded corners,  text width=2.5cm, minimum size=2.5cm,text centered, draw=black, fill=white!30]
@@ -107,6 +92,7 @@
 \midrule
 Oct 11 & 1.0 & Initial draft\\
 Oct 15 & 1.1 & Revised according to GitHub issues\\
+Oct 17 & 1.2 & Revised by the author\\
 \bottomrule
 \end{tabularx}
 
@@ -285,8 +271,8 @@ The major functions of \famname{} can be divided into several sections and sub s
 \node{\famname}
 	child[concept color=teal!40] { node {Enhancement}}
 	child[concept color=teal!40] { node {Analysis}
-	    child[concept color=purple!50,] { node {Segmentation}}
     	child[concept color=blue!30] { node {Registration}}
+	    child[concept color=purple!50,] { node {Segmentation}}
 	    child[concept color=blue!30] { node {Statistical Analysis}
 	        child { node {Feature Extraction}}
 	        child { node {Classification}}
@@ -310,7 +296,7 @@ In this project, the scope of the family is limited to the software with the Seg
 
 Reviewers of this documentation should have an understanding of functions, sets and binary numbers in discrete math from level 1 or 2 computer science and probability from level 1 and 2 calculus.
 
-The users of MIA can have a lower level of expertise, as explained in Section \ref{sec_UserCharacteristics}.
+The users of \famname{} can have a lower level of expertise, as explained in Section \ref{sec_UserCharacteristics}.
 
 
 \subsection{Organization of Document}
@@ -670,13 +656,13 @@ Symbol & $\sigma^{2}_{B}$\\
 \begin{itemize}
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_calk}:]
-Calculate the optimal threshold value $k^{\star}$ with Otsu’s Method.
+Calculate and display the optimal threshold value $k^{\star}$ with Otsu’s Method.
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_outputimage}:]
 Output the processed images representing the segmentation results with one threshold.
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_multicalk}:]
-Calculate multiple optimal thresholds value $k^{\star}_{1}$ and $k^{\star}_{2}$ with Otsu’s Method.
+Calculate and display multiple optimal threshold values $k^{\star}_{1}$ and $k^{\star}_{2}$ with Otsu’s Method.
 
 \item[GS\refstepcounter{goalnum}\thegoalnum \label{GS_multioutputimage}:]
 Output the processed images representing the segmentation results with multiple thresholds.
@@ -1004,29 +990,41 @@ qualities that the software is expected to exhibit.
 \famname{} shall guarantee that the output file is the same format and size as the input file.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
-\famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, global threshold or multiple threshold.
+\famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, global threshold or multiple threshold. \famname{} shall also display the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
 \famname{} shall verify that the output data are valid and meet the same format standards as \rref{R_Inputs}. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
-\famname{} shall output the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. \famname{} shall also output segmentation image $G_{X \times Y}$.
+\famname{} shall output segmentation image $G_{X \times Y}$.
 
 \end{itemize}
 
 \subsection{Nonfunctional Requirements}
 
 \begin{itemize}
+\item Installability: \famname{} shall be able to be installed on Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation process shall be easy and fast.
 \item Correctness: The output image will be generally similar to the output from VTK.
-\item Maintainability: \famname{} shall be documented with an CA, VnV, MG, and MIS.
-\item Performance: \famname{} shall be able to calculate the output not much slower then VTK.
-\item Robustness: The system will not crash when a user provides invalid input.
-\item Usability: \famname{} should be easy and satisfying for users to learn and use.
+\item Verifiability: \famname{} shall be easy to be checked or tested.
+\item Reliability: \famname{} shall be able to be operated in an acceptable manner over time.
+\item Robustness: \famname{} will not crash when a user provides invalid input.
+\item Performance: \famname{} shall take time and space resourse not much worse than VTK.
+\item Usability: \famname{} shall be easy and satisfying for users to learn and use.
+\item Maintainability: \famname{} shall be documented with an CA, VnV, MG, and MIS. It shall be able to undergo changes, like adding or changing functionality, meeting new requirements or fixing errors.
+\item Reusability: \famname{} shall have the suitability of components and subsystems for use in other applications
+\item Portability: \famname{} shall be able to run on Windows 10, macOS 10.14, and Ubuntu Linux 18.04.
+environments.
+\item Understandability: The code shall be easy to understand, follow a coding standard and uses proper comments.
+\item Interoperability: Two or more systems, products or components can exchange information and use the information that has been exchanged.
+\item Visibility/Transparency: The development process of \famname{} shall be well-defined and presented to its users and other developers.
+\item Reproducibility: Identical results shall be able to be obtained in the future.
 \end{itemize}
 
 \section{Likely Changes}    
 
 \noindent \begin{itemize}
+
+\item[LC\refstepcounter{lcnum}\thelcnum\label{LC_localthres}:]This document only describes global threshold with Otsu's Method. It could include the method using local thresholds in the future.
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_morek}:]This document only describes multi-threshold method with 2 thresholds. It could list more Instance Models with more thresholds in the future.
 
@@ -1067,6 +1065,8 @@ dependencies of theoretical models, general definitions, data definitions, and i
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
 \end{table}
+
+\newpage
 
 \newpage
 
