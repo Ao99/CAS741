@@ -92,7 +92,8 @@
 \midrule
 Oct 11 & 1.0 & Initial draft\\
 Oct 15 & 1.1 & Revised according to GitHub issues\\
-Oct 17 & 1.2 & Revised by the author\\
+Oct 17 & 1.2 & Added more nonfunctional requirements\\
+Oct 18 & 1.3 & Revised input image format and functional requirements\\
 \bottomrule
 \end{tabularx}
 
@@ -221,6 +222,7 @@ $\mathbb{Z}$ & N/A & set of all integers
   A & Assumption\\
   CA & Commonalities Analysis\\
   DD & Data Definition\\
+  DICOM & Digital Imaging and Communications in Medicine\\
   GD & General Definition\\
   GS & Goal Statement\\
   IM & Instance Model\\
@@ -398,6 +400,7 @@ easier to correctly understand the requirements:
 \item Histogram: a histogram is an accurate representation of the distribution of numerical data. It is an estimate of the probability distribution of a continuous variable.
 \item Pixel: in digital imaging, a pixel, pel, or picture element is a physical point in a raster image, or the smallest addressable element in an all points addressable display device; so it is the smallest controllable element of a picture represented on the screen.
 \item VTK: the Visualization Toolkit is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and 2D plotting.
+\item DICOM: Digital Imaging and Communications in Medicine (DICOM) is the standard for the communication and management of medical imaging information and related data.
 \end{itemize}
 
 \subsection{Data Definitions} \label{sec_datadef}
@@ -546,10 +549,10 @@ Symbol & $L$\\
 % \hline
   SI Units & N/A\\
   \hline
-  Equation & $L = 256$\\
+  Equation & $L \in \{256, 4096, 65536\}$\\
   \hline
     Description & 
-    $L$ is the number of the shades of gray, also referred as number of intensity levels, where $L=2^{8}=256$, as stated in \aref{A_8bitinteger}.
+    $L$ is the number of the shades of gray, also referred as number of intensity levels, where $L \in \{2^{8}, 2^{12}, 2^{16}$, as stated in \aref{A_8bitinteger}.
   \\
   \hline
   Sources& \url{https://homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm}\\
@@ -938,7 +941,9 @@ Medical image segmentation by Threshold Method can be solved by \tref{T_globalth
 The images are 2D and grayscale.
 
 \item[A\refstepcounter{assumpnum}\theassumpnum \label{A_8bitinteger}:]
-The pixel format of images is the byte image, where the feature value is the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. 
+The pixel format of input images is DICOM image, where the feature value is the gray intensity value stored as an 12-bit or 16-bit integer giving a range of possible values from 0 to 4095 or 65535.
+
+The pixel format of output images is the byte image, where the feature value is the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. 
 
 \end{itemize}
 
@@ -984,16 +989,16 @@ qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] 
-\famname{} shall verify that the input data are valid. A valid in put image must be 2D 8-bit grayscale medical image and the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255. An error message shall be displayed if input data are invalid.
+\famname{} shall verify that the input data are valid. A valid in put image must be 2D 12-bit or 16-bit grayscale DICOM image. An error message shall be displayed if input data are invalid.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] 
-\famname{} shall guarantee that the output file is the same format and size as the input file.
+\famname{} shall guarantee that the output file is the same pixel size as the input file.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
 \famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, global threshold or multiple threshold. \famname{} shall also display the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-\famname{} shall verify that the output data are valid and meet the same format standards as \rref{R_Inputs}. 
+\famname{} shall verify that the output image must be 2D 8-bit grayscale DICOM image and the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
 \famname{} shall output segmentation image $G_{X \times Y}$.
@@ -1065,8 +1070,6 @@ dependencies of theoretical models, general definitions, data definitions, and i
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
 \end{table}
-
-\newpage
 
 \newpage
 
