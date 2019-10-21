@@ -1,67 +1,7 @@
 \documentclass[12pt]{article}
 
-\usepackage{amsmath, mathtools}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{colortbl}
-\usepackage{xr}
-\usepackage{longtable}
-\usepackage{xfrac}
-\usepackage{float}
-\usepackage{siunitx}
-\usepackage{caption}
-\usepackage{pdflscape}
-\usepackage{afterpage}
-\usepackage{tikz}
-\usetikzlibrary{mindmap}
-\usepackage{multirow}
-\usepackage{fullpage}
-
-%\usepackage{refcheck}
-
 \input{../Comments}
 \input{../Common}
-
-% For easy change of table widths
-\newcommand{\colZwidth}{1.0\textwidth}
-\newcommand{\colAwidth}{0.13\textwidth}
-\newcommand{\colBwidth}{0.82\textwidth}
-\newcommand{\colCwidth}{0.1\textwidth}
-\newcommand{\colDwidth}{0.05\textwidth}
-\newcommand{\colEwidth}{0.8\textwidth}
-\newcommand{\colFwidth}{0.17\textwidth}
-\newcommand{\colGwidth}{0.5\textwidth}
-\newcommand{\colHwidth}{0.28\textwidth}
-
-% Used so that cross-references have a meaningful prefix
-\newcounter{defnum} %Definition Number
-\newcommand{\dthedefnum}{GD\thedefnum}
-\newcommand{\dref}[1]{GD\ref{#1}}
-\newcounter{datadefnum} %Datadefinition Number
-\newcommand{\ddthedatadefnum}{DD\thedatadefnum}
-\newcommand{\ddref}[1]{DD\ref{#1}}
-\newcounter{theorynum} %Theory Number
-\newcommand{\tthetheorynum}{T\thetheorynum}
-\newcommand{\tref}[1]{T\ref{#1}}
-\newcounter{tablenum} %Table Number
-\newcommand{\tbthetablenum}{T\thetablenum}
-\newcommand{\tbref}[1]{TB\ref{#1}}
-\newcounter{assumpnum} %Assumption Number
-\newcommand{\atheassumpnum}{P\theassumpnum}
-\newcommand{\aref}[1]{A\ref{#1}}
-\newcounter{goalnum} %Goal Number
-\newcommand{\gthegoalnum}{P\thegoalnum}
-\newcommand{\gsref}[1]{GS\ref{#1}}
-\newcounter{instnum} %Instance Number
-\newcommand{\itheinstnum}{IM\theinstnum}
-\newcommand{\iref}[1]{IM\ref{#1}}
-\newcounter{reqnum} %Requirement Number
-\newcommand{\rthereqnum}{P\thereqnum}
-\newcommand{\rref}[1]{R\ref{#1}}
-\newcounter{lcnum} %Likely change number
-\newcommand{\lthelcnum}{LC\thelcnum}
-\newcommand{\lcref}[1]{LC\ref{#1}}
 
 %tikstyle commands
 % Define block styles
@@ -94,6 +34,7 @@ Oct 11 & 1.0 & Initial draft\\
 Oct 15 & 1.1 & Revised according to GitHub issues\\
 Oct 17 & 1.2 & Added more nonfunctional requirements\\
 Oct 18 & 1.3 & Revised input image format and functional requirements\\
+Oct 21 & 1.4 & Revised TM, IM and nonfunctional requirements\\
 \bottomrule
 \end{tabularx}
 
@@ -711,7 +652,7 @@ This section focuses on the general equations and laws that \famname{} is based 
   \rowcolor[gray]{0.9}
   Number& T\refstepcounter{theorynum}\thetheorynum \label{T_globalthres}\\
   \hline
-  Label&\bf Global Threshold Method\\
+  Label&\bf Single Global Threshold Method\\
   \hline
   Equation&  $g(x,y)=\left\{
 \begin{aligned}
@@ -741,7 +682,7 @@ This section focuses on the general equations and laws that \famname{} is based 
   \rowcolor[gray]{0.9}
   Number& T\refstepcounter{theorynum}\thetheorynum \label{T_multithres}\\
   \hline
-  Label&\bf Multiple Threshold Method\\
+  Label&\bf Multiple Global Thresholds Method\\
   \hline
   Equation&  $g(x,y)=\left\{
 \begin{aligned}
@@ -807,7 +748,7 @@ Medical image segmentation by Threshold Method can be solved by \tref{T_globalth
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_otsufindk}\\
   \hline
-  Label& \bf Otsu's Method to find the optimal threshold value $k^{\star}$\\
+  Label& \bf Otsu's Method to find the single optimal threshold value $k^{\star}$\\
   \hline
   Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $\sigma_{B}$, k, $P_{1}$, $P_{2}$, $m_{1}$, $m_{2}$, $m_{G}$ from \ddref{DD_betweenvariance}\\
   \hline
@@ -841,7 +782,7 @@ Medical image segmentation by Threshold Method can be solved by \tref{T_globalth
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_globaloutput}\\
   \hline
-  Label& \bf Use Otsu's Method to output segmentation image\\
+  Label& \bf Use single global threshold to output segmentation image\\
   \hline
   Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $k^{\star}$ from \iref{IM_otsufindk}\\
   \hline
@@ -875,7 +816,7 @@ Medical image segmentation by Threshold Method can be solved by \tref{T_globalth
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_multifindk}\\
   \hline
-  Label& \bf Otsu's Method to find multiple optimal threshold values $k^{\star}_{1}$ and $k^{\star}_{2}$\\
+  Label& \bf Otsu's Method to find the multiple optimal threshold values $k^{\star}_{1}$ and $k^{\star}_{2}$\\
   \hline
   Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $\sigma_{B}$, k, $P_{1}$, $P_{2}$, $m_{1}$, $m_{2}$, $m_{G}$ from \ddref{DD_betweenvariance}\\
   \hline
@@ -905,7 +846,7 @@ Medical image segmentation by Threshold Method can be solved by \tref{T_globalth
   \rowcolor[gray]{0.9}
   Number& IM\refstepcounter{instnum}\theinstnum \label{IM_multioutput}\\
   \hline
-  Label& \bf Use multiple thresholds to output segmentation image\\
+  Label& \bf Use multiple global thresholds to output segmentation image\\
   \hline
   Input& $F_{X \times Y}$ from \ddref{DD_inoutimage}, $f(x,y)$ from \ddref{DD_featurevalue}, $L$ from \ddref{DD_numberofshadesgray}, $k^{\star}_{1}$ and $k^{\star}_{2}$ from \iref{IM_multifindk}\\
   \hline
@@ -989,40 +930,50 @@ qualities that the software is expected to exhibit.
 \noindent \begin{itemize}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] 
-\famname{} shall verify that the input data are valid. A valid in put image must be 2D 12-bit or 16-bit grayscale DICOM image. An error message shall be displayed if input data are invalid.
+\famname{} shall verify that the input data are valid. A valid input image must be 2D 12-bit or 16-bit grayscale DICOM image. An error message shall be displayed if input data are invalid.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] 
 \famname{} shall guarantee that the output file is the same pixel size as the input file.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
-\famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, global threshold or multiple threshold. \famname{} shall also display the correct optimal threshold value $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. 
+\famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, single or multiple global thresholds. \famname{} shall also display the correct optimal threshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. 
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
 \famname{} shall verify that the output image must be 2D 8-bit grayscale image and the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
-\famname{} shall output segmentation image $G_{X \times Y}$.
+\famname{} shall output segmentation image.
 
 \end{itemize}
 
 \subsection{Nonfunctional Requirements}
 
 \begin{itemize}
-\item Installability: \famname{} shall be able to be installed on Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation process shall be easy and fast.
-\item Correctness: The output image will be generally similar to the output from VTK.
-\item Verifiability: \famname{} shall be easy to be checked or tested.
-\item Reliability: \famname{} shall be able to be operated in an acceptable manner over time.
-\item Robustness: \famname{} will not crash when a user provides invalid input.
-\item Performance: \famname{} shall take time and space resourse not much worse than VTK.
-\item Usability: \famname{} shall be easy and satisfying for users to learn and use.
-\item Maintainability: \famname{} shall be documented with an CA, VnV, MG, and MIS. It shall be able to undergo changes, like adding or changing functionality, meeting new requirements or fixing errors.
-\item Reusability: \famname{} shall have the suitability of components and subsystems for use in other applications
-\item Portability: \famname{} shall be able to run on Windows 10, macOS 10.14, and Ubuntu Linux 18.04.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_install}:]
+Installability: \famname{} shall be able to be installed and uninstalled on Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation and uninstallation process shall be easy and fast.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_correct}:]
+Correctness: The output image will be generally similar to the output from VTK.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_verify}:]
+Verifiability: \famname{} shall be easy to be checked or tested.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_robust}:]
+Robustness: \famname{} will not crash when a user provides invalid input.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_use}:]
+Usability: \famname{} shall be easy and satisfying for users to learn and use.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_maintain}:]
+Maintainability: \famname{} shall be documented with an CA, VnV, MG, and MIS. It shall be able to undergo changes, like adding or changing functionality, meeting new requirements or fixing errors.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_portal}:]
+Portability: \famname{} shall be able to run on Windows 10, macOS 10.14, and Ubuntu Linux 18.04.
 environments.
-\item Understandability: The code shall be easy to understand, follow a coding standard and uses proper comments.
-\item Interoperability: Two or more systems, products or components can exchange information and use the information that has been exchanged.
-\item Visibility/Transparency: The development process of \famname{} shall be well-defined and presented to its users and other developers.
-\item Reproducibility: Identical results shall be able to be obtained in the future.
+\item[R\refstepcounter{reqnum}\thereqnum
+\label{R_understand}:]
+Understandability: The code shall be easy to understand, follow a coding standard and uses proper comments.
 \end{itemize}
 
 \section{Likely Changes}    
