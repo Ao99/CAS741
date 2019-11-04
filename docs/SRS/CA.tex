@@ -330,23 +330,49 @@ easier to correctly understand the requirements:
 
 \begin{itemize}
 
-\item Image: in Mathematics, an image is defined as a function $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$.
-\item Digital image: When the spatial coordinates and the function value are finite and discrete, the image is called digital, shown as $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.
-\item Grayscale image: In digital photography, computer-generated imagery, and colorimetry, a grayscale or greyscale image is one in which the value of each pixel is a single sample representing only an amount of light, that is, it carries only intensity information.
-\item 2D Digital Image: the computer-based generation of digital images - mostly from two-dimensional models (such as 2D geometric models, text, and digital images) and by techniques specific to them.
-\item Medical Image: visual representations of the interior of a body for clinical analysis and medical intervention, as well as visual representation of the function of some organs or tissues (physiology).
-\item Grayscale Intensity: represents gray levels, where the intensity 0 usually represents black and the intensity 255 usually represents full intensity, or white.
-\item Shades of Gray: variations of gray or grey include achromatic grayscale shades, which lie exactly between white and black, and nearby colors with low colorfulness.
-\item Coordinates: in geometry, a coordinate system is a system that uses one or more numbers, or coordinates, to uniquely determine the position of the points or other geometric elements on a manifold such as Euclidean space.
-\item Histogram: a histogram is an accurate representation of the distribution of numerical data. It is an estimate of the probability distribution of a continuous variable.
-\item Pixel: in digital imaging, a pixel, pel, or picture element is a physical point in a raster image, or the smallest addressable element in an all points addressable display device; so it is the smallest controllable element of a picture represented on the screen.
-\item VTK: the Visualization Toolkit is an open-source, freely available software system for 3D computer graphics, modeling, image processing, volume rendering, scientific visualization, and 2D plotting.
-\item DICOM: Digital Imaging and Communications in Medicine (DICOM) is the standard for the communication and management of medical imaging information and related data.
+\item Image: in Mathematics, an image is defined as a function
+  $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$.
+\item Digital image: When the spatial coordinates and the function value are
+  finite and discrete, the image is called digital, shown as
+  $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.
+\item Grayscale image: In digital photography, computer-generated imagery, and
+  colorimetry, a grayscale or greyscale image is one in which the value of each
+  pixel is a single sample representing only an amount of light, that is, it
+  carries only intensity information.
+\item 2D Digital Image: the computer-based generation of digital images - mostly
+  from two-dimensional models (such as 2D geometric models, text, and digital
+  images) and by techniques specific to them.
+\item Medical Image: visual representations of the interior of a body for
+  clinical analysis and medical intervention, as well as visual representation
+  of the function of some organs or tissues (physiology).
+\item Grayscale Intensity: represents gray levels, where the intensity 0 usually
+  represents black and the intensity 255 usually represents full intensity, or
+  white.
+\item Shades of Gray: variations of gray or grey include achromatic grayscale
+  shades, which lie exactly between white and black, and nearby colors with low
+  colorfulness.
+\item Coordinates: in geometry, a coordinate system is a system that uses one or
+  more numbers, or coordinates, to uniquely determine the position of the points
+  or other geometric elements on a manifold such as Euclidean space.
+\item Histogram: a histogram is an accurate representation of the distribution
+  of numerical data. It is an estimate of the probability distribution of a
+  continuous variable.
+\item Pixel: in digital imaging, a pixel, pel, or picture element is a physical
+  point in a raster image, or the smallest addressable element in an all points
+  addressable display device; so it is the smallest controllable element of a
+  picture represented on the screen.
+\item VTK: the Visualization Toolkit is an open-source, freely available
+  software system for 3D computer graphics, modeling, image processing, volume
+  rendering, scientific visualization, and 2D plotting.
+\item DICOM: Digital Imaging and Communications in Medicine (DICOM) is the
+  standard for the communication and management of medical imaging information
+  and related data.
 \end{itemize}
 
 \subsection{Data Definitions} \label{sec_datadef}
 
-This section collects and defines all the data needed to build the instance models. The dimension of each quantity is also given.
+This section collects and defines all the data needed to build the instance
+models. The dimension of each quantity is also given.
 
 ~\newline
 
@@ -369,7 +395,12 @@ Symbol & N/A\\
   Equation & $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$\\
   \hline
   Description & 
-    In Mathematics, an image is defined as a function $h : \mathbb{R}^{a} \rightarrow \mathbb{R}^{b}$. Usually, $a = 2$ and, in the simplest case, $b = 1$. When the spatial coordinates and the function value are finite and discrete, the image is called digital, shown as $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.      
+    In Mathematics, an image is defined as a function $h : \mathbb{R}^{a}
+                \rightarrow \mathbb{R}^{b}$. Usually, $a = 2$ and, in the
+                simplest case, $b = 1$. When the spatial coordinates and the
+                function value are finite and discrete, the image is called
+                digital, shown as $h : \mathbb{Z}^{a} \rightarrow
+                \mathbb{Z}^{b}$.
   \\
   \hline
   Sources& \cite{Ferrari2018a}\\
@@ -400,7 +431,12 @@ Symbol & $H$\\
   Equation & $H_{X \times Y} = [h(x,y)]_{X \times Y}$\\
   \hline
   Description & 
-    In this project, we only consider 2D grayscale images, as stated in \aref{A_2Dgrayscale}. The images can be defined as $h : \mathbb{Z}^{2} \rightarrow \mathbb{Z}$, or the above equation. $X \times Y$ is the size of the image. $(x,y)$ denotes the 2D spatial coordinates, where $x \in [0,X-1]$ and $y \in [0,Y-1]$
+    In this project, we only consider 2D grayscale images, as stated in
+                \aref{A_2Dgrayscale}. The images can be defined as $h :
+                \mathbb{Z}^{2} \rightarrow \mathbb{Z}$, or the above
+                equation. $X \times Y$ is the size of the image. $(x,y)$ denotes
+                the 2D spatial coordinates, where $x \in [0,X-1]$ and $y \in
+                [0,Y-1]$
   \\
   \hline
   Sources& \cite{Pal1993}\\
@@ -431,7 +467,13 @@ Symbol & $F$ and $G$\\
   Equation & $F_{X \times Y} = [f(x,y)]_{X \times Y}$ and $G_{X \times Y} = [g(x,y)]_{X \times Y}$\\
   \hline
   Description & 
-    F and G denote the input and output medical image respectively, which are both 2D Digital Grayscale. $X \times Y$ is the size of the image. $(x,y)$ denotes the 2D spatial coordinates, where $x \in [0,X-1]$ and $y \in [0,Y-1]$
+    F and G denote the input and output medical image respectively, which are
+                both 2D Digital Grayscale. $X \times Y$ is the size of the
+                image. $(x,y)$ denotes the 2D spatial coordinates, where $x \in
+                [0,X-1]$ and $y \in [0,Y-1]$  \wss{I'm not sure what this DD
+                says that the previosu one doesn't already say.  In other DDs
+                you will define the output, but this one doesn't really define
+                the output, it just says that there will be output.}
   \\
   \hline
   Sources& \cite{Pal1993}\\
@@ -462,7 +504,16 @@ Symbol & $f$ and $g$\\
   Equation & $f(x,y), g(x,y) \in \{0,1,...,L-1\}$\\
   \hline
   Description & 
-    $(x,y)$ denotes the 2D spatial coordinates and $f(x,y)$, $g(x,y)$ the feature values at $(x,y)$ of the input and output image respectively. Depending on the type of image, the feature value could be light intensity, depth, intensity of radio wave or temperature. $\{0,1,...,L-1\}$ is the set of discrete levels of the feature value, and $L$ is the number of the levels. In this project, we refer to $f(x,y)$ and $g(x,y)$ as gray intensity value (or intensity) at $(x,y)$.
+    $(x,y)$ denotes the 2D spatial coordinates and $f(x,y)$, $g(x,y)$ the
+                feature values at $(x,y)$ of the input and output image
+                respectively. Depending on the type of image, the feature value
+                could be light intensity, depth, intensity of radio wave or
+                temperature. $\{0,1,...,L-1\}$ is the set of discrete levels of
+                the feature value, and $L$ is the number of the levels. In this
+                project, we refer to $f(x,y)$ and $g(x,y)$ as gray intensity
+                value (or intensity) at $(x,y)$. \wss{I also don't think this is
+                adding anything new. If the new thing is the output type, then
+                couldn't you work that into your previous definitions?}
   \\
   \hline
   Sources& \cite{Pal1993}\\
@@ -493,7 +544,8 @@ Symbol & $L$\\
   Equation & $L \in \{256, 4096, 65536\}$\\
   \hline
     Description & 
-    $L$ is the number of the shades of gray, also referred as number of intensity levels, where $L \in \{2^{8}, 2^{12}, 2^{16}$, as stated in \aref{A_8bitinteger}.
+    $L$ is the number of the shades of gray, also referred as number of
+                  intensity levels, where $L \in \{2^{8}, 2^{12}, 2^{16} \}$, as stated in \aref{A_8bitinteger}.
   \\
   \hline
   Sources& \url{https://homepages.inf.ed.ac.uk/rbf/HIPR2/value.htm}\\
@@ -938,8 +990,12 @@ qualities that the software is expected to exhibit.
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
 \famname{} shall provide correct calculate according to Instance Models according to the user's choice of which method to use, single or multiple global thresholds. \famname{} shall also display the correct optimal threshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly. 
 
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:]
-\famname{} shall verify that the output image must be 2D 8-bit grayscale image and the pixel format must be the byte image, where the feature value must be the gray intensity value stored as an 8-bit integer giving a range of possible values from 0 to 255.
+\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] \famname{}
+  shall verify that the output image must be 2D 8-bit grayscale image and the
+  pixel format must be the byte image, where the feature value must be the gray
+  intensity value stored as an 8-bit integer giving a range of possible values
+  from 0 to 255. \wss{I adjusted it in several spots, but you should be aiming
+    for 80 character width for your \LaTeX{} source document.}
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
 \famname{} shall output segmentation image.
@@ -951,7 +1007,13 @@ qualities that the software is expected to exhibit.
 \begin{itemize}
 \item[R\refstepcounter{reqnum}\thereqnum
 \label{R_install}:]
-Installability: \famname{} shall be able to be installed and uninstalled on Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation and uninstallation process shall be easy and fast.
+Installability: \famname{} shall be able to be installed and uninstalled on
+Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation and
+uninstallation process shall be easy and fast. \wss{easy and fast is not
+  verifiable, because it is ambiguous.  If you instead said that X out of Y
+  users considered the software easy to install, you would have an improvement.
+  The approach you are using in your VnV plan is a better way to specify the
+  NFRs.  It might be easiest to just reference that document from the SRS?}
 \item[R\refstepcounter{reqnum}\thereqnum
 \label{R_correct}:]
 Correctness: The output image will be generally similar to the output from VTK.
@@ -1021,6 +1083,17 @@ dependencies of theoretical models, general definitions, data definitions, and i
 \caption{Traceability Matrix Showing the Connections Between Items of Different Sections}
 \label{Table:trace}
 \end{table}
+
+\wss{Great work Ao.  I especially like your formal representation of an image.
+  You might find that rather than adding data definitions for the different
+  symbols and notations, you might be able to just add a section for Data
+  Types.  In this new Types section you could clarify what it means for constraining
+  the output type for an image function, for instance.}
+\wss{My main feedback is that you have really (mostly) documented an SRS, not a
+  CA.  I think rather than turn your document into a CA, you should just embrace
+  the fact that you are describing one family member and change your document to
+  follow the SRS template.  I do not believe that this will be too difficult,
+  since is already mostly following the SRS template.}
 
 \newpage
 
