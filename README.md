@@ -2,7 +2,7 @@
 
 Developer Name: Ao Dong
 
-This project is a implementation of segementation for DICOM medical images.
+This project is a implementation of segmentation for DICOM medical images.
 
 The folders and files for this project are as follows:
 
