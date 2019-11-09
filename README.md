@@ -1,8 +1,8 @@
-# Medical Imaging Applications
+# Medical Image Segmentation
 
 Developer Name: Ao Dong
 
-This project is a reimplementation of ...
+This project is a implementation of segementation for DICOM medical images.
 
 The folders and files for this project are as follows:
 
