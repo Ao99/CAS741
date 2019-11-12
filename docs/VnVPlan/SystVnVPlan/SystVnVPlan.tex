@@ -19,6 +19,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Oct 27 & 1.0 & Initial Draft\\
+Nov 11 & 1.1 & Minor Revision\\
 \bottomrule
 \end{tabularx}
 
@@ -118,16 +119,16 @@ During the writing of CA, the identification of verification activity is conside
 
 Some details need to be identified, such as measurement methods, test environment, development strategy, resources, tools, and facilities. Before making the final plan, the proposed plan can be reviewed by the VnV team, and issues can be submitted to improve the plan.
 
-Usually the pan should be ready before the implementation stage. However, during the implementation, if specifications need to be modified in CA, the plan might need to be updated accordingly.
+Usually the plan should be ready before the implementation stage. However, during the implementation, if specifications need to be modified in CA, the plan might need to be updated accordingly.
 
 The specifications and test plan shall be well-documented. There can be preliminary test plan to make improvements to the final plan.
 
 \subsection{Implementation Verification Plan}
     Specific verification methods will be carefully chosen for functional and nonfunctional requirements respectively. For instance, both Static Verification and Dynamic Verification will be used. 
     
-    Static aspects such as code conventions, software metrics calculation, anti-pattern detection will be analyzed for all functional requirements in Section . Both manual and automatic techniques will be used for investigation, mathematical calculations, logical evaluation, etc. Regarding the automatic techniques, some static code analyzer can be used, such as PMD(\url{https://pmd.github.io/}), LGTM(\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive (\url{https://discotek.ca/deepdive.xhtml}).
+    Static aspects such as code conventions, software metrics calculation, anti-pattern detection will be analyzed for some nonfunctional requirements in Section \ref{sec_nonfuncreqtest}. Both manual and automatic techniques will be used for investigation, mathematical calculations, logical evaluation, etc. Regarding the automatic techniques, some static code analyzer can be used, such as PMD(\url{https://pmd.github.io/}), LGTM(\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive (\url{https://discotek.ca/deepdive.xhtml}).
     
-    After selecting a group of test cases consisting of tests data, dynamic verification will be used by execution of the system or its units. By finding out the output test results, we can execute testings for the functional requirements in Section . By methods like questionnaire and interview, we can analyze the nonfunctional requirements listed in Section .
+    After selecting a group of test cases consisting of tests data, dynamic verification will be used by execution of the system or its units. By finding out the output test results, we can execute testings for the functional requirements in Section \ref{sec_funcreqtest}. By methods like questionnaire and interview, we can analyze the nonfunctional requirements listed in Section \ref{sec_nonfuncreqtest}.
         
 \subsection{Software Validation Plan}
 
@@ -136,6 +137,7 @@ One possible validation approach is interviewing Dr. Michael Noseworthy to find 
 \section{System Test Description}
 \label{sec_systestdescri}
 \subsection{Tests for Functional Requirements}
+\label{sec_funcreqtest}
 
 There are 5 functional requirements described in Section 7.1 of CA.
 
@@ -331,6 +333,7 @@ How test will be performed: software or online apps (such as \url{https://online
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
+\label{sec_nonfuncreqtest}
 There are 8 nonfunctional requirements described in Section 7.2 of CA.
 
 \begin{itemize}
