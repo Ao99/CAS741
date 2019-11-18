@@ -78,7 +78,7 @@ quality of the program is assured.
 
 Some general information such as introduction to the software and testing
 objectives are included in Section \ref{sec_geinfo}. Verification plans and test
-descriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri}
+descriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri},
 respectively.
 
 \section{General Information} \label{sec_geinfo}
@@ -106,7 +106,7 @@ tested, with test descriptions in Section \ref{sec_systestdescri}.
 
 The goal of verifying and validating is to increase confidence in the software
 implementation. The most important qualities to focus on are nonfunctional
-requirements such as correctness and usability.
+requirements, such as correctness and usability.
 
 This document will be used as a starting point for the verification and
 validation report.  The test cases presented within this document will be
@@ -120,17 +120,24 @@ implemented correctly.
     \item Unit VnV Plan
 \end{itemize}
 
-\section{Plan}
-\label{sec_plan} The following sections provide more detail about the VnV of the
+\wss{Your design documents are also relevant.  You can ``fake it'' and list them
+  here too.}
+
+\section{Plan} \label{sec_plan}
+
+The following sections provide more detail about the VnV of the
 \progname{} family. Information about the testing participants is provided, and
 the verification plans for CA, design, implementation and validation plan for
 software are described.
+
 \subsection{Verification and Validation Team}
 
 \begin{itemize}
     \item Ao Dong
     \item Peter Michalski
-    \item Other interested classmates
+    \item Other interested classmates \wss{You can be more specific here.  Some
+        students have explicitly been assigned to work on your project.  You
+        should also list the course instructor as part of the VnV team.}
 \end{itemize}
 
 \subsection{CA Verification Plan}
@@ -146,7 +153,8 @@ necessary adjustments accordingly.
 
 During the writing of CA, the identification of verification activity is
 considered parallel. This enables the writer to make sure that the specification
-in the CA is verifiable. Any changes in the CA should be careful.
+in the CA is verifiable. Any changes in the CA should be careful. \wss{This last
+  sentence is not a complete thought.}
 
 Some details need to be identified, such as measurement methods, test
 environment, development strategy, resources, tools, and facilities. Before
@@ -160,17 +168,23 @@ might need to be updated accordingly.
 The specifications and test plan shall be well-documented. There can be
 preliminary test plan to make improvements to the final plan.
 
-\subsection{Implementation Verification Plan} Specific verification methods will
-be carefully chosen for functional and nonfunctional requirements
-respectively. For instance, both Static Verification and Dynamic Verification
-will be used.
+\wss{This is not a very specific plan.  Who is going to review your design?  How
+  are they going to do the review?  Peter had some specific ideas for doing this
+that you might like to borrow.}
+
+\subsection{Implementation Verification Plan}
+
+Specific verification methods will be carefully chosen for functional and
+nonfunctional requirements respectively. For instance, both Static Verification
+and Dynamic Verification will be used.
     
     Static aspects such as code conventions, software metrics calculation,
 anti-pattern detection will be analyzed for some nonfunctional requirements in
 Section \ref{sec_nonfuncreqtest}. Both manual and automatic techniques will be
 used for investigation, mathematical calculations, logical evaluation,
 etc. Regarding the automatic techniques, some static code analyzer can be used,
-such as PMD(\url{https://pmd.github.io/}),
+such as PMD(\url{https://pmd.github.io/}), \wss{Have a look at the writing
+  checklist - additional spaces are needed before the opening brackets.}
 LGTM(\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive
 (\url{https://discotek.ca/deepdive.xhtml}).
     
@@ -180,18 +194,22 @@ out the output test results, we can execute testings for the functional
 requirements in Section \ref{sec_funcreqtest}. By methods like questionnaire and
 interview, we can analyze the nonfunctional requirements listed in Section
 \ref{sec_nonfuncreqtest}.
-        
+
 \subsection{Software Validation Plan}
 
-One possible validation approach is interviewing Dr. Michael Noseworthy to find
-out if \progname{} is really what the users need.
+One possible validation approach is interviewing Dr.\ Michael Noseworthy
+\wss{``Dr. Noseworthy'' has two spaces after the period ``Dr.\ Noseworthy'' only
+  has one.} to find out if \progname{} is really what the users need.  
 
-\section{System Test Description}
-\label{sec_systestdescri}
-\subsection{Tests for Functional Requirements}
-\label{sec_funcreqtest}
+\section{System Test Description} \label{sec_systestdescri}
 
-There are 5 functional requirements described in Section 7.1 of CA.
+\subsection{Tests for Functional Requirements} \label{sec_funcreqtest}
+
+There are 5 functional requirements described in Section 7.1 of CA. \wss{It is a
+  maintenance nightmare to copy and paste between documents.  You can just
+  reference the original document.  Using the original files in the Blank
+  Project Template repo with make, it is possible to cross-reference between
+  documents.}
 
 \begin{itemize}
 
@@ -261,7 +279,9 @@ Output: \progname{} shall display warning that this file is not supported.
 Test Case Derivation: successfully display error message.
 					
 How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times.
+will be repeated multiple times. \wss{You should make this test automatic.
+  Using a unit testing framework, a test case can be defined that is considered
+  successful is the correct exception is raised.}
 					
 \item{Invalid file format}
 
@@ -278,10 +298,11 @@ Output: \progname{} shall display warning that this file might be damaged or the
 format is not supported.
 
 Test Case Derivation: successfully detect the data format in the file and
-display error message.
+display error message. 
 
 How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times.
+will be repeated multiple times.  \wss{Again, this can be automated using a unit
+  testing framework.  It can again be handled with exceptions.}
 
 \item{Valid input file}
 
@@ -313,7 +334,11 @@ Part of the test for nonfunctional requirements including Correctness and
 Verifiability in Section \ref{sec_correctverfiabletest} is also done here.
 
 In this test, calculated values will be cross-checked with results from other
-software such as VTK.
+software such as VTK.  \wss{I don't like the ``such as'' here.  Now is the time
+  to make specific decisions.  If you are going to use VTK say that, if you are
+  going to use something else, say that.  Being specific here does not mean you
+  are tied to the decision, you could always change your mind later and ``fake''
+  the documentation.}
 		
 \paragraph{Calculation Test}
 
@@ -324,7 +349,12 @@ software such as VTK.
 Control: Automatic
 					
 Initial State: \progname{} is started and running, a valid input image such as
-valid.dcm or valid.dcm30 is taken.
+valid.dcm or valid.dcm30 is taken. \wss{I would like you to be more specific.
+  What it the image?  Where can I find it?  A sample image from the VTK
+  documentation would be fine, but you need to make a specific decision.  Also,
+  I believe that the input image is part of input, not the initial state.  This
+  same comment about identifying the specific image occurs throughout your test
+  cases.  It would be fine if you used the same image for multiple tests.}
 					
 Input: user shall choose the first one from the two options: Single or Multiple
 Global Thresholds. User shall also start the next step.
@@ -395,17 +425,18 @@ Test Case Derivation: successfully detect the users' choice and provide an
 output file with valid filename extension.
 
 How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times.
+will be repeated multiple times. \wss{This can be automated.}
 
 \end{enumerate}
 
-\subsubsection{Output verification}
-\label{sec_outputverifytest} \progname{} shall guarantee that the output file is
-the same resolution as the input file, and shall verify that the output data are
-valid and meet the format standards. The output image must be 2D 8-bit grayscale
-image and the pixel format must be the byte image, where the feature value must
-be the gray intensity value stored as an 8-bit integer giving a range of
-possible values from 0 to 255.
+\subsubsection{Output verification} \label{sec_outputverifytest}
+
+\progname{} shall guarantee that the output file is the same resolution as the
+input file, and shall verify that the output data are valid and meet the format
+standards. The output image must be 2D 8-bit grayscale image and the pixel
+format must be the byte image, where the feature value must be the gray
+intensity value stored as an 8-bit integer giving a range of possible values
+from 0 to 255.
 
 Part of the test for nonfunctional requirements including Correctness and
 Verifiability in Section \ref{sec_correctverfiabletest} is also done here.
@@ -437,7 +468,10 @@ How test will be performed: software or online apps (such as
 \url{http://checkfiletype.com/}) detecting file types can be used to determine
 the file format and resolutions. The result is automatically generated, but the
 test will be performed by the test team manually, and will be repeated multiple
-times.
+times. \wss{This test can also be automated.  That should be your goal.  I don't
+  think it will be that difficult if you use the right library.  (Steven
+  Palmer's chemical speciation example from one of the recent years used a
+  library to do this.)}
 
 \item{Correctness of output file}
 
@@ -468,9 +502,12 @@ multiple times.
 
 \end{enumerate}
 
-\subsection{Tests for Nonfunctional Requirements}
-\label{sec_nonfuncreqtest} There are 8 nonfunctional requirements described in
-Section 7.2 of CA.
+\subsection{Tests for Nonfunctional Requirements} \label{sec_nonfuncreqtest}
+
+There are 8 \wss{Using a counter here would make your document more
+  maintainable} nonfunctional requirements described in
+Section 7.2 of CA.  \wss{Really just referencing the section is enough, since
+  reproducing the text creates a maintainability problem.}
 
 \begin{itemize}
 \item[R\refstepcounter{reqnum}\thereqnum
@@ -580,8 +617,9 @@ can be successfully installed and/or uninstalled
 How test will be performed: as above.
 \end{enumerate}
 
-\subsubsection{Correctness and Verifiability}
-\label{sec_correctverfiabletest}
+\wss{I agree that installability needs to be done with manual tests.}
+
+\subsubsection{Correctness and Verifiability} \label{sec_correctverfiabletest}
 
 The term correctness is often mentioned as a degree to which software meets the
 requirement specification~\cite{IEEE1990}.  Verifiability is sometimes referred
@@ -590,19 +628,25 @@ a software can be checked or proven~\cite{SmithEtAl2018}.
 		
 Correctness and Verifiability are tested in the tests for functional
 requirements included in Section \ref{sec_caltest} and
-\ref{sec_outputverifytest}.
+\ref{sec_outputverifytest}. \wss{Yes I agree with assessing correctness, but you
+  aren't really measuring verifiability.  Your tests could be very difficult to
+  perform.  Just running tests just not prove that the software is verifiable.}
 
-\subsubsection{Robustness}
-\label{sec_robustnesstest} A program is robust if it behaves "reasonably", even
+\subsubsection{Robustness} \label{sec_robustnesstest}
+
+A program is robust if it behaves ``reasonably'', even
 in circumstances that were not anticipated in the requirements specification -
 for example, when it encounters incorrect input data or some hardware
 malfunction~\cite{Ghezzi1991}.
 
 Robustness is tested in the test for functional requirements included in Section
-\ref{sec_inputtest}.
+\ref{sec_inputtest}. \wss{Technically, this isn't robustness testing if your
+  requirements explicitly say what to do in these input error cases.  I cannot
+  remember whether your requirements are specific about these scenarios.}
 
-\subsubsection{Usability}
-\label{sec_usabilitytest} Usability is the degree to which a product or system
+\subsubsection{Usability} \label{sec_usabilitytest}
+
+Usability is the degree to which a product or system
 can be used by specified users to achieve specified goals with effectiveness,
 efficiency and satisfaction in a specified context of use
 \cite{ISO/IEC25010:2011}.
@@ -623,7 +667,8 @@ Initial State: \progname{} is started and running.
 Input/Condition: A new user to \progname{} is asked to learn the software by
 himself/herself and to accomplish the task of inputting image, choosing
 calculation method and outputting image. If user guide exists, it shall be
-provided.
+provided. \wss{I like this, but I think you can be more specific.  What
+  calculation method are they asked to choose?}
 					
 Output/Result: time to completion, number of misoperations and percentage of
 success will be measured.
@@ -754,7 +799,9 @@ Table \ref{Tb_portable}. it will be performed by the test team manually.
 \begin{tabular}{@{}ll@{}}
 \toprule
 Questions & Sets of Answers \\ \midrule
-(I)What platforms is the software advertised to work on? & \begin{tabular}[c]{@{}l@{}}\{Windows, Linux, macOS,\\ Android, Other OS\}\end{tabular} \\
+(I)What platforms is the software advertised to work on?
+          & \begin{tabular}[c]{@{}l@{}}\{Windows, Linux, macOS,\\ Android, Other
+              OS\}\end{tabular} \\
 \begin{tabular}[c]{@{}l@{}}(I)Is there any compromise to functional or
   nonfunctional\\ requirements by running on this platform?\end{tabular} &
                                                                            \{yes*, no\} \\
@@ -866,7 +913,13 @@ performed by the test team manually.
 
 \end{enumerate}
 
+\wss{Good work with the nonfunctional requirements.  I hope you are able to do
+  at least some of these measurements.  I think we would learn from collecting
+  the data, and this could be helpful for your MEng project.}
+
 \subsection{Traceability Between Test Cases and Requirements}
+
+\wss{Include some text to introduce the table.}
 
 \begin{table}[h]
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
