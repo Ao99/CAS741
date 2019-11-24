@@ -1,21 +1,5 @@
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{fullpage}
-\usepackage[round]{natbib}
-\usepackage{multirow}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
-}
-
 \input{../../Comments}
 \input{../../Common}
 
@@ -34,7 +18,7 @@
 \begin{document}
 
 \title{Module Guide for \progname{}} 
-\author{Author Name}
+\author{Ao Dong}
 \date{\today}
 
 \maketitle
@@ -46,8 +30,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Nov 25 & 1.0 & Initial draft\\
 \bottomrule
 \end{tabularx}
 
@@ -66,6 +49,7 @@ This section records information for easy reference.
   \midrule 
   AC & Anticipated Change\\
   DAG & Directed Acyclic Graph \\
+  dcm4che & A DICOM Toolkit and Library\\
   M & Module \\
   MG & Module Guide \\
   OS & Operating System \\
@@ -74,7 +58,6 @@ This section records information for easy reference.
   SRS & Software Requirements Specification\\
   \progname & Explanation of program name\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -95,7 +78,7 @@ This section records information for easy reference.
 Decomposing a system into modules is a commonly accepted approach to developing
 software.  A module is a work assignment for a programmer or programming
 team~\citep{ParnasEtAl1984}.  We advocate a decomposition
-based on the principle of information hiding~\citep{Parnas1972a}.  This
+based on the principle of information hiding~\citep{Parnas1972}.  This
 principle supports design for change, because the ``secrets'' that each module
 hides represent likely future changes.  Design for change is valuable in SC,
 where modifications are frequent, especially during initial development as the
@@ -107,22 +90,23 @@ Our design follows the rules layed out by \citet{ParnasEtAl1984}, as follows:
   secrets of separate modules.
 \item Each data structure is implemented in only one module.
 \item Any other program that requires information stored in a module's data
-  structures must obtain it by calling access programs belonging to that module.
-\end{itemize}
+structures must obtain it by calling access programs belonging to that
+module.\end{itemize}
 
 After completing the first stage of the design, the Software Requirements
-Specification (SRS), the Module Guide (MG) is developed~\citep{ParnasEtAl1984}. The MG
+Specification (SRS), the Module Guide (MG) is developed~\citep{ParnasEtAl1984}.
+The MG
 specifies the modular structure of the system and is intended to allow both
 designers and maintainers to easily identify the parts of the software.  The
 potential readers of this document are as follows:
 
 \begin{itemize}
 \item New project members: This document can be a guide for a new project member
-  to easily understand the overall structure and quickly find the
+to easily understand the overall structure and quickly find the
   relevant modules they are searching for.
 \item Maintainers: The hierarchical structure of the module guide improves the
-  maintainers' understanding when they need to make changes to the system. It is
-  important for a maintainer to update the relevant sections of the document
+maintainers' understanding when they need to make changes to the system. It is
+important for a maintainer to update the relevant sections of the document
   after changes have been made.
 \item Designers: Once the module guide has been written, it can be used to
   check for consistency, feasibility and flexibility. Designers can verify the
@@ -137,8 +121,8 @@ was constructed according to the likely changes. Section \ref{SecConnection}
 specifies the connections between the software requirements and the
 modules. Section \ref{SecMD} gives a detailed description of the
 modules. Section \ref{SecTM} includes two traceability matrices. One checks
-the completeness of the design against the requirements provided in the SRS. The
-other shows the relation between anticipated changes and the modules. Section
+the completeness of the design against the requirements provided in the SRS.
+Theother shows the relation between anticipated changes and the modules. Section
 \ref{SecUse} describes the use relation between modules.
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
@@ -152,31 +136,119 @@ unlikely changes are listed in Section \ref{SecUchange}.
 
 Anticipated changes are the source of the information that is to be hidden
 inside the modules. Ideally, changing one of the anticipated changes will only
-require changing the one module that hides the associated decision. The approach
-adapted here is called design for
+require changing the one module that hides the associated decision. The
+approachadapted here is called design for
 change.
 
 \begin{description}
 \item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
+hardware on which the software is running.
+
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+initial input data. \progname{}
+convert DICOM image frames to bitmap images before segmentation with dcm4che
+library. It may convert to other image formats with other libraries.
+
+\item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] The format of the
+final output data.
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acCalculation}:]\progname{} only uses global threshold with Otsu's
+Method. It could include the method using local thresholds in the future. It
+also only uses multi-threshold method with 2 thresholds. It could use the methodwith more thresholds in the future. \progname{} only uses threshold segmentationmethod. It could use all the methods in Table \ref{tb_segmethods} in the future.
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|l|l|}
+\hline
+\multirow{2}{*}{\textbf{Generation}} & \multicolumn{3}{c|}{\textbf{Category}} \\\cline{2-4}
+& \multicolumn{1}{c|}{\textbf{Region-based}} &
+\multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Boundary\\
+Following\end{tabular}}} &
+\multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Pixel\\
+Classification\end{tabular}}} \\ \hline
+\textbf{$1^{st}$} & • Region growing & \begin{tabular}[c]{@{}l@{}}• Edge
+tracing\\ (heuristic)\end{tabular} & • Intensity threshold \\ \hline
+\textbf{$2^{nd}$} & \begin{tabular}[c]{@{}l@{}}• Deformable models\\ • Graph
+search\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Minimal path\\ • Target
+tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular} &\begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means
+clustering\\ • Neural networks\\ • Multiresolution\end{tabular} \\ \hline
+\textbf{$3^{rd}$} & \begin{tabular}[c]{@{}l@{}}• Shape models\\ • Appearance
+models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
+\begin{tabular}[c]{@{}l@{}}• Atlas-based\\ • Rule-based\end{tabular} \\ \hline
+\end{tabular}
+\caption{Segmentation Methods~\cite{Withey2007}}
+\label{tb_segmethods}
+\end{table}
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acVerify}:]\progname{} only verify the resolution and grayscale value of
+processed image and segmentation image, it can make more thoroughly verificationin the future.
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acConstants}:]The constant values used in the program.
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acControl}:]\progname{} only has segmentation function. It could have
+functions for all the sections in analysis in Figure \ref{fg_miafunctions} in
+the future.
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acSequenceDS}:] The implementation for the sequence (array) data
+structure.
+
+\item[\refstepcounter{acnum} \actheacnum
+\label{acImageDS}:]Image Data Structure has 2 $\mathbb{N}$ and a 1D sequence
+now. \progname{}
+manipulates multi-frame images with a sequence of image data created from it. Itmay use other image data structures in the future, such as a 3D sequence
+representing multi frame images.
 \end{description}
+
+\begin{center}
+\begin{tikzpicture}[mindmap, grow cyclic, every node/.style=concept, concept
+color=orange!40,
+	level 1/.append style={level distance=5cm,sibling angle=90},
+	level 2/.append style={level distance=3cm,sibling angle=90},
+	level 3/.style={level distance=3cm,sibling angle=60}]
+\node{\famname}
+	child[concept color=teal!40] { node {Enhancement}}
+	child[concept color=teal!40] { node {Analysis}
+    	child[concept color=blue!30] { node {Registration}}
+	    child[concept color=purple!50,] { node {Segmentation}}
+	    child[concept color=blue!30] { node {Statistical Analysis}
+	        child { node {Feature Extraction}}
+	        child { node {Classification}}
+	        child { node {Interpretation}}
+	}}
+	child[concept color=teal!40] { node {Simulation/\\Modeling}}
+    child[concept color=teal!40] { node {Visualization}
+	    child[concept color=blue!30] { node {2D Display}}
+	    child[concept color=blue!30] { node {3D Rendering}}
+	    child[concept color=blue!30] { node {Reformatted Views}}
+    	}
+;
+\end{tikzpicture}
+\captionof{figure}{Major functions of \famname{} \cite{Dong2019ca}}
+\label{fg_miafunctions}
+\end{center}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
-The module design should be as general as possible. However, a general system is
-more complex. Sometimes this complexity is not necessary. Fixing some design
+The module design should be as general as possible. However, a general system
+ismore complex. Sometimes this complexity is not necessary. Fixing some design
 decisions at the system architecture stage can simplify the software design. If
 these decision should later need to be changed, then many parts of the design
 will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
-  (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{uc_IO}:] Input/Output devices
+(Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
+
+\item[\refstepcounter{ucnum} \uctheucnum \label{uc_Input}:] 
+There will always be a source of input data external to the software.
+
+\item[\refstepcounter{ucnum} \uctheucnum \label{uc_Goal}:] 
+The goal of the system is related to medical imaging analysis.
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -188,7 +260,22 @@ actually be implemented.
 
 \begin{description}
 \item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mInput}:]
+Input Module
+\item [\refstepcounter{mnum} \mthemnum \label{mOutput}:]
+Output Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCalculation}:]
+Optimal Thresholds Calculation
+\item [\refstepcounter{mnum} \mthemnum \label{mVerify}:]
+Image Verification
+\item [\refstepcounter{mnum} \mthemnum \label{mConstants}:]
+Constant Values
+\item [\refstepcounter{mnum} \mthemnum \label{mControl}:]
+Control Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSequenceDS}:]
+Sequence Data Structure
+\item [\refstepcounter{mnum} \mthemnum \label{mImageDS}:]
+Image Data Structure
 \end{description}
 
 
@@ -202,19 +289,18 @@ actually be implemented.
 {Hardware-Hiding Module} & ~ \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{6}{0.3\textwidth}{Behaviour-Hiding Module}
+& Input Module\\
+& Output Module\\
+& Optimal Thresholds Calculation\\
+& Image Verification\\
+& Constant Values\\
+& Control Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{2}{0.3\textwidth}{Software Decision Module}
+& Sequence Data Structure\\
+& Image Data Structure\\
 \bottomrule
 
 \end{tabular}
@@ -228,15 +314,6 @@ The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
 between requirements and modules is listed in Table \ref{TblRT}.
 
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.  In scientific examples, the choice of algorithm
-could potentially go here, if that is a decision that is exposed by the
-interface.}
-
 \section{Module Decomposition} \label{SecMD}
 
 Modules are decomposed according to the principle of ``information hiding''
@@ -246,12 +323,13 @@ module. The \emph{Services} field specifies \emph{what} the module will do
 without documenting \emph{how} to do it. For each module, a suggestion for the
 implementing software is given under the \emph{Implemented By} title. If the
 entry is \emph{OS}, this means that the module is provided by the operating
-system or by standard programming language libraries.  \emph{\progname{}} means the
+system or by standard programming language libraries. \emph{\progname{}} means
+the
 module will be implemented by the \progname{} software.
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash
-(\emph{--}) is shown, this means that the module is not a leaf and will not have
-to be implemented.
+(\emph{--}) is shown, this means that the module is not a leaf and will not
+haveto be implemented.
 
 \subsection{Hardware Hiding Modules (\mref{mHH})}
 
@@ -276,17 +354,59 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{Input Module (\mref{mInput})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
+\item[Secrets:]The format and structure of the input data and the processed
+input data.
 \item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
+input module, store the processed data, and verify the validity of the processeddata.
+\item[Implemented By:] \progname{}
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Output Module (\mref{mOutput})}
 
+\begin{description}
+\item[Secrets:]The algorithm and process of generating the output data.
+\item[Services:]Verify the validity of the optimal threshold values, verify the
+user's choice, use optimal threshold values to generate segmentation file
+according to chosen method.
+\item[Implemented By:] \progname{}
+\end{description}
+
+\subsubsection{Optimal Thresholds Calculation (\mref{mCalculation})}
+
+\begin{description}
+\item[Secrets:]The algorithm and process of calculation.
+\item[Services:]Get user's choice of segmentation method, then calculate and
+display optimal threshold value(s) accordingly.
+
+\item[Implemented By:] \progname{}
+\end{description}
+
+\subsubsection{Image Verification (\mref{mVerify})}
+
+\begin{description}
+\item[Secrets:]The algorithm and process of verification.
+\item[Services:]verify the validity of the processed data and segmentation
+data.\item[Implemented By:] \progname{}
+\end{description}
+
+\subsubsection{Constant Values (\mref{mConstants})}
+
+\begin{description}
+\item[Secrets:]The constant values used by the program.
+\item[Services:]Provide constant values for other modules.
+\item[Implemented By:] \progname{}
+\end{description}
+
+\subsubsection{Control Module (\mref{mControl})}
+
+\begin{description}
+\item[Secrets:]The algorithm for coordinating the running of the program.
+\item[Services:]Provides the main program.
+\item[Implemented By:] \progname{}
+\end{description}
 
 \subsection{Software Decision Module}
 
@@ -301,7 +421,23 @@ to be implemented.
 \item[Implemented By:] --
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{Sequence Data Structure (\mref{mSequenceDS})}
+
+\begin{description}
+\item[Secrets:]The data structure for a sequence data type.
+\item[Services:]Provides array manipulation, including building an array,
+accessing a specific entry, slicing an array, etc.
+\item[Implemented By:] Java
+\end{description}
+
+\subsubsection{Image Data Structure (\mref{mImageDS})}
+
+\begin{description}
+\item[Secrets:]The algorithm and process of creation and modification of
+images.\item[Services:]Provides the data structure to create, store and modify
+images.
+\item[Implemented By:] Java
+\end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -316,17 +452,14 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+R1 & \mref{mHH}, \mref{mInput}, \mref{mVerify}, \mref{mConstants},
+\mref{mControl}, \mref{mSequenceDS}, \mref{mImageDS}\\
+R2 & \mref{mOutput}, \mref{mVerify}, \mref{mConstants}, \mref{mSequenceDS},
+\mref{mImageDS}\\
+R3 & \mref{mCalculation}, \mref{mSequenceDS}, \mref{mImageDS}\\
+R4 & \mref{mOutput}, \mref{mVerify}, \mref{mConstants}, \mref{mControl},
+\mref{mSequenceDS}, \mref{mImageDS}\\
+R5 & \mref{mOutput}, \mref{mConstants}, \mref{mSequenceDS}, \mref{mImageDS}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Requirements and Modules}
@@ -341,16 +474,13 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \midrule
 \acref{acHardware} & \mref{mHH}\\
 \acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
 \acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
+\acref{acCalculation} & \mref{mCalculation}\\
+\acref{acVerify} & \mref{mVerify}\\
+\acref{acConstants} & \mref{mConstants}\\
 \acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acSequenceDS} & \mref{mSequenceDS}\\
+\acref{acImageDS} & \mref{mImageDS}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -360,19 +490,20 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \section{Use Hierarchy Between Modules} \label{SecUse}
 
 In this section, the uses hierarchy between modules is
-provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B if
-correct execution of B may be necessary for A to complete the task described in
+provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B
+ifcorrect execution of B may be necessary for A to complete the task described
+in
 its specification. That is, A {\em uses} B if there exist situations in which
 the correct functioning of A depends upon the availability of a correct
 implementation of B.  Figure \ref{FigUH} illustrates the use relation between
 the modules. It can be seen that the graph is a directed acyclic graph
 (DAG). Each level of the hierarchy offers a testable and usable subset of the
-system, and modules in the higher level of the hierarchy are essentially simpler
-because they use modules from the lower levels.
+system, and modules in the higher level of the hierarchy are essentially
+simpler because they use modules from the lower levels.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
 \caption{Use hierarchy among modules}
 \label{FigUH}
 \end{figure}
