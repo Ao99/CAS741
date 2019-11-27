@@ -145,17 +145,24 @@ change.
 hardware on which the software is running.
 
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-initial input data. \progname{}
+initial \wss{Does the word ``initial'' have significance here?  I think you can
+  just say ``input data''.}  input data. \progname{}
 convert DICOM image frames to bitmap images before segmentation with dcm4che
 library. It may convert to other image formats with other libraries.
 
 \item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] The format of the
-final output data.
+final \wss{As above, do you need the word ``final''?} output data.
 
 \item[\refstepcounter{acnum} \actheacnum
-\label{acCalculation}:]\progname{} only uses global threshold with Otsu's
-Method. It could include the method using local thresholds in the future. It
-also only uses multi-threshold method with 2 thresholds. It could use the methodwith more thresholds in the future. \progname{} only uses threshold segmentationmethod. It could use all the methods in Table \ref{tb_segmethods} in the future.
+  \label{acCalculation}:]\progname{} only uses global threshold with Otsu's
+  Method. \wss{If you mention Otsu's method, then you should give a citation to
+    where this method is introduced/explained.  I also wonder what is the secret
+    here.  Is it a secret the Otsu's method is being used, or will the interface
+    expose that decision.}  It could include the method using local thresholds
+  in the future. It also only uses multi-threshold method with 2 thresholds. It
+  could use the method with more thresholds in the future. \progname{} only uses
+  threshold segmentation method. It could use all the methods in Table
+  \ref{tb_segmethods} in the future.
 \begin{table}[h]
 \centering
 \begin{tabular}{|c|l|l|l|}
@@ -509,6 +516,7 @@ simpler because they use modules from the lower levels.
 \end{figure}
 
 %\section*{References}
+\wss{MG looks good.}
 
 \bibliographystyle {plainnat}
 \bibliography{../../../refs/References}
