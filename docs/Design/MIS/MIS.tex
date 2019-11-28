@@ -61,7 +61,10 @@ multiple assignment statement and conditional rules follow the form $(c_1
 document has one modification to the original notations: the concatenation
 notation $||$ can be used to build a new sequence from an existing sequence. For
 example, s2 $:= ||(x : \mathbb{N} | x \in s1 \cdot x+1)$, where s1 = $\langle
-1,2,...,10 \rangle$, then s2 = $\langle 2,3,...,11 \rangle$.
+1,2,...,10 \rangle$, then s2 = $\langle 2,3,...,11 \rangle$. \wss{explain that
+  the notation is for convenience.  It is not proper mathematics; the order
+  would of the elements is actually random.  The notation is adopted for
+  practical reasons.}
 
 The following table summarizes the primitive data types used by \progname. 
 
@@ -191,7 +194,8 @@ None
 \begin{enumerate}
     \item Get (filenameIn: string) and (filenameOut: string) from user
     \item
-    Input.loadInput($filenameIn$)
+    Input.loadInput($filenameIn$) \wss{You filename is sometimes in italics and
+      sometimes not.  You should be consistent.}
     \item
     For ($j: \mathbb{N}$) from 0 to Input.numFrames, repeat the following steps
     \item
@@ -199,9 +203,13 @@ None
 $\implies$ emptyloadedImage)
     \item
 (ThresCal.validThresholds = true $\implies$ Output.displayThresholds() $|$ else
-$\implies$ badThresholds)
+$\implies$ badThresholds) \wss{You do not actually have to compare with true.
+  If ThresCal.validThresholds is a Boolean, it is already True or False.  This
+  comment applies elsewhere in this spec as well.}
 \item (ThresCal.methodChoice $\in \{$Constants.CHOICE1, Constants.CHOICE2$\}
 \implies$ Output.writeOutput(filenameOut) $|$ else $\implies$ badMethodChoice)
+\wss{Our notation does not have an ``else''.  You can just say True in place of
+  ``else''.  This same comment applies throughout this document.}
 \end{enumerate}
 \item output: none
 \item exception: $exc :=$\\
@@ -210,6 +218,12 @@ ThresCal.validThresholds = $false \implies$ badThresholds\\
 ThresCal.methodChoice $\not\in \{$Constants.CHOICE1, Constants.CHOICE2$\}
 \implies$ badMethodChoice
 \end{itemize}
+
+\wss{Your exception covers the same ground as given in your pseudo code.  You
+  shouldn't really repeat this here, especially since it is ambiguous in the way
+you have worded it.  I suggest you replace the exception information you have
+with a note that points the reader to the transition field for the definition of
+the exception behaviour.}
 
 \subsubsection{Local Functions}
 
@@ -236,6 +250,13 @@ CHOICE1 := 1\\
 CHOICE2 := 2\\
 EMPTY := 0
 
+\wss{Are these constants all necessary?  Are the bounds really more related to
+  available memory?}
+
+\wss{For the choices, I suggest that you introduce an enumerated type (via an
+  exported type, like the department names in the student allocation example).  The
+  names choice1 and choice2 do not really tell the reader anything.  Can you
+  give them more meaningful names?}
 
 \subsubsection{Access Routine Semantics}
 N/A
@@ -345,6 +366,12 @@ ImageVerify.verify1File($img$))
 \item exception: none
 \end{itemize}
 
+\wss{You have a parallel data structure for loadedImages and isLoaded.  They are
+  two separate sequences.  They both need to be indexed separately.  What about
+  having the index in this module.  You can just give an index and it will
+  return an image, as long as the image is loaded.  There could be an exception
+  otherwise.  Something to think about.}
+
 \subsubsection{Local Functions}
 
 \noindent dcmToImage: dcmFrame $\rightarrow$ imageData\\
@@ -419,7 +446,8 @@ Constants.MINY, and not greater than Constants.MAXX or Constants.MAXY.
 \item exception: none 
 \end{itemize}
 
-\noindent Input.isLoaded:
+\noindent Input.isLoaded: \wss{This access program is not given in the syntax.
+  The state variable is missing.  Is this a copy-paste error?}
 \begin{itemize}
 \item output: $out:=$ isLoaded 
 \item exception: none 
@@ -539,7 +567,8 @@ None
 $j \in \mathbb{N}$ is the index of one imageData in the Input.loadedImages
 sequence.
 \begin{itemize}
-\item transition:
+\item transition: \wss{I don't think you need pseudo-code for this.  A state
+    based specification should be possible.}
 This function modifies
 the state variables using the following procedural specification:
 \begin{enumerate}
@@ -803,7 +832,10 @@ Constants.MINY, and not greater than Constants.MAXX and Constants.MAXY.
 
 compare2Files(imageData, imageData) does not check if these two inputs are
 valid, it assumes that during the previous steps, the software has called
-verify1File(imageData) to verify these two inputs individually.
+verify1File(imageData) to verify these two inputs individually. \wss{This access
+  program seems to be misnamed.  The images are only being compared to verify
+  that they are the same size.  I assumed that returning True would mean that
+  the images were the same.}
 
 \subsubsection{Access Routine Semantics}
 
