@@ -12,8 +12,8 @@ public class Input {
     private static boolean[] isLoaded;
 
     public void loadInput(String s){
-        //Assume that the DICOM file has 3 frames
-        numFrames = 3;
+        //Assume that the DICOM file has 5 frames
+        numFrames = 5;
         try {
             loadedImages = new ImageData[numFrames];
             for(int i=0;i<numFrames;i++){

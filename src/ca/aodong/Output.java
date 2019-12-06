@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Output {
+    private ImageData img;
     private ImageData segImage;
 
     public void displayThresholds() {
@@ -22,6 +23,8 @@ public class Output {
 
     public void writeOutput(String s) {
         createSegmentation();
+        if(!ImageVerify.verify1File(segImage)) return;
+        if(!ImageVerify.compare2Files(img,segImage)) return;
         int x = segImage.width();
         int y = segImage.height();
         BufferedImage img = new BufferedImage(x, y, BufferedImage.TYPE_BYTE_GRAY);
@@ -46,7 +49,7 @@ public class Output {
         int k1 = ThresCal.k1();
         int k2 = ThresCal.k2();
         int k3 = ThresCal.k3();
-        ImageData img = Input.loadedImages()[j];
+        img = Input.loadedImages()[j];
 
         int[] pixelValue = new int[img.width() * img.height()];
 
