@@ -2,7 +2,7 @@ package ca.aodong;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
+import java.io.*;
 
 public class Input {
     private static ImageData[] loadedImages;
@@ -29,8 +29,10 @@ public class Input {
                         pixelValue[n * x + m] = img.getRGB(m, n) & 0xFF;
                     }
                 }
+            } catch (IOException e) {
+                System.out.println("Error: cannot read the file " + name);
             } catch (Exception e) {
-                System.out.println("Error: the format of frame" + (j + 1) + " is not supported.");
+                System.out.println("Error: the format of frame " + (j + 1) + " is not supported.");
             }
             loadedImages[j] = new ImageData(x, y, pixelValue);
         }
@@ -43,7 +45,7 @@ public class Input {
         for (int j = 0; j < numFrames; j++) {
             isLoaded[j] = ImageVerify.verify1File(loadedImages[j]);
             if (isLoaded[j]) cnt++;
-            else System.out.println("Error: frame" + (j + 1) + " is not loaded.");
+            else System.out.println("Error: frame " + (j + 1) + " is not loaded.");
         }
         System.out.println(cnt + " image frames have been loaded.");
     }

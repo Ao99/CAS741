@@ -16,6 +16,10 @@ public class ThresCal {
 
     public void calculation(int j) {
         imageIndex = j;
+        if (!Input.isLoaded()[j]) {
+            validThresholds = false;
+            return;
+        }
         getMethodChoice();
         img = Input.loadedImages()[j];
 

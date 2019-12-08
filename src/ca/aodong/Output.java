@@ -10,6 +10,7 @@ public class Output {
     private ImageData segImage;
 
     public void displayThresholds() {
+        if (!ThresCal.isValidThresholds()) return;
         if (ThresCal.methodChoice() == 1) {
             System.out.println("The single threshold value for frame " + (ThresCal.imageIndex() + 1) + " is k= " + ThresCal.k1() + ".");
         } else if (ThresCal.methodChoice() == 2) {
@@ -23,9 +24,13 @@ public class Output {
 
     public boolean writeOutput(String s) {
         int j = ThresCal.imageIndex();
+        if(!ThresCal.isValidThresholds()){
+            System.out.println("Error: frame "+(j+1)+" is not segmented nor saved.");
+            return false;
+        }
         createSegmentation();
         if (!ImageVerify.verify1File(segImage) || !ImageVerify.compare2Files(img, segImage)) {
-            System.out.println("Error: frame " + (j + 1) + " is not correctly segmented");
+            System.out.println("Error: frame " + (j + 1) + " is not correctly segmented.");
             return false;
         }
         int x = segImage.width();
