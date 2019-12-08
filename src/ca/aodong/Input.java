@@ -16,8 +16,8 @@ public class Input {
         numFrames = 5;
         try {
             loadedImages = new ImageData[numFrames];
-            for(int i=0;i<numFrames;i++){
-                String name = s + "frame" + (i+1) + ".bmp";
+            for(int j=0;j<numFrames;j++){
+                String name = s + "frame" + (j+1) + ".bmp";
                 File inputFile = new File(name);
                 BufferedImage img = ImageIO.read(inputFile);
                 int x = img.getWidth();
@@ -28,7 +28,7 @@ public class Input {
                         pixelValue[n * x + m] = img.getRGB(m, n) & 0xFF;
                     }
                 }
-                loadedImages[i] = new ImageData(x,y,pixelValue);
+                loadedImages[j] = new ImageData(x,y,pixelValue);
             }
             verifyInput();
         } catch (IOException e) {
