@@ -21,10 +21,13 @@ public class Output {
         }
     }
 
-    public void writeOutput(String s) {
+    public boolean writeOutput(String s) {
+        int j = ThresCal.imageIndex();
         createSegmentation();
-        if(!ImageVerify.verify1File(segImage)) return;
-        if(!ImageVerify.compare2Files(img,segImage)) return;
+        if (!ImageVerify.verify1File(segImage) || !ImageVerify.compare2Files(img, segImage)) {
+            System.out.println("Error: frame " + (j + 1) + " is not correctly segmented");
+            return false;
+        }
         int x = segImage.width();
         int y = segImage.height();
         BufferedImage img = new BufferedImage(x, y, BufferedImage.TYPE_BYTE_GRAY);
@@ -40,7 +43,9 @@ public class Output {
             ImageIO.write(img, "png", outputFile);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     private void createSegmentation() {

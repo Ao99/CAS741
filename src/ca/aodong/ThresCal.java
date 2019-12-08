@@ -123,16 +123,25 @@ public class ThresCal {
     }
 
     private void getMethodChoice() {
-        if (methodChoice == 0) {
+        while (methodChoice == 0) {
             Scanner choiceInput = new Scanner(System.in);
-            System.out.println("***************************");
-            System.out.println("Number of thresholds to use");
-            System.out.println("Please input 1 or 2 or 3:");
-            System.out.println("***************************");
-            methodChoice = choiceInput.nextInt();
+            System.out.println("********************************************");
+            System.out.println("Number of thresholds to use:");
+            System.out.println("please input a number from the set " + Constants.numThres.toString());
+            System.out.println("********************************************");
+            try {
+                methodChoice = choiceInput.nextInt();
+                if (methodChoice > 3 || methodChoice < 1) {
+                    System.out.println("Error: input is not a number from the set,");
+                    System.out.println("please read the following instructions carefully and try again:");
+                    methodChoice = 0;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: input is not a number from the set,");
+                System.out.println("please read the following instructions carefully and try again:");
+            }
         }
     }
-
 
     public static int imageIndex() {
         return imageIndex;

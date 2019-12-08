@@ -1,46 +1,51 @@
 package ca.aodong;
 
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 public class Input {
     private static ImageData[] loadedImages;
     private static int numFrames;
     private static boolean[] isLoaded;
 
-    public void loadInput(String s){
-        //Assume that the DICOM file has 5 frames
-        numFrames = 5;
-        try {
-            loadedImages = new ImageData[numFrames];
-            for(int j=0;j<numFrames;j++){
-                String name = s + "frame" + (j+1) + ".bmp";
-                File inputFile = new File(name);
+    public void loadInput(String s) {
+        //Assume that the DICOM file has 6 frames, some frames can be damaged
+        numFrames = 6;
+        loadedImages = new ImageData[numFrames];
+        for (int j = 0; j < numFrames; j++) {
+            String name = s + "frame" + (j + 1) + ".bmp";
+            File inputFile = new File(name);
+            int x = 0;
+            int y = 0;
+            int[] pixelValue = new int[0];
+            try {
                 BufferedImage img = ImageIO.read(inputFile);
-                int x = img.getWidth();
-                int y = img.getHeight();
-                int[] pixelValue = new int[x * y];
+                x = img.getWidth();
+                y = img.getHeight();
+                pixelValue = new int[x * y];
                 for (int n = 0; n < y; n++) {
                     for (int m = 0; m < x; m++) {
                         pixelValue[n * x + m] = img.getRGB(m, n) & 0xFF;
                     }
                 }
-                loadedImages[j] = new ImageData(x,y,pixelValue);
+            } catch (Exception e) {
+                System.out.println("Error: the format of frame" + (j + 1) + " is not supported.");
             }
-            verifyInput();
-        } catch (IOException e) {
-            e.printStackTrace();
+            loadedImages[j] = new ImageData(x, y, pixelValue);
         }
+        verifyInput();
     }
 
-    private void verifyInput(){
+    private void verifyInput() {
         isLoaded = new boolean[numFrames];
-        for(int i=0;i<numFrames;i++){
-            isLoaded[i] = ImageVerify.verify1File(loadedImages[i]);
+        int cnt = 0;
+        for (int j = 0; j < numFrames; j++) {
+            isLoaded[j] = ImageVerify.verify1File(loadedImages[j]);
+            if (isLoaded[j]) cnt++;
+            else System.out.println("Error: frame" + (j + 1) + " is not loaded.");
         }
+        System.out.println(cnt + " image frames have been loaded.");
     }
 
     public static ImageData[] loadedImages() {
