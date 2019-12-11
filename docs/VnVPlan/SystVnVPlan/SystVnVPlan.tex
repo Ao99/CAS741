@@ -41,26 +41,30 @@ Nov 11 & 1.1 & Minor Revision\\
   \textbf{symbol} & \textbf{description}\\
   \midrule 
   2D & Two-Dimensional\\
-  CA & Commonalities Analysis\\
   DICOM & Digital Imaging and Communications in Medicine\\
   Git & \begin{tabular}[c]{@{}l@{}}a distributed version-control system for
           tracking changes in source code during\\ software
           development\end{tabular}\\
+  IDE & Integrated Development Environment\\
   JIRA & a proprietary issue tracking product\\ 
   JUnit & a unit testing framework for the Java programming language.\\
   $k^{\star}$  & optimal  threshold  value found by Otsu' Method\\
-  $k^{\star}_{1}$  & optimal  threshold  value found by Otsu' Method with multiple thresholds\\
-  $k^{\star}_{2}$ & optimal  threshold  value found by Otsu' Method with multiple thresholds\\
+$k^{\star}_{1}$ & optimal threshold value found by Otsu' Method with multiple
+thresholds\\
+$k^{\star}_{2}$ & optimal threshold value found by Otsu' Method with multiple
+thresholds\\
   $L$ & number  of  the  discrete  levels  of  the  feature value\\
   MG & Module Guide\\
   \famname{} & Medical Imaging Applications\\
   MIS & Module Interface Specification\\
-  \progname{} & Medical Imaging Segmentation\\
-  Redmine & a free and open source, web-based project management and issue tracking tool\\
+  \progname{} & Medical Imaging Segmentation Library\\
+Redmine & a free and open source, web-based project management and issue
+tracking tool\\
   SourceForge & \begin{tabular}[c]{@{}l@{}}a web-based service that offers
-                  software developers a centralized online location\\ to control
-                  and manage free and open-source software
+software developers a centralized online location\\ to control and manage free
+and open-source software
                   projects\end{tabular}\\
+  SRS & Software Requirements\\
   T & Test\\
   Trac & an open-source, Web-based project management and bug tracking system\\
   VnV & Verification and Validation\\
@@ -72,36 +76,38 @@ Nov 11 & 1.1 & Minor Revision\\
 
 \pagenumbering{arabic}
 
-This document describes procedures concerning the testing of one software of the
-MIA family for compliance with the requirements. It also describes how the
+This document describes procedures concerning the testing of one software of
+theMIA family for compliance with the requirements. It also describes how the
 quality of the program is assured.
 
 Some general information such as introduction to the software and testing
-objectives are included in Section \ref{sec_geinfo}. Verification plans and test
-descriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri},
+objectives are included in Section \ref{sec_geinfo}. Verification plans and
+testdescriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri},
 respectively.
 
 \section{General Information} \label{sec_geinfo}
 
 \subsection{Summary}
 
-The software going through the test is Medical Imaging Segmentation (\progname{}).
+The software going through the test is Medical Imaging Segmentation
+(\progname{}).
 
 Segmentation, separation of structures of interest from the background and from
-each other~\cite{Bankman2000}. Image segmentation is the process of partitioning
-an image into different meaningful segments. In medical imaging, these segments
+each other~\cite{Bankman2000}. Image segmentation is the process of
+partitioningan image into different meaningful segments. In medical imaging,
+these segments
 often correspond to different tissue classes, organs, pathologies, or other
 biologically relevant structures~\cite{Forouzanfar2010}.
 
 \progname{} uses one of many segmentation algorithms - the Intensity Threshold
-method. It also uses Otsu's Method to find the optimal threshold value(s). After
-receiving input medical image from the users, \progname{} calculates the optimal
-threshold value(s), and output the processed segmentation image.
+method. It also uses Otsu's Method to find the optimal threshold value(s).
+Afterreceiving input medical image from the users, \progname{} calculates the
+optimalthreshold value(s), and output the processed segmentation image.
 
 \subsection{Objectives}
-
+\label{Sec_objectives}
 The requirements that the software has to be verified against can be found in
-the CA document. All the functional and nonfunctional requirements should be
+the SRS document. All the functional and nonfunctional requirements should be
 tested, with test descriptions in Section \ref{sec_systestdescri}.
 
 The goal of verifying and validating is to increase confidence in the software
@@ -116,45 +122,57 @@ implemented correctly.
 \subsection{Relevant Documentation}
 
 \begin{itemize}
-    \item CA
-    \item Unit VnV Plan
+    \item SRS \cite{Dong2019SRS}
+    \item Unit VnV Plan \cite{Dong2019UnitVnv}
+    \item MG \cite{Dong2019MG}
+    \item MIS \cite{Dong2019MIS}
 \end{itemize}
 
-\wss{Your design documents are also relevant.  You can ``fake it'' and list them
-  here too.}
+\wss{Your design documents are also relevant. You can ``fake it'' and list them
+here too.}
+\an{I've cited all relevant documents here}
 
 \section{Plan} \label{sec_plan}
 
 The following sections provide more detail about the VnV of the
 \progname{} family. Information about the testing participants is provided, and
-the verification plans for CA, design, implementation and validation plan for
+the verification plans for SRS, design, implementation and validation plan for
 software are described.
 
 \subsection{Verification and Validation Team}
 
 \begin{itemize}
     \item Ao Dong
+    \item Prof. Spencer Smith
     \item Peter Michalski
-    \item Other interested classmates \wss{You can be more specific here.  Some
-        students have explicitly been assigned to work on your project.  You
-        should also list the course instructor as part of the VnV team.}
+    \item Zhi Zhang
+    \item Sasha Soraine
+    \item Sharon Wu
+    
+\wss{You can be more specific here. Some students have explicitly been assigned
+to work on your project. You should also list the course instructor as part of
+the VnV team.}
+\an{added relevant individuals' names here}
+
 \end{itemize}
 
-\subsection{CA Verification Plan}
+\subsection{SRS Verification Plan}
 
-The CA can be reviewed with the help from the author's professor and
-classmates. Teamwork will be done systematically by reviewing each others CA or
-other documents. The whole process can be done through GitHub by reviewing and
-submitting issues. Reviewers can give revision suggestions to the author, and
+The SRS can be reviewed with the help from the author's professor and
+classmates. Teamwork will be done systematically by reviewing each others SRS
+orother documents. The whole process can be done through GitHub by reviewing
+andsubmitting issues. Reviewers can give revision suggestions to the author, and
 the author has the responsibility to check all the submitted issues and make
 necessary adjustments accordingly.
 
 \subsection{Design Verification Plan}
 
-During the writing of CA, the identification of verification activity is
-considered parallel. This enables the writer to make sure that the specification
-in the CA is verifiable. Any changes in the CA should be careful. \wss{This last
-  sentence is not a complete thought.}
+During the writing of SRS, the identification of verification activity is
+considered parallel. This enables the writer to make sure that the
+specificationin the SRS is verifiable. Any future changes to the SRS should not
+compromise
+the verifiability. \wss{This last
+  sentence is not a complete thought.}\an{adjusted}
 
 Some details need to be identified, such as measurement methods, test
 environment, development strategy, resources, tools, and facilities. Before
@@ -162,15 +180,43 @@ making the final plan, the proposed plan can be reviewed by the VnV team, and
 issues can be submitted to improve the plan.
 
 Usually the plan should be ready before the implementation stage. However,
-during the implementation, if specifications need to be modified in CA, the plan
+during the implementation, if specifications need to be modified in SRS, the
+plan
 might need to be updated accordingly.
 
 The specifications and test plan shall be well-documented. There can be
 preliminary test plan to make improvements to the final plan.
 
-\wss{This is not a very specific plan.  Who is going to review your design?  How
-  are they going to do the review?  Peter had some specific ideas for doing this
-that you might like to borrow.}
+\wss{This is not a very specific plan. Who is going to review your design?
+Howare they going to do the review? Peter had some specific ideas for doing
+thisthat you might like to borrow.}
+
+\an{Peter's paper only has two sentences here. I borrowed the following idea
+anyway.}
+
+The verification of the design shall help achieving the objectives described in
+Section \ref{Sec_objectives} \cite{Michalski2019SystVnv}. Specifically,
+the verification should ensure that all the functional requirements and
+nonfuncionaly requirements can be fully tested.
+
+\an{I borrowed Sasha's idea as follows.}
+
+Three methods can be used for the design verification
+\cite{Soraine2019SystVnv}:\begin{itemize}
+\item Rubber duck testing. This verification shall be done by the author. It
+includes examining the whole MG and MIS and explaining the software process
+aloud to a (imaginary) rubber duck.
+
+\item Expert review. This verification shall be done by Prof.\ Smith and the MG
+and MIS reviewers Zhi Zhang and Sharon Wu. The design shall be verified to be
+able to meet all the requirements in the SRS. The reviewing process shall use
+anissue tracking and version control tool such as GitHub.
+
+\item Task-based peer review. This verification shall be done by Peter
+Michalskiand other interested peers, who can complete individual tasks by
+verifying
+certain parts of the whole software design.
+\end{itemize}
 
 \subsection{Implementation Verification Plan}
 
@@ -183,63 +229,38 @@ anti-pattern detection will be analyzed for some nonfunctional requirements in
 Section \ref{sec_nonfuncreqtest}. Both manual and automatic techniques will be
 used for investigation, mathematical calculations, logical evaluation,
 etc. Regarding the automatic techniques, some static code analyzer can be used,
-such as PMD(\url{https://pmd.github.io/}), \wss{Have a look at the writing
-  checklist - additional spaces are needed before the opening brackets.}
-LGTM(\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive
+such as PMD (\url{https://pmd.github.io/}), \wss{Have a look at the writing
+checklist - additional spaces are needed before the opening brackets.}
+\an{adjusted}
+LGTM (\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive
 (\url{https://discotek.ca/deepdive.xhtml}).
     
     After selecting a group of test cases consisting of tests data, dynamic
 verification will be used by execution of the system or its units. By finding
 out the output test results, we can execute testings for the functional
-requirements in Section \ref{sec_funcreqtest}. By methods like questionnaire and
-interview, we can analyze the nonfunctional requirements listed in Section
+requirements in Section \ref{sec_funcreqtest}. By methods like questionnaire
+andinterview, we can analyze the nonfunctional requirements listed in Section
 \ref{sec_nonfuncreqtest}.
 
 \subsection{Software Validation Plan}
 
-One possible validation approach is interviewing Dr.\ Michael Noseworthy
-\wss{``Dr. Noseworthy'' has two spaces after the period ``Dr.\ Noseworthy'' only
-  has one.} to find out if \progname{} is really what the users need.  
+One possible validation approach is interviewing Dr.\ Michael Noseworthy to
+findout if \progname{} is really what the users need.
 
 \section{System Test Description} \label{sec_systestdescri}
 
 \subsection{Tests for Functional Requirements} \label{sec_funcreqtest}
 
-There are 5 functional requirements described in Section 7.1 of CA. \wss{It is a
+The functional requirements described in the SRS \cite{Dong2019SRS}. \wss{It is
+a
   maintenance nightmare to copy and paste between documents.  You can just
   reference the original document.  Using the original files in the Blank
   Project Template repo with make, it is possible to cross-reference between
   documents.}
+\an{I cited SRS here, and deleted the copied words}
 
-\begin{itemize}
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] \famname{} shall
-verify that the input data are valid. A valid input image must be 2D 12-bit or
-16-bit grayscale DICOM image. An error message shall be displayed if input data
-are invalid.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] \famname{}
-shall guarantee that the output file is the same resolution as the input file.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:] \famname{} shall
-provide correct calculate according to Instance Models according to the user's
-choice of which method to use, single or multiple global thresholds. \famname{}
-shall also display the correctly calculated optimal threshold value(s)
-$k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] \famname{}
-  shall verify that the output image must be 2D 8-bit grayscale image and the
-  pixel format must be the byte image, where the feature value must be the gray
-  intensity value stored as an 8-bit integer giving a range of possible values
-  from 0 to 255.
-
-\item[R\refstepcounter{reqnum}\thereqnum \label{R_Outputk}:] 
-\famname{} shall output segmentation image.
-
-\end{itemize}
-
-\progname{} shall verify that the input data are valid, shall guarantee that the
-output is consistent with the input and meet the same standard, and shall
+\progname{} shall verify that the input data are valid, shall guarantee that
+theoutput is consistent with the input and meet the same standard, and shall
 provide correct calculation and output.
 
 R1 will be tested in Section \ref{sec_inputtest}, R3 will be tested in
@@ -249,15 +270,18 @@ R1 will be tested in Section \ref{sec_inputtest}, R3 will be tested in
 \subsubsection{Input verification}
 \label{sec_inputtest}
 
-According to R1 in the CA, \progname{} shall verify that the input data are
+According to R1 in the SRS, \progname{} shall verify that the input data are
 valid. A valid input image must be 12-bit or 16-bit grayscale DICOM image. An
 error message shall be displayed if input data are invalid.
 
 Part of the test for nonfunctional requirements including Robustness in Section
 \ref{sec_robustnesstest} is also done here.
 
-In this test, various types of input file will be tested, \progname{} shall only
-take 12-bit or 16-bit grayscale DICOM image as input. Taken incorrect format or
+In this test, various types of input file will be tested, \progname{} shall
+onlytake 12-bit or 16-bit grayscale DICOM image with width and height greater
+than 0
+and with valid pixel values as input, as described in the Section Input Data
+Constraints in the SRS. Taken incorrect format or
 file type, it shall display an error message.
 		
 \paragraph{Input Verification Test}
@@ -266,7 +290,7 @@ file type, it shall display an error message.
 
 \item{Invalid filename extensions}
 
-Control: Manual
+Control: Automatic
 					
 Initial State: \progname{} is started and running
 					
@@ -278,14 +302,19 @@ Output: \progname{} shall display warning that this file is not supported.
 
 Test Case Derivation: successfully display error message.
 					
-How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times. \wss{You should make this test automatic.
+How test will be performed: it will be performed by the test team with help of
+JUnit. The test team should load the whole project with an IDE and run the
+JUnittest file /test/InputFilenameTest.java. \wss{You should make this test
+automatic.
   Using a unit testing framework, a test case can be defined that is considered
   successful is the correct exception is raised.}
+\an{Modified to use a ``fake" JUnit test module which might won't be in the
+folder soon}
+
 					
 \item{Invalid file format}
 
-Control: Manual
+Control: Automatic
 					
 Initial State: \progname{} is started and running
 					
@@ -294,15 +323,19 @@ this document; or a random file whose filename extension has been changed from
 an invalid one to .dcm and .dcm30, but the file format is not 12-bit or 16-bit
 DICOM image.
 					
-Output: \progname{} shall display warning that this file might be damaged or the
-format is not supported.
+Output: \progname{} shall display warning that this file might be damaged or
+theformat is not supported.
 
 Test Case Derivation: successfully detect the data format in the file and
 display error message. 
 
-How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times.  \wss{Again, this can be automated using a unit
+How test will be performed: it will be performed by the test team with help of
+JUnit. The test team should load the whole project with an IDE and run the
+JUnittest file /test/InputFormatTest.java. \wss{Again, this can be automated
+using a
+unit
   testing framework.  It can again be handled with exceptions.}
+\an{Modified}
 
 \item{Valid input file}
 
@@ -325,21 +358,23 @@ will be repeated multiple times.
 
 \subsubsection{Calculation}
 \label{sec_caltest} \progname{} shall provide correct calculate according to
-Instance Models according to the user's choice of which method to use, single or
-multiple global thresholds. \progname{} shall also display the correct optimal
-threshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$
+Instance Models according to the user's choice of which method to use, single
+ormultiple global thresholds. \progname{} shall also display the correct
+optimalthreshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$
 accordingly.
 
 Part of the test for nonfunctional requirements including Correctness and
 Verifiability in Section \ref{sec_correctverfiabletest} is also done here.
 
-In this test, calculated values will be cross-checked with results from other
-software such as VTK.  \wss{I don't like the ``such as'' here.  Now is the time
+In this test, calculated values will be cross-checked with results from
+ITK-SNAPMedical Image Segmentation Tool
+(\url{https://sourceforge.net/projects/itk-snap/}). \wss{I don't like the
+``suchas'' here. Now is the time
   to make specific decisions.  If you are going to use VTK say that, if you are
   going to use something else, say that.  Being specific here does not mean you
-  are tied to the decision, you could always change your mind later and ``fake''
-  the documentation.}
-		
+are tied to the decision, you could always change your mind later and ``fake''
+the documentation.}
+\an{Changed it to a specific software}
 \paragraph{Calculation Test}
 
 \begin{enumerate}
@@ -348,16 +383,21 @@ software such as VTK.  \wss{I don't like the ``such as'' here.  Now is the time
 
 Control: Automatic
 					
-Initial State: \progname{} is started and running, a valid input image such as
-valid.dcm or valid.dcm30 is taken. \wss{I would like you to be more specific.
+Initial State: \progname{} is started and running, /test/sample\_image.dcm has
+been taken as the input. \wss{I would like you to be more specific.
   What it the image?  Where can I find it?  A sample image from the VTK
   documentation would be fine, but you need to make a specific decision.  Also,
   I believe that the input image is part of input, not the initial state.  This
   same comment about identifying the specific image occurs throughout your test
   cases.  It would be fine if you used the same image for multiple tests.}
-					
+\an{Changed it to an specific input image which is also ``fake", it won't
+actually be in the folder soon.}
+\an{I prefer to remain the input part here because this test assume that an
+input is successfully taken. If any errors happen during the input part, they
+should be outside the scope of this test.}
+
 Input: user shall choose the first one from the two options: Single or Multiple
-Global Thresholds. User shall also start the next step.
+Global Thresholds.
 					
 Output: accordingly, \progname{} shall calculate and display one optimal
 threshold value $k^{\star}$, where $k^{\star} \in \{1, 2, 3, ..., L-2\}$. The
@@ -366,34 +406,37 @@ value will be compared with output from VTK to show the correctness.
 Test Case Derivation: successfully detect the users' choice and display
 potentially correct number of values.
 
-How test will be performed: the same input image will be used for calculation in
-VTK, and the output optimal threshold values from VTK will be used as control
-value. The percentage of difference between the outputs from \progname{} and VTK
-will be calculated. It will be performed by the test team with assistance from
+How test will be performed: the same input image will be used for calculation
+inVTK, and the output optimal threshold values from VTK will be used as control
+value. The percentage of difference between the outputs from \progname{} and
+VTKwill be calculated. It will be performed by the test team with assistance
+from
 JUnit, and will be repeated multiple times.
 
 \item{Display double threshold values}
 
 Control: Automatic
 					
-Initial State: \progname{} is started and running, a valid input image such as
-valid.dcm or valid.dcm30 is taken.
+Initial State: \progname{} is started and running, /test/sample\_image.dcm has
+been taken as the input.
 					
-Input: user shall choose the second one from the two options: Single or Multiple
-Global Thresholds. User shall also start the next step.
+Input: user shall choose the second one from the two options: Single or
+MultipleGlobal Thresholds.
 					
 Output: accordingly, \progname{} shall calculate and display two optimal
-threshold values - $k^{\star}_{1}$ and $k^{\star}_{2}$, where $k^{\star}_{1} \in
-[1, k^{\star}_{2}-2]$ and $k^{\star}_{2} \in [k^{\star}_{1}+2,L-2]$. The values
+threshold values - $k^{\star}_{1}$ and $k^{\star}_{2}$, where $k^{\star}_{1}
+\in[1, k^{\star}_{2}-2]$ and $k^{\star}_{2} \in [k^{\star}_{1}+2,L-2]$. The
+values
 will be compared with output from VTK to show the correctness.
 
 Test Case Derivation: successfully detect the users' choice and display
 potentially correct number of values.
 
-How test will be performed: the same input image will be used for calculation in
-VTK, and the output optimal threshold values from VTK will be used as control
-value. The percentage of difference between the outputs from \progname{} and VTK
-will be calculated. It will be performed by the test team with assistance from
+How test will be performed: the same input image will be used for calculation
+inVTK, and the output optimal threshold values from VTK will be used as control
+value. The percentage of difference between the outputs from \progname{} and
+VTKwill be calculated. It will be performed by the test team with assistance
+from
 JUnit, and will be repeated multiple times.
 
 \end{enumerate}
@@ -410,7 +453,7 @@ an output image is expected.
 
 \item{Existence of output file}
 
-Control: Manual
+Control: Automatic
 					
 Initial State: \progname{} is started and running, a valid input image such as
 valid.dcm or valid.dcm30 is taken, user has chosen which threshold method to
@@ -424,8 +467,10 @@ with correct filename extension .bmp.
 Test Case Derivation: successfully detect the users' choice and provide an
 output file with valid filename extension.
 
-How test will be performed: it will be performed by the test team manually, and
-will be repeated multiple times. \wss{This can be automated.}
+How test will be performed: it will be performed by the test team with help of
+JUnit. The test team should load the whole project with an IDE and run the
+JUnittest file /test/OutputFileWriteTest.java. \wss{This can be automated.}
+\an{adjusted}
 
 \end{enumerate}
 
@@ -462,16 +507,17 @@ Input: the input and output file.
 Output: the result of whether the output image is an 8-bit grayscale image with
 the same resolution as the input file.
 
-Test Case Derivation: successfully output file with correct filename extensions.
-
-How test will be performed: software or online apps (such as
-\url{http://checkfiletype.com/}) detecting file types can be used to determine
-the file format and resolutions. The result is automatically generated, but the
-test will be performed by the test team manually, and will be repeated multiple
-times. \wss{This test can also be automated.  That should be your goal.  I don't
+Test Case Derivation: successfully output file with correct filename
+extensions.How test will be performed: it will be performed by the test team
+with the help
+of JUnit and OpenCV Java library. The test team should load the whole project
+with an IDE and run the JUnit test file /test/OutputFormatTest.java, which is
+built using OpenCV Java library for image reading and JUnit for testing.
+\wss{This test can also be automated. That should be your goal. I don't
   think it will be that difficult if you use the right library.  (Steven
   Palmer's chemical speciation example from one of the recent years used a
   library to do this.)}
+\an{adjusted}
 
 \item{Correctness of output file}
 
@@ -494,57 +540,30 @@ output file from VTK using the same threshold value(s).
 Test Case Derivation: successfully compare the output file with control image
 from VTK.
 
-How test will be performed: software or online apps (such as
-\url{https://online-image-comparison.com/}) detecting differences between images
-can be used to determine the correctness. The result is automatically generated,
-but the test will be performed by the test team manually, and will be repeated
-multiple times.
+How test will be performed: it will be performed by the test team with the help
+of JUnit and OpenCV Java library. The test team should load the whole project
+with an IDE and run the JUnit test file /test/OutputCorrectnessTest.java, which
+is built using OpenCV Java library for image reading and JUnit for testing. The
+resolution and pixel values of input and output images will be compared, and
+thedifference will be measured.
 
 \end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements} \label{sec_nonfuncreqtest}
 
-There are 8 \wss{Using a counter here would make your document more
-  maintainable} nonfunctional requirements described in
-Section 7.2 of CA.  \wss{Really just referencing the section is enough, since
+The functional requirements described in the SRS \cite{Dong2019SRS}.
+
+\wss{Really just referencing the section is enough, since
   reproducing the text creates a maintainability problem.}
+\an{I cited SRS here, and deleted the copied words}
 
-\begin{itemize}
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_install}:] Installability: \famname{} shall be able to be installed and
-uninstalled on Windows 10, macOS 10.14, and Ubuntu Linux 18.04. The installation
-and uninstallation process shall be easy and fast.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_correct}:] Correctness: The output image will be generally similar to
-the output from VTK.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_verify}:] Verifiability: \famname{} shall be easy to be checked or
-tested.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_robust}:] Robustness: \famname{} will not crash when a user provides
-invalid input.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_use}:] Usability: \famname{} shall be easy and satisfying for users to
-learn and use.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_maintain}:] Maintainability: \famname{} shall be documented with an CA,
-VnV, MG, and MIS. It shall be able to undergo changes, like adding or changing
-functionality, meeting new requirements or fixing errors.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_portal}:] Portability: \famname{} shall be able to run on Windows 10,
-macOS 10.14, and Ubuntu Linux 18.04. environments.
-\item[R\refstepcounter{reqnum}\thereqnum
-\label{R_understand}:] Understandability: The code shall be easy to understand,
-follow a coding standard and uses proper comments.
-\end{itemize}
-
-All the qualities of \progname{} will be tested in the following 7
+All the qualities of \progname{} will be tested in the following 
 subsections. Most qualities can be measured by the grade sheet in tables, such
-as Table \ref{Tb_install} for Installability. In some cases a superscript $*$ is
-used to indicate that a response of this type should be accompanied by
+as Table \ref{Tb_install} for Installability. In some cases a superscript $*$
+isused to indicate that a response of this type should be accompanied by
 explanatory text. For instance, if problems were caused by uninstall, the
-reviewer should note what problems were caused. An (I) precedes the test case or
-question description when its measurement requires a successful installation
+reviewer should note what problems were caused. An (I) precedes the test case
+orquestion description when its measurement requires a successful installation
 \cite{SmithEtAl2018}.
 
 \subsubsection{Installability}
@@ -557,19 +576,20 @@ uninstalled in a specified environment \cite{ISO/IEC25010:2011}.
 \begin{enumerate}
 
 \item{Installation and uninstallation on Windows system}
+\label{sec_InstallWindows}
 
 Type: Manual
 					
 Initial State: a virtual machine of fresh Windows 10 operating system
 					
-Input/Condition: \progname{} installation package, install command and uninstall
-command after installation
+Input/Condition: \progname{} installation package, install command and
+uninstallcommand after installation
 					
-Output/Result: the degree of effectiveness and efficiency with which \progname{}
-can be successfully installed and/or uninstalled
+Output/Result: the degree of effectiveness and efficiency with which
+\progname{}can be successfully installed and/or uninstalled
 					
-How test will be performed: Installability can be measured by the grade sheet in
-Table \ref{Tb_install}. it will be performed by the test team manually.
+How test will be performed: Installability can be measured by the grade sheet
+inTable \ref{Tb_install}. It will be performed by the test team manually.
 
 \begin{table}[h]
 \begin{tabular}{@{}ll@{}}
@@ -594,13 +614,14 @@ Type: Manual
 					
 Initial State: a virtual machine of fresh macOS 10.14 operating system
 					
-Input/Condition: \progname{} installation package, install command and uninstall
-command after installation
+Input/Condition: \progname{} installation package, install command and
+uninstallcommand after installation
 					
-Output/Result: the degree of effectiveness and efficiency with which \progname{}
-can be successfully installed and/or uninstalled
+Output/Result: the degree of effectiveness and efficiency with which
+\progname{}can be successfully installed and/or uninstalled
 					
-How test will be performed: as above.
+How test will be performed: same as Installation and uninstallation on Windows
+system.
 
 \item{Installation and uninstallation on Linux system}
 
@@ -608,13 +629,14 @@ Type: Manual
 					
 Initial State: a virtual machine of fresh Ubuntu Linux 18.04 operating system
 					
-Input/Condition: \progname{} installation package, install command and uninstall
-command after installation
+Input/Condition: \progname{} installation package, install command and
+uninstallcommand after installation
 					
-Output/Result: the degree of effectiveness and efficiency with which \progname{}
-can be successfully installed and/or uninstalled
+Output/Result: the degree of effectiveness and efficiency with which
+\progname{}can be successfully installed and/or uninstalled
 					
-How test will be performed: as above.
+How test will be performed: same as Installation and uninstallation on Windows
+system.
 \end{enumerate}
 
 \wss{I agree that installability needs to be done with manual tests.}
@@ -626,11 +648,34 @@ requirement specification~\cite{IEEE1990}.  Verifiability is sometimes referred
 to as testability, since the focus is on measuring how easily the properties of
 a software can be checked or proven~\cite{SmithEtAl2018}.
 		
-Correctness and Verifiability are tested in the tests for functional
+Correctness is tested in the tests for functional
 requirements included in Section \ref{sec_caltest} and
-\ref{sec_outputverifytest}. \wss{Yes I agree with assessing correctness, but you
-  aren't really measuring verifiability.  Your tests could be very difficult to
+\ref{sec_outputverifytest}. \wss{Yes I agree with assessing correctness, but
+youaren't really measuring verifiability. Your tests could be very difficult to
   perform.  Just running tests just not prove that the software is verifiable.}
+\an{Added more contents as follows for verifiability}
+
+Correctness and verifiability will also be measured by the grade sheet in Table
+\ref{Tb_correctnessVerifiability}. It will be performed by the test team
+manually.
+
+\begin{table}[h]
+\begin{tabular}{@{}ll@{}}
+\toprule
+Questions & Sets of Answers \\ \midrule
+Are external libraries used? & \{yes*, no, unclear\}\\
+Does the community have confidence in this library? & \{yes, no, unclear\} \\
+Any reference to the requirements specifications of the program? & \{yes*, no,
+unclear\} \\
+What tools or techniques are used to build confidence of correctness? & string
+\\
+(I) If there is a getting started tutorial, is the output as expected? & \{yes,
+no*, n/a\} \\
+Overall impression? & \{1 .. 10\} \\ \bottomrule
+\end{tabular}
+\caption{Correctness and Verifiability Grade Sheet~\cite{SmithEtAl2018}}
+\label{Tb_correctnessVerifiability}
+\end{table}
 
 \subsubsection{Robustness} \label{sec_robustnesstest}
 
@@ -639,10 +684,29 @@ in circumstances that were not anticipated in the requirements specification -
 for example, when it encounters incorrect input data or some hardware
 malfunction~\cite{Ghezzi1991}.
 
-Robustness is tested in the test for functional requirements included in Section
-\ref{sec_inputtest}. \wss{Technically, this isn't robustness testing if your
+It will be measured by the grade sheet in Table \ref{Tb_robustness}. It will be
+performed by the test team manually.
+
+\begin{table}[h]
+\begin{tabular}{@{}ll@{}}
+\toprule
+Questions & Sets of Answers \\ \midrule
+(I) Does the software handle garbage input reasonably? & \{yes, no*\}\\
+\begin{tabular}[c]{@{}l@{}}(I) For any plain text input files, if all new lines
+are replaced with new lines\\
+and carriage returns, will the software handle this gracefully? \end{tabular} &
+\{yes, no*, n/a\} \\
+Overall impression? & \{1 .. 10\} \\ \bottomrule
+\end{tabular}
+\caption{Robustness Grade Sheet~\cite{SmithEtAl2018}}
+\label{Tb_robustness}
+\end{table}
+
+\wss{Technically, this isn't robustness testing if your
   requirements explicitly say what to do in these input error cases.  I cannot
   remember whether your requirements are specific about these scenarios.}
+\an{I changed it to your questionnaire. Before finding an better method, I
+thinkit's the best way of measuring.}
 
 \subsubsection{Usability} \label{sec_usabilitytest}
 
@@ -665,16 +729,18 @@ Type: Manual
 Initial State: \progname{} is started and running.
 					
 Input/Condition: A new user to \progname{} is asked to learn the software by
-himself/herself and to accomplish the task of inputting image, choosing
+himself/herself and to accomplish the task of inputting image, choosing the
+multiple-threshold
 calculation method and outputting image. If user guide exists, it shall be
 provided. \wss{I like this, but I think you can be more specific.  What
   calculation method are they asked to choose?}
-					
+\an{I specified to choose from one of the methods}
+				
 Output/Result: time to completion, number of misoperations and percentage of
 success will be measured.
 					
-How test will be performed: results will be recorded in the grade sheet in Table
-\ref{Tb_use}. It will be performed by the test team manually.
+How test will be performed: results will be recorded in the grade sheet in
+Table\ref{Tb_use}. It will be performed by the test team manually.
 
 \item{Memorability}
 
@@ -689,8 +755,8 @@ provided.
 Output/Result: time to completion, number of misoperations and percentage of
 success will be measured, and percentage of improvements will be calculated
 					
-How test will be performed: results will be recorded in the grade sheet in Table
-\ref{Tb_use}. It will be performed by the test team manually.
+How test will be performed: results will be recorded in the grade sheet in
+Table\ref{Tb_use}. It will be performed by the test team manually.
 					
 \item{Efficiency}
 
@@ -704,8 +770,8 @@ guide shall be provided.
 					
 Output/Result: time to completion and number of misoperations will be measured
 					
-How test will be performed: results will be recorded in the grade sheet in Table
-\ref{Tb_use}. It will be performed by the test team manually.
+How test will be performed: results will be recorded in the grade sheet in
+Table\ref{Tb_use}. It will be performed by the test team manually.
 					
 \item{Satisfaction}
 
@@ -718,8 +784,8 @@ and provide a overall satisfaction grade to the software
 					
 Output/Result: answer from the user
 					
-How test will be performed: results will be recorded in the grade sheet in Table
-\ref{Tb_use}. It will be performed by the test team manually.
+How test will be performed: results will be recorded in the grade sheet in
+Table\ref{Tb_use}. It will be performed by the test team manually.
 
 \end{enumerate}
 
@@ -746,8 +812,8 @@ Output/Result: answers and grades to the table.
 How test will be performed: testers shall check the GitHub repo of \progname{}
 for the effectiveness of version control and issue tracking on the software and
 the documents; they shall check the existence and completeness of the documents
-such as CA, SysVnVPlan, MG, MIS. Results will be recorded in the grade sheet in
-Table \ref{Tb_maintain}. It will be performed by the test team manually.
+such as SRS, SysVnVPlan, MG, MIS. Results will be recorded in the grade sheet
+inTable \ref{Tb_maintain}. It will be performed by the test team manually.
 \end{enumerate}
 
 \begin{table}[]
@@ -772,8 +838,8 @@ clones? & \{yes*, no, unclear\} \\ Overall impression? & \{1 .. 10\} \\ \hline
 
 \subsubsection{Portability}
 \label{sec_portabletest} Portability is the degree of effectiveness and
-efficiency with which a system, product or component can be transferred from one
-hardware, software or other operational or usage environment to
+efficiency with which a system, product or component can be transferred from
+onehardware, software or other operational or usage environment to
 another~\cite{ISO/IEC25010:2011}.
 
 \paragraph{Portability Test}
@@ -789,23 +855,23 @@ of fresh Windows 10 operating system
 					
 Input/Condition: operate the basic functions of the software
 					
-Output/Result: the degree of effectiveness and efficiency with which \progname{}
-can be operate on this platform
+Output/Result: the degree of effectiveness and efficiency with which
+\progname{}can be operate on this platform
 					
 How test will be performed: Portability can be measured by the grade sheet in
-Table \ref{Tb_portable}. it will be performed by the test team manually.
+Table \ref{Tb_portable}. It will be performed by the test team manually.
 
 \begin{table}[h]
 \begin{tabular}{@{}ll@{}}
 \toprule
 Questions & Sets of Answers \\ \midrule
 (I)What platforms is the software advertised to work on?
-          & \begin{tabular}[c]{@{}l@{}}\{Windows, Linux, macOS,\\ Android, Other
-              OS\}\end{tabular} \\
+& \begin{tabular}[c]{@{}l@{}}\{Windows, Linux, macOS,\\ Android, Other
+OS\}\end{tabular} \\
 \begin{tabular}[c]{@{}l@{}}(I)Is there any compromise to functional or
   nonfunctional\\ requirements by running on this platform?\end{tabular} &
-                                                                           \{yes*, no\} \\
-Are special steps taken in the source code to handle portability? & \{yes*, no, n/a\} \\
+\{yes*, no\} \\Are special steps taken in the source code to handle portability?& \{yes*, no,
+n/a\} \\
 Is portability explicitly identified as NOT being important? & \{yes, no\} \\
 Convincing evidence that portability has been achieved? & \{yes*, no\} \\
 Overall impression? & \{1 .. 10\} \\ \bottomrule
@@ -827,7 +893,7 @@ Output/Result: the degree of effectiveness and efficiency
 with which \progname{} can be operate on this platform
 					
 How test will be performed: Portability can be measured by the grade sheet in
-Table \ref{Tb_portable}. it will be performed by the test team manually.
+Table \ref{Tb_portable}. It will be performed by the test team manually.
 
 \item{Portability on Linux system}
 
@@ -842,7 +908,7 @@ Output/Result: the degree of effectiveness and efficiency
 with which \progname{} can be operate on this platform
 					
 How test will be performed: Portability can be measured by the grade sheet in
-Table \ref{Tb_portable}. it will be performed by the test team manually.
+Table \ref{Tb_portable}. It will be performed by the test team manually.
 \end{enumerate}
 
 \subsubsection{Understandability}
@@ -871,7 +937,7 @@ code
 					
 How test will be performed: After reading part or all of the source code,
 Understandability can be measured by the grade sheet in Table
-\ref{Tb_understandable}. it will be performed by the test team manually.
+\ref{Tb_understandable}. It will be performed by the test team manually.
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -881,10 +947,12 @@ Understandability can be measured by the grade sheet in Table
 Questions & Set of Answers \\ \midrule
 Consistent indentation and formatting style? & \{yes, no, n/a\} \\
 Explicit identification of a coding standard? & \{yes*, no, n/a\} \\
-Are the code identifiers consistent, distinctive, and meaningful? & \{yes, no*, n/a\} \\
-Are constants (other than 0 and 1) hard-coded into the program? & \{yes, no*, n/a\} \\
-Comments are clear, indicate what is being done, not how? & \{yes, no*, n/a\} \\
-Is the name/URL of any algorithms used mentioned? & \{yes, no*, n/a\} \\
+Are the code identifiers consistent, distinctive, and meaningful? & \{yes, no*,
+n/a\} \\
+Are constants (other than 0 and 1) hard-coded into the program? & \{yes, no*,
+n/a\} \\
+Comments are clear, indicate what is being done, not how? & \{yes, no*, n/a\}
+\\Is the name/URL of any algorithms used mentioned? & \{yes, no*, n/a\} \\
 Parameters are in the same order for all functions? & \{yes, no*, n/a\} \\
 Is code modularized? & \{yes, no*, n/a\} \\
 Descriptive names of source code files? & \{yes, no*, n/a\} \\
@@ -919,7 +987,13 @@ performed by the test team manually.
 
 \subsection{Traceability Between Test Cases and Requirements}
 
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed. Every time a
+component is changed,the items in the column of that component that are marked
+with an “X” may have to be modified as well. Table \ref{Tb_trace} shows the
+dependencies between the test cases and the requirements.
 \wss{Include some text to introduce the table.}
+\an{Added text similar to the SRS}
 
 \begin{table}[h]
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
@@ -930,14 +1004,15 @@ performed by the test team manually.
 \ref{sec_outputtest} &  &  &  &  & X &  &  &  &  &  &  &  &  \\ \hline
 \ref{sec_outputverifytest} &  & X &  & X &  &  & X & X &  &  &  &  &  \\ \hline
 \ref{sec_installtest} &  &  &  &  &  & X &  &  &  &  &  &  &  \\ \hline
-\ref{sec_correctverfiabletest} &  &  &  &  &  &  & X & X &  &  &  &  &  \\ \hline
+\ref{sec_correctverfiabletest} & & & & & & & X & X & & & & & \\ \hline
 \ref{sec_robustnesstest} &  &  &  &  &  &  &  &  & X &  &  &  &  \\ \hline
 \ref{sec_usabilitytest} &  &  &  &  &  &  &  &  &  & X &  &  &  \\ \hline
 \ref{sec_Maintaintest} &  &  &  &  &  &  &  &  &  &  & X &  &  \\ \hline
 \ref{sec_portabletest} &  &  &  &  &  &  &  &  &  &  &  & X &  \\ \hline
 \ref{sec_understandtest} &  &  &  &  &  &  &  &  &  &  &  &  & X \\ \hline
 \end{tabular}
-\caption{Traceability Matrix showing the connections between requirements and tests}
+\caption{Traceability Matrix showing the connections between requirements and
+tests}
 \label{Tb_trace}
 \end{table}
 
@@ -977,14 +1052,14 @@ Test ID & Question/test detail & Anser/result \\ \hline
                   users\end{tabular}} & Time to completion & Seconds \\
  & Number of misoperations & $\mathbb{N}$ \\ \hline
 \multirow{9}{*}{\begin{tabular}[c]{@{}l@{}}(I)Satisfaction:\\ every
-                  user\end{tabular}} & Do the operations fit to human nature and
-                                       your intuition? & \{yes, no*\} \\
+user\end{tabular}} & Do the operations fit to human nature and your intuition? &\{yes, no*\} \\
  & Does it support your language? & \{yes, no*\} \\
  & Can you understand the descriptions easily & \{yes, no*\} \\
  & Does it give a clear explanation when an error occurs? & \{yes, no*\} \\
  & Have you noticed any hot keys? & \{yes*, no\} \\
  & Do you think any hot key need to be added? & \{yes*, no\} \\
- & Do you think undo or redo function is missing during any step? & \{yes*, no\} \\
+& Do you think undo or redo function is missing during any step? & \{yes*, no\}
+\\
  & \begin{tabular}[c]{@{}l@{}}Do you think any other function for convenience
      need to be added?\\ Such as auto-fill, repeat and a record for all the
      steps.\end{tabular} & \{yes*, no\} \\
