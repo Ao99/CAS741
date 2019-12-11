@@ -42,10 +42,10 @@ public class Output {
                 img.setRGB(m, n, segImage.pixelValue()[n * x + m] * 0x00010101);
             }
         }
-        s += "_" + ThresCal.methodChoice() + ".png";
+        s += "_" + ThresCal.methodChoice() + ".bmp";
         File outputFile = new File(s);
         try {
-            ImageIO.write(img, "png", outputFile);
+            ImageIO.write(img, "bmp", outputFile);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
