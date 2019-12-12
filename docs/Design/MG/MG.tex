@@ -3,18 +3,6 @@
 \input{../../Comments}
 \input{../../Common}
 
-\newcounter{acnum}
-\newcommand{\actheacnum}{AC\theacnum}
-\newcommand{\acref}[1]{AC\ref{#1}}
-
-\newcounter{ucnum}
-\newcommand{\uctheucnum}{UC\theucnum}
-\newcommand{\uref}[1]{UC\ref{#1}}
-
-\newcounter{mnum}
-\newcommand{\mthemnum}{M\themnum}
-\newcommand{\mref}[1]{M\ref{#1}}
-
 \begin{document}
 
 \title{Module Guide for \progname{}} 
@@ -31,6 +19,7 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Nov 25 & 1.0 & Initial draft\\
+Dec 11 & 1.1 & Modification according to feedback\\
 \bottomrule
 \end{tabularx}
 
@@ -47,11 +36,14 @@ This section records information for easy reference.
   \toprule		
   \textbf{symbol} & \textbf{description}\\
   \midrule 
+  1D & one-dimensional\\
+  3D & three-dimensional\\
   AC & Anticipated Change\\
   DAG & Directed Acyclic Graph \\
   dcm4che & A DICOM Toolkit and Library\\
   M & Module \\
   MG & Module Guide \\
+  $\mathbb{N}$ & Natural Number\\
   OS & Operating System \\
   R & Requirement\\
   SC & Scientific Computing \\
@@ -101,8 +93,8 @@ designers and maintainers to easily identify the parts of the software.  The
 potential readers of this document are as follows:
 
 \begin{itemize}
-\item New project members: This document can be a guide for a new project member
-to easily understand the overall structure and quickly find the
+\item New project members: This document can be a guide for a new project
+memberto easily understand the overall structure and quickly find the
   relevant modules they are searching for.
 \item Maintainers: The hierarchical structure of the module guide improves the
 maintainers' understanding when they need to make changes to the system. It is
@@ -122,8 +114,8 @@ specifies the connections between the software requirements and the
 modules. Section \ref{SecMD} gives a detailed description of the
 modules. Section \ref{SecTM} includes two traceability matrices. One checks
 the completeness of the design against the requirements provided in the SRS.
-Theother shows the relation between anticipated changes and the modules. Section
-\ref{SecUse} describes the use relation between modules.
+Theother shows the relation between anticipated changes and the modules.
+Section\ref{SecUse} describes the use relation between modules.
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
 
@@ -145,29 +137,37 @@ change.
 hardware on which the software is running.
 
 \item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-initial \wss{Does the word ``initial'' have significance here?  I think you can
-  just say ``input data''.}  input data. \progname{}
+\wss{Does the word ``initial'' have significance here? I think you can
+just say ``input data''.} \an{I agree. Deleted ``initial''} input data.
+\progname{}
 convert DICOM image frames to bitmap images before segmentation with dcm4che
 library. It may convert to other image formats with other libraries.
 
 \item[\refstepcounter{acnum} \actheacnum \label{acOutput}:] The format of the
-final \wss{As above, do you need the word ``final''?} output data.
+\wss{As above, do you need the word ``final''?}\an{I agree. Deleted ``final''}
+output data.
 
 \item[\refstepcounter{acnum} \actheacnum
   \label{acCalculation}:]\progname{} only uses global threshold with Otsu's
-  Method. \wss{If you mention Otsu's method, then you should give a citation to
-    where this method is introduced/explained.  I also wonder what is the secret
-    here.  Is it a secret the Otsu's method is being used, or will the interface
-    expose that decision.}  It could include the method using local thresholds
+Method, as explained in the SRS \cite{Dong2019SRS}. \wss{If you mention Otsu's
+method, then you should give a citation to
+where this method is introduced/explained. I also wonder what is the secrethere.
+Is it a secret the Otsu's method is being used, or will the interfaceexpose that
+decision.} \an{I suppose ``using 2 thresholds to segment the image"
+is not a secret, but ``these 2 thresholds are calculated with Otsu's method" is
+a secret. So yes, it's a secret the Otsu's method is being used, but the
+interface won't
+    expose that decision.} It could include the method using local thresholds
   in the future. It also only uses multi-threshold method with 2 thresholds. It
-  could use the method with more thresholds in the future. \progname{} only uses
-  threshold segmentation method. It could use all the methods in Table
+could use the method with more thresholds in the future. \progname{} only uses
+threshold segmentation method. It could use all the methods in Table
   \ref{tb_segmethods} in the future.
 \begin{table}[h]
 \centering
 \begin{tabular}{|c|l|l|l|}
 \hline
-\multirow{2}{*}{\textbf{Generation}} & \multicolumn{3}{c|}{\textbf{Category}} \\\cline{2-4}
+\multirow{2}{*}{\textbf{Generation}} & \multicolumn{3}{c|}{\textbf{Category}}
+\\\cline{2-4}
 & \multicolumn{1}{c|}{\textbf{Region-based}} &
 \multicolumn{1}{c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Boundary\\
 Following\end{tabular}}} &
@@ -177,7 +177,8 @@ Classification\end{tabular}}} \\ \hline
 tracing\\ (heuristic)\end{tabular} & • Intensity threshold \\ \hline
 \textbf{$2^{nd}$} & \begin{tabular}[c]{@{}l@{}}• Deformable models\\ • Graph
 search\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Minimal path\\ • Target
-tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular} &\begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means
+tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular}
+&\begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means
 clustering\\ • Neural networks\\ • Multiresolution\end{tabular} \\ \hline
 \textbf{$3^{rd}$} & \begin{tabular}[c]{@{}l@{}}• Shape models\\ • Appearance
 models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
@@ -189,7 +190,8 @@ models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
 
 \item[\refstepcounter{acnum} \actheacnum
 \label{acVerify}:]\progname{} only verify the resolution and grayscale value of
-processed image and segmentation image, it can make more thoroughly verificationin the future.
+processed image and segmentation image, it can make more thoroughly
+verificationin the future.
 
 \item[\refstepcounter{acnum} \actheacnum
 \label{acConstants}:]The constant values used in the program.
@@ -206,7 +208,8 @@ structure.
 \item[\refstepcounter{acnum} \actheacnum
 \label{acImageDS}:]Image Data Structure has 2 $\mathbb{N}$ and a 1D sequence
 now. \progname{}
-manipulates multi-frame images with a sequence of image data created from it. Itmay use other image data structures in the future, such as a 3D sequence
+manipulates multi-frame images with a sequence of image data created from it.
+Itmay use other image data structures in the future, such as a 3D sequence
 representing multi frame images.
 \end{description}
 
@@ -234,27 +237,27 @@ color=orange!40,
     	}
 ;
 \end{tikzpicture}
-\captionof{figure}{Major functions of \famname{} \cite{Dong2019ca}}
+\captionof{figure}{Major functions of \famname{} \cite{Dong2019SRS}}
 \label{fg_miafunctions}
 \end{center}
 
 \subsection{Unlikely Changes} \label{SecUchange}
 
 The module design should be as general as possible. However, a general system
-ismore complex. Sometimes this complexity is not necessary. Fixing some design
+is more complex. Sometimes this complexity is not necessary. Fixing some design
 decisions at the system architecture stage can simplify the software design. If
 these decision should later need to be changed, then many parts of the design
 will potentially need to be modified. Hence, it is not intended that these
 decisions will be changed.
 
 \begin{description}
-\item[\refstepcounter{ucnum} \uctheucnum \label{uc_IO}:] Input/Output devices
+\item[\refstepcounter{ucnum} \utheucnum \label{uc_IO}:] Input/Output devices
 (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
 
-\item[\refstepcounter{ucnum} \uctheucnum \label{uc_Input}:] 
+\item[\refstepcounter{ucnum} \utheucnum \label{uc_Input}:] 
 There will always be a source of input data external to the software.
 
-\item[\refstepcounter{ucnum} \uctheucnum \label{uc_Goal}:] 
+\item[\refstepcounter{ucnum} \utheucnum \label{uc_Goal}:] 
 The goal of the system is related to medical imaging analysis.
 \end{description}
 
@@ -367,7 +370,8 @@ haveto be implemented.
 \item[Secrets:]The format and structure of the input data and the processed
 input data.
 \item[Services:]Converts the input data into the data structure used by the
-input module, store the processed data, and verify the validity of the processeddata.
+input module, stores the processed data, and uses another module to verify the
+validity of the processed data.
 \item[Implemented By:] \progname{}
 \end{description}
 
@@ -395,7 +399,7 @@ display optimal threshold value(s) accordingly.
 
 \begin{description}
 \item[Secrets:]The algorithm and process of verification.
-\item[Services:]verify the validity of the processed data and segmentation
+\item[Services:]Verify the validity of the processed data and segmentation
 data.\item[Implemented By:] \progname{}
 \end{description}
 
