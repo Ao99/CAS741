@@ -131,7 +131,7 @@ public class ThresCal {
             Scanner choiceInput = new Scanner(System.in);
             System.out.println("********************************************");
             System.out.println("Number of thresholds to use:");
-            System.out.println("please input a number from the set " + Constants.numThres.toString());
+            System.out.println("please input a number from the set " + Constants.numsThres.toString());
             System.out.println("********************************************");
             try {
                 methodChoice = choiceInput.nextInt();
