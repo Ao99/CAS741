@@ -10,11 +10,11 @@ public class ThresCal {
     private static int k2;
     private static int k3;
 
-    private ImageData img;
-    private double[] p;
-    private double mg;
+    private static ImageData img;
+    private static double[] p;
+    private static double mg;
 
-    public void calculation(int j) {
+    public static void calculation(int j) {
         imageIndex = j;
         if (!Input.isLoaded()[j]) {
             validThresholds = false;
@@ -71,7 +71,7 @@ public class ThresCal {
         }
     }
 
-    private int n(int i) {
+    private static int n(int i) {
         int sum = 0;
         for (int k = 0; k < img.pixelValue().length; k++) {
             if (img.pixelValue()[k] == i) sum++;
@@ -79,11 +79,11 @@ public class ThresCal {
         return sum;
     }
 
-    private double p(int i) {
+    private static double p(int i) {
         return (double) n(i) / (img.width() * img.height());
     }
 
-    private double prb(int start, int end) {
+    private static double prb(int start, int end) {
         double sum = 0.0;
         for (int i = start; i <= end; i++) {
             sum += p[i];
@@ -91,7 +91,7 @@ public class ThresCal {
         return sum;
     }
 
-    private double m(int start, int end) {
+    private static double m(int start, int end) {
         double sum = 0.0;
         for (int i = start; i <= end; i++) {
             sum += i * p[i];
@@ -99,7 +99,7 @@ public class ThresCal {
         return sum / prb(start, end);
     }
 
-    private double mg() {
+    private static double mg() {
         double sum = 0.0;
         for (int i = 0; i <= 255; i++) {
             sum += i * p[i];
@@ -108,25 +108,25 @@ public class ThresCal {
     }
 
     //a series of overloading method sigma2b(t1, t2, t3, ....)
-    private double sigma2b(int t1) {
+    private static double sigma2b(int t1) {
         return prb(0, t1) * Math.pow(m(0, t1) - mg, 2) +
                 prb(t1 + 1, 255) * Math.pow(m(t1 + 1, 255) - mg, 2);
     }
 
-    private double sigma2b(int t1, int t2) {
+    private static double sigma2b(int t1, int t2) {
         return prb(0, t1) * Math.pow(m(0, t1) - mg, 2) +
                 prb(t1 + 1, t2) * Math.pow(m(t1 + 1, t2) - mg, 2) +
                 prb(t2 + 1, 255) * Math.pow(m(t2 + 1, 255) - mg, 2);
     }
 
-    private double sigma2b(int t1, int t2, int t3) {
+    private static double sigma2b(int t1, int t2, int t3) {
         return prb(0, t1) * Math.pow(m(0, t1) - mg, 2) +
                 prb(t1 + 1, t2) * Math.pow(m(t1 + 1, t2) - mg, 2) +
                 prb(t2 + 1, t3) * Math.pow(m(t2 + 1, t3) - mg, 2) +
                 prb(t3 + 1, 255) * Math.pow(m(t3 + 1, 255) - mg, 2);
     }
 
-    private void getMethodChoice() {
+    private static void getMethodChoice() {
         while (methodChoice == 0) {
             Scanner choiceInput = new Scanner(System.in);
             System.out.println("********************************************");

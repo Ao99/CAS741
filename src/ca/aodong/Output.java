@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class Output {
-    private ImageData img;
-    private ImageData segImage;
+    private static ImageData img;
+    private static ImageData segImage;
 
-    public void displayThresholds() {
+    public static void displayThresholds() {
         if (!ThresCal.isValidThresholds()) return;
         if (ThresCal.methodChoice() == 1) {
             System.out.println("The single threshold value for frame " + (ThresCal.imageIndex() + 1) + " is k= " + ThresCal.k1() + ".");
@@ -22,7 +22,7 @@ public class Output {
         }
     }
 
-    public boolean writeOutput(String s) {
+    public static boolean writeOutput(String s) {
         int j = ThresCal.imageIndex();
         if(!ThresCal.isValidThresholds()){
             System.out.println("Error: frame "+(j+1)+" is not segmented nor saved.");
@@ -42,7 +42,7 @@ public class Output {
                 img.setRGB(m, n, segImage.pixelValue()[n * x + m] * 0x00010101);
             }
         }
-        s += "_" + ThresCal.methodChoice() + ".bmp";
+        s += (j+1) + "_" + ThresCal.methodChoice() + ".bmp";
         File outputFile = new File(s);
         try {
             ImageIO.write(img, "bmp", outputFile);
@@ -53,7 +53,7 @@ public class Output {
         return true;
     }
 
-    private void createSegmentation() {
+    private static void createSegmentation() {
         int j = ThresCal.imageIndex();
         int c = ThresCal.methodChoice();
         int k1 = ThresCal.k1();

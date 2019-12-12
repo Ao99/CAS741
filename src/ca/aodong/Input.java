@@ -9,7 +9,7 @@ public class Input {
     private static int numFrames;
     private static boolean[] isLoaded;
 
-    public void loadInput(String s) {
+    public static void loadInput(String s) {
         //Assume that the DICOM file has 6 frames, some frames can be damaged
         numFrames = 6;
         loadedImages = new ImageData[numFrames];
@@ -39,7 +39,7 @@ public class Input {
         verifyInput();
     }
 
-    private void verifyInput() {
+    private static void verifyInput() {
         isLoaded = new boolean[numFrames];
         int cnt = 0;
         for (int j = 0; j < numFrames; j++) {
