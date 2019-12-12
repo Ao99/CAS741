@@ -30,7 +30,7 @@ public class Input {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Error: cannot read the file " + name);
+                System.out.println("Error: cannot find the file " + name);
             } catch (Exception e) {
                 System.out.println("Error: the format of frame " + (j + 1) + " is not supported.");
             }
