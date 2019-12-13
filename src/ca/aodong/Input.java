@@ -10,8 +10,8 @@ public class Input {
     private static boolean[] isLoaded;
 
     public static void loadInput(String s) {
-        //Assume that the DICOM file has 6 frames, some frames can be damaged
-        numFrames = 6;
+        //Assume that the DICOM file has 7 frames, frame6 is damaged, frame7 is missing
+        numFrames = 7;
         loadedImages = new ImageData[numFrames];
         for (int j = 0; j < numFrames; j++) {
             String name = s + "frame" + (j + 1) + ".bmp";

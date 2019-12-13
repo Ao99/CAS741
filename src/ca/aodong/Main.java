@@ -3,8 +3,8 @@ package ca.aodong;
 public class Main {
 
     public static void main(String[] args) {
-        String filenameIn = "test/input/";
-        String filenameOut = "test/output/";
+        String filenameIn = "/home/ubuntu/environment/MISEG/test/input/";
+        String filenameOut = "/home/ubuntu/environment/MISEG/test/output/";
 
         Input.loadInput(filenameIn);
         int cnt = 0;
