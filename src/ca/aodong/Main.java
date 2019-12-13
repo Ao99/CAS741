@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         String filenameIn = "test/input/";
-        String filenameOut = "test/output/frame";
+        String filenameOut = "test/output/";
 
         Input.loadInput(filenameIn);
         int cnt = 0;

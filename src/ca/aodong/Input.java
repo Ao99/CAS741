@@ -43,9 +43,9 @@ public class Input {
         isLoaded = new boolean[numFrames];
         int cnt = 0;
         for (int j = 0; j < numFrames; j++) {
-            isLoaded[j] = ImageVerify.verify1File(loadedImages[j]);
+            isLoaded[j] = ImageVerify.verifyImageData(loadedImages[j]);
             if (isLoaded[j]) cnt++;
-            else System.out.println("Error: frame " + (j + 1) + " is not loaded.");
+            else System.out.println("Warning: frame " + (j + 1) + " is not loaded.");
         }
         System.out.println(cnt + " image frames have been loaded.");
     }

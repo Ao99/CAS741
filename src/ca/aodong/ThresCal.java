@@ -20,6 +20,7 @@ public class ThresCal {
         frameIndex = j;
         if (!Input.isLoaded()[j]) {
             isThresValid = false;
+            System.out.println("Warning: thresholds for frame " + (j + 1) + " are not calculated.");
             return;
         }
         img = Input.loadedImages()[j];
@@ -41,7 +42,7 @@ public class ThresCal {
                 }
             }
             if (k1 >= 1 && k1 <= 254) isThresValid = true;
-            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1≤254");
+            else System.out.println("Error: incorrect thresholds calculation for frame " + (j + 1));
 
         } else if (chosenThresNum == 2) {
             double maxSigma2b = 0.0;
@@ -56,7 +57,7 @@ public class ThresCal {
                 }
             }
             if (k1 >= 1 && k1 < k2 && k2 <= 254) isThresValid = true;
-            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1<k2≤254");
+            else System.out.println("Error: incorrect thresholds calculation for frame " + (j + 1));
 
         } else if (chosenThresNum == 3) {
             double maxSigma2b = 0.0;
@@ -74,7 +75,7 @@ public class ThresCal {
                 }
             }
             if (k1 >= 1 && k1 < k2 && k2 < k3 && k3 <= 254) isThresValid = true;
-            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1<k2<k3≤254");
+            else System.out.println("Error: incorrect thresholds calculation for frame " + (j + 1));
         }
     }
 
