@@ -3,25 +3,27 @@ package ca.aodong;
 import java.util.Scanner;
 
 public class ThresCal {
-    private static int imageIndex;
-    private static int methodChoice;
-    private static boolean validThresholds;
+    private static int frameIndex;
+    private static int chosenThresNum;
+    private static boolean isThresValid;
     private static int k1;
     private static int k2;
     private static int k3;
-
     private static ImageData img;
+
+    //The following state variables are not required by MIS.
+    //They're here for the interests of conciseness and code performance
     private static double[] p;
     private static double mg;
 
     public static void calculation(int j) {
-        imageIndex = j;
+        frameIndex = j;
         if (!Input.isLoaded()[j]) {
-            validThresholds = false;
+            isThresValid = false;
             return;
         }
-        getMethodChoice();
         img = Input.loadedImages()[j];
+        getUserChoice();
 
         p = new double[256];
         for (int i = 0; i <= 255; i++) {
@@ -29,7 +31,7 @@ public class ThresCal {
         }
         mg = mg();
 
-        if (methodChoice == 1) {
+        if (chosenThresNum == 1) {
             double maxSigma2b = 0.0;
             for (int t = 1; t <= 254; t++) {
                 double currSigma2b = sigma2b(t);
@@ -38,8 +40,10 @@ public class ThresCal {
                     maxSigma2b = currSigma2b;
                 }
             }
-            if (k1 >= 1 && k1 <= 254) validThresholds = true;
-        } else if (methodChoice == 2) {
+            if (k1 >= 1 && k1 <= 254) isThresValid = true;
+            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1≤254");
+
+        } else if (chosenThresNum == 2) {
             double maxSigma2b = 0.0;
             for (int t1 = 1; t1 <= 253; t1++) {
                 for (int t2 = t1 + 1; t2 <= 254; t2++) {
@@ -51,8 +55,10 @@ public class ThresCal {
                     }
                 }
             }
-            if (k1 >= 1 && k1 < k2 && k2 <= 254) validThresholds = true;
-        } else if (methodChoice == 3) {
+            if (k1 >= 1 && k1 < k2 && k2 <= 254) isThresValid = true;
+            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1<k2≤254");
+
+        } else if (chosenThresNum == 3) {
             double maxSigma2b = 0.0;
             for (int t1 = 1; t1 <= 252; t1++) {
                 for (int t2 = t1 + 1; t2 <= 253; t2++) {
@@ -67,7 +73,8 @@ public class ThresCal {
                     }
                 }
             }
-            if (k1 >= 1 && k1 < k2 && k2 <= 254) validThresholds = true;
+            if (k1 >= 1 && k1 < k2 && k2 < k3 && k3 <= 254) isThresValid = true;
+            else System.out.println("Error: incorrect calculation. The result does not follow the rule: 1≤k1<k2<k3≤254");
         }
     }
 
@@ -126,19 +133,19 @@ public class ThresCal {
                 prb(t3 + 1, 255) * Math.pow(m(t3 + 1, 255) - mg, 2);
     }
 
-    private static void getMethodChoice() {
-        while (methodChoice == 0) {
+    private static void getUserChoice() {
+        while (chosenThresNum == 0) {
             Scanner choiceInput = new Scanner(System.in);
             System.out.println("********************************************");
             System.out.println("Number of thresholds to use:");
             System.out.println("please input a number from the set " + Constants.numsThres.toString());
             System.out.println("********************************************");
             try {
-                methodChoice = choiceInput.nextInt();
-                if (methodChoice > 3 || methodChoice < 1) {
+                chosenThresNum = choiceInput.nextInt();
+                if (chosenThresNum > 3 || chosenThresNum < 1) {
                     System.out.println("Error: input is not a number from the set,");
                     System.out.println("please read the following instructions carefully and try again:");
-                    methodChoice = 0;
+                    chosenThresNum = 0;
                 }
             } catch (Exception e) {
                 System.out.println("Error: input is not a number from the set,");
@@ -147,16 +154,16 @@ public class ThresCal {
         }
     }
 
-    public static int imageIndex() {
-        return imageIndex;
+    public static int frameIndex() {
+        return frameIndex;
     }
 
-    public static int methodChoice() {
-        return methodChoice;
+    public static int chosenThresNum() {
+        return chosenThresNum;
     }
 
-    public static boolean isValidThresholds() {
-        return validThresholds;
+    public static boolean isThresValid() {
+        return isThresValid;
     }
 
     public static int k1() {

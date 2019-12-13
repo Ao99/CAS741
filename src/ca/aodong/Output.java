@@ -10,21 +10,21 @@ public class Output {
     private static ImageData segImage;
 
     public static void displayThresholds() {
-        if (!ThresCal.isValidThresholds()) return;
-        if (ThresCal.methodChoice() == 1) {
-            System.out.println("The single threshold value for frame " + (ThresCal.imageIndex() + 1) + " is k= " + ThresCal.k1() + ".");
-        } else if (ThresCal.methodChoice() == 2) {
-            System.out.println("The multiple threshold values for frame " + (ThresCal.imageIndex() + 1) + " are k1=" + ThresCal.k1() +
+        if (!ThresCal.isThresValid()) return;
+        if (ThresCal.chosenThresNum() == 1) {
+            System.out.println("The single threshold value for frame " + (ThresCal.frameIndex() + 1) + " is k= " + ThresCal.k1() + ".");
+        } else if (ThresCal.chosenThresNum() == 2) {
+            System.out.println("The multiple threshold values for frame " + (ThresCal.frameIndex() + 1) + " are k1=" + ThresCal.k1() +
                     ", k2=" + ThresCal.k2() + ".");
-        } else if (ThresCal.methodChoice() == 3) {
-            System.out.println("The multiple threshold values for frame " + (ThresCal.imageIndex() + 1) + " are k1=" + ThresCal.k1() +
+        } else if (ThresCal.chosenThresNum() == 3) {
+            System.out.println("The multiple threshold values for frame " + (ThresCal.frameIndex() + 1) + " are k1=" + ThresCal.k1() +
                     ", k2=" + ThresCal.k2() + ", k3=" + ThresCal.k3() + ".");
         }
     }
 
     public static boolean writeOutput(String s) {
-        int j = ThresCal.imageIndex();
-        if(!ThresCal.isValidThresholds()){
+        int j = ThresCal.frameIndex();
+        if(!ThresCal.isThresValid()){
             System.out.println("Error: frame "+(j+1)+" is not segmented nor saved.");
             return false;
         }
@@ -42,7 +42,7 @@ public class Output {
                 img.setRGB(m, n, segImage.pixelValue()[n * x + m] * 0x00010101);
             }
         }
-        s += (j+1) + "_" + ThresCal.methodChoice() + ".bmp";
+        s += (j+1) + "_" + ThresCal.chosenThresNum() + ".bmp";
         File outputFile = new File(s);
         try {
             ImageIO.write(img, "bmp", outputFile);
@@ -54,8 +54,8 @@ public class Output {
     }
 
     private static void createSegmentation() {
-        int j = ThresCal.imageIndex();
-        int c = ThresCal.methodChoice();
+        int j = ThresCal.frameIndex();
+        int c = ThresCal.chosenThresNum();
         int k1 = ThresCal.k1();
         int k2 = ThresCal.k2();
         int k3 = ThresCal.k3();
