@@ -151,9 +151,9 @@ output data.
   \label{acCalculation}:]\progname{} only uses global threshold with Otsu's
 Method, as explained in the SRS \cite{Dong2019SRS}. \wss{If you mention Otsu's
 method, then you should give a citation to
-where this method is introduced/explained. I also wonder what is the secrethere.
-Is it a secret the Otsu's method is being used, or will the interfaceexpose that
-decision.} \an{I suppose ``using 2 thresholds to segment the image"
+where this method is introduced/explained. I also wonder what is the
+secrethere.Is it a secret the Otsu's method is being used, or will the
+interfaceexpose thatdecision.} \an{I suppose ``using 2 thresholds to segment theimage"
 is not a secret, but ``these 2 thresholds are calculated with Otsu's method" is
 a secret. So yes, it's a secret the Otsu's method is being used, but the
 interface won't
@@ -406,7 +406,7 @@ data.\item[Implemented By:] \progname{}
 \subsubsection{Constant Values (\mref{mConstants})}
 
 \begin{description}
-\item[Secrets:]The constant values used by the program.
+\item[Secrets:]The way storing and modifying the constant values.
 \item[Services:]Provide constant values for other modules.
 \item[Implemented By:] \progname{}
 \end{description}
@@ -444,10 +444,11 @@ accessing a specific entry, slicing an array, etc.
 \subsubsection{Image Data Structure (\mref{mImageDS})}
 
 \begin{description}
-\item[Secrets:]The algorithm and process of creation and modification of
-images.\item[Services:]Provides the data structure to create, store and modify
-images.
-\item[Implemented By:] Java
+\item[Secrets:]The algorithm and process of recording and exchanging image
+information.
+\item[Services:]Provides the data structure to record and exchange image
+information.
+\item[Implemented By:] \progname{}
 \end{description}
 
 \section{Traceability Matrix} \label{SecTM}
