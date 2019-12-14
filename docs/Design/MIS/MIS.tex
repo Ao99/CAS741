@@ -23,6 +23,8 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 Nov 25 & 1.0 & Initial Draft\\
+Dec 11 & 1.1 & Modification according to feedback\\
+Dec 12 & 1.2 & Modification according to implementation\\
 \bottomrule
 \end{tabularx}
 
@@ -59,12 +61,18 @@ with the addition that template modules have been adapted from
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$. This
 document has one modification to the original notations: the concatenation
-notation $||$ can be used to build a new sequence from an existing sequence. For
-example, s2 $:= ||(x : \mathbb{N} | x \in s1 \cdot x+1)$, where s1 = $\langle
-1,2,...,10 \rangle$, then s2 = $\langle 2,3,...,11 \rangle$. \wss{explain that
+notation $||$ can be used to build a new sequence from an existing sequence.
+Forexample, s2 $:= ||(x : \mathbb{N} | x \in s1 \cdot x+1)$, where s1 =
+$\langle1,2,...,10 \rangle$, then s2 = $\langle 2,3,...,11 \rangle$. We adopt
+the
+notation in this way assuming that the elements in a sequence are in order
+rather than random. Using it in this way is for convenience and practical
+reasons, but not for properly expanding the original notation in a mathematical
+way. \wss{explain that
   the notation is for convenience.  It is not proper mathematics; the order
   would of the elements is actually random.  The notation is adopted for
   practical reasons.}
+\an{Explanation added.}
 
 The following table summarizes the primitive data types used by \progname. 
 
@@ -106,7 +114,7 @@ bitmap file & outputFile & an 8-bit 2D grayscale bitmap image file\\
 \noindent
 The specification of \progname \ uses some derived data types: sequences,
 strings, and
-tuples. Sequences are lists filled with elements of the same data type. strings
+tuples. Sequences are lists filled with elements of the same data type. Strings
 are sequences of characters. Tuples contain a list of values, potentially of
 different types. In addition, \progname \ uses functions, which
 are defined by the data types of their inputs and outputs. Local functions are
@@ -167,7 +175,7 @@ Output in Section \ref{Md_Output}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-main & - & - & emptyloadedImage, badThresholds, badMethodChoice\\
+main & - & - & \\
 \hline
 \end{tabular}
 \end{center}
@@ -192,38 +200,36 @@ None
 \begin{itemize}
 \item transition: use other modules by following these steps
 \begin{enumerate}
-    \item Get (filenameIn: string) and (filenameOut: string) from user
-    \item
-    Input.loadInput($filenameIn$) \wss{You filename is sometimes in italics and
-      sometimes not.  You should be consistent.}
-    \item
-    For ($j: \mathbb{N}$) from 0 to Input.numFrames, repeat the following steps
-    \item
-(Input.isLoaded($j$) = true $\implies$ ThresCal.calculation($j$) $|$ else
-$\implies$ emptyloadedImage)
-    \item
-(ThresCal.validThresholds = true $\implies$ Output.displayThresholds() $|$ else
-$\implies$ badThresholds) \wss{You do not actually have to compare with true.
-  If ThresCal.validThresholds is a Boolean, it is already True or False.  This
-  comment applies elsewhere in this spec as well.}
-\item (ThresCal.methodChoice $\in \{$Constants.CHOICE1, Constants.CHOICE2$\}
-\implies$ Output.writeOutput(filenameOut) $|$ else $\implies$ badMethodChoice)
+\item Get ($filenameIn$: string) and ($filenameOut$: string) from user
+\item Input.loadInput($filenameIn$) \wss{You filename is sometimes in italics
+and sometimes not. You should be consistent.} \an{I put it this way because it
+is a parameter. I changed all parameters to italics everywhere}
+\item For ($j: \mathbb{N}$) from 0 to Input.numFrames, repeat the following
+steps,
+\item ThresCal.calculation($j$)
+\item Output.displayThresholds()
+\wss{You do not actually have to compare with true.
+  If ThresCal.isThresValid is a Boolean, it is already True or False.  This
+comment applies elsewhere in this spec as well.}\an{I made some change so this
+part doesn't compare True or False. But for the rest of the document, I
+modifiedas you suggested.}
+\item Output.writeOutput($filenameOut$)
 \wss{Our notation does not have an ``else''.  You can just say True in place of
-  ``else''.  This same comment applies throughout this document.}
+``else''. This same comment applies throughout this document.}\an{I made some
+change so this part doesn't compare True or False. But for the rest of the
+document, I modified as you suggested.}
 \end{enumerate}
 \item output: none
-\item exception: $exc :=$\\
-Input.isLoaded[$j$] = $false \implies$ emptyloadedImage\\
-ThresCal.validThresholds = $false \implies$ badThresholds\\
-ThresCal.methodChoice $\not\in \{$Constants.CHOICE1, Constants.CHOICE2$\}
-\implies$ badMethodChoice
+\item exception: none
 \end{itemize}
 
 \wss{Your exception covers the same ground as given in your pseudo code.  You
-  shouldn't really repeat this here, especially since it is ambiguous in the way
-you have worded it.  I suggest you replace the exception information you have
-with a note that points the reader to the transition field for the definition of
-the exception behaviour.}
+shouldn't really repeat this here, especially since it is ambiguous in the
+wayyou have worded it. I suggest you replace the exception information you have
+with a note that points the reader to the transition field for the definition
+ofthe exception behaviour.}
+\an{I've moved all exception to other modules, so not anymore a problem here,
+but I'll also make sure not a problem in other parts.}
 
 \subsubsection{Local Functions}
 
@@ -242,21 +248,19 @@ None
 
 \subsubsection{Exported Constants}
 
-MINX := 10\\
-MAXX := 1000\\
-MINY := 10\\
-MAXY := 1000\\
-CHOICE1 := 1\\
-CHOICE2 := 2\\
-EMPTY := 0
+numsThres: set of $\mathbb{N}$\\
+numsThres := \{1, 2, 3\}
 
 \wss{Are these constants all necessary?  Are the bounds really more related to
   available memory?}
-
+\an{I removed bounds for images. Now images are valid with width and height
+greater than 0}
 \wss{For the choices, I suggest that you introduce an enumerated type (via an
-  exported type, like the department names in the student allocation example).  The
-  names choice1 and choice2 do not really tell the reader anything.  Can you
+exported type, like the department names in the student allocation example). The
+names choice1 and choice2 do not really tell the reader anything. Can you
   give them more meaningful names?}
+\an{I only kept a set of natural number here. When the user's choice is in this
+set, it's valid}
 
 \subsubsection{Access Routine Semantics}
 N/A
@@ -270,8 +274,7 @@ Input
 
 \subsection{Uses}
 
-Image Data Structure \ref{Md_ImageDS}, Image Verification in Section
-\ref{Md_Verify}
+ImageData \ref{Md_ImageDS}, ImageVerify in Section \ref{Md_Verify}
 
 \subsection{Syntax}
 
@@ -280,12 +283,12 @@ Image Data Structure \ref{Md_ImageDS}, Image Verification in Section
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{2cm} p{5cm} p{2cm}}
+\begin{tabular}{p{3cm} p{2cm} p{5cm} p{3cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-loadInput & $s$: string & - & FileError\\
-verifyInput & & - & \\
+loadInput & $s$: string & - & badInputFileName, badInputFileFormat\\
+verifyInput & & - & emptyFrameJ \\
 loadedImages & - & sequence of imageData\\
 numFrames & - & $\mathbb{N}$ & \\
 isLoaded & - & sequence of boolean\\
@@ -347,9 +350,11 @@ dcmToImage($f$))
     verifyInput()
 \end{enumerate}
 \item output: none
-\item exception: $exc :=$ a file name $s$ cannot be found or the format of
-inputFile is incorrect
-$\implies$ FileError
+\item exception: $exc :=$\\
+a file name $s$ cannot be found
+$\implies$ badInputFileName\\
+the format of
+inputFile is incorrect $\implies$ badInputFileFormat\\
 \end{itemize}
 
 \noindent verifyInput():
@@ -358,24 +363,31 @@ $\implies$ FileError
 This function modifies the state variables using the following procedural
 specification:
 \begin{enumerate}
-    \item
+\item
 isLoaded := $||$($img$ : imageData $|$ $img \in$ loadedImages $\cdot$
-ImageVerify.verify1File($img$))
+ImageVerify.verifyImageData($img$))
+\item Initiate a local variable cnt: $\mathbb{N}$
+\item cnt := $+$($b$ : boolean $|$ $b \in$ isLoaded $\cdot$
+($b \implies$ 1 $|$ True $\implies$ 0)
+\item print ``cnt image frames have been loaded".
 \end{enumerate}
 \item output: none 
-\item exception: none
+\item exception: $exc :=$\\
+$\neg$ ImageVerify.verifyImageData(loadedImages[$j$]) $\implies$ emptyFrameJ
 \end{itemize}
 
-\wss{You have a parallel data structure for loadedImages and isLoaded.  They are
-  two separate sequences.  They both need to be indexed separately.  What about
+\wss{You have a parallel data structure for loadedImages and isLoaded. They are
+two separate sequences. They both need to be indexed separately. What about
   having the index in this module.  You can just give an index and it will
   return an image, as long as the image is loaded.  There could be an exception
   otherwise.  Something to think about.}
+\an{I don't quite understand this comment here. It seems like what I've already
+being doing. For now}
 
 \subsubsection{Local Functions}
 
 \noindent dcmToImage: dcmFrame $\rightarrow$ imageData\\
-\noindent dcmToImage($f$) $\equiv$ ImageData($f.x$, $f.y$,
+\noindent dcmToImage($f$) $\equiv$ new ImageData($f.x$, $f.y$,
 stringToSequence($f.s$))
 
 \noindent stringToSequence: string $\rightarrow$ sequence of $\mathbb{N}$
@@ -387,26 +399,31 @@ $pv$ is a string containing grayscale value for one pixel.
 \newpage
 
 \section{MIS of Image Data Structure} \label{Md_ImageDS}
-\subsection{Module}
+\subsection{Generic Template Module}
 
 ImageData
 
 \subsection{Uses}
 
-Constant Values \ref{Md_Constants}
+none
 
 \subsection{Syntax}
 
 \subsubsection{Exported Constants}
 
+\subsubsection{Exported Types}
+
+ImageData = ?
+
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{3cm} p{5cm}}
+\begin{tabular}{p{3cm} p{4cm} p{3cm} p{5cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-ImageData & $x: \mathbb{N}$, $y: \mathbb{N}$, $p$: sequence of $\mathbb{N}$ &
+new ImageData & $x: \mathbb{N}$, $y: \mathbb{N}$, $p$: sequence of $\mathbb{N}$
+&
 imageData & badWidthInput, badHeightInput, badPixelValueLength\\
 width & - & $\mathbb{N}$\\
 height & - & $\mathbb{N}$ & \\
@@ -429,8 +446,11 @@ none
 
 \subsubsection{Assumptions}
 
-We only need images with width and height not less than Constants.MINX or
-Constants.MINY, and not greater than Constants.MAXX or Constants.MAXY.
+imageData with 0 width or height is allowed. The software uses such imageData
+torepresent an empty image without successfully loading information from a
+frame.
+Image Verification Module \ref{Md_Verify} is able to identify it as not
+successfully loaded.
 
 \subsubsection{Access Routine Semantics}
 
@@ -446,14 +466,15 @@ Constants.MINY, and not greater than Constants.MAXX or Constants.MAXY.
 \item exception: none 
 \end{itemize}
 
-\noindent Input.isLoaded: \wss{This access program is not given in the syntax.
-  The state variable is missing.  Is this a copy-paste error?}
+\noindent Input.pixelValue: \wss{This access program is not given in the
+syntax.The state variable is missing. Is this a copy-paste error?}
+\an{It's a copy-paste error. I changed it to the correct one}
 \begin{itemize}
-\item output: $out:=$ isLoaded 
+\item output: $out:=$ pixelValue 
 \item exception: none 
 \end{itemize}
 
-\noindent ImageData($x, y, p$):
+\noindent new ImageData($x, y, p$):
 \begin{itemize}
 \item transition: 
 The parameters $x$ and $y$ are natural numbers, $p$ is a sequence of natural
@@ -468,11 +489,11 @@ the state variables using the following procedural specification:
     \item
     pixelValue $:= p$
 \end{enumerate}
-\item output: := itself
+\item output: := self
 \item exception: $exc :=$\\
-$x \not\in [Constants.MINX,Constants.MAXX] \implies$ badWidthInput\\
-$y \not\in [Constants.MINY,Constants.MAXY] \implies$ badHeightInput\\
-$p.length \not= x \times y \implies$ badPixelValueLength
+$x < 0 \implies$ badWidthInput\\
+$y < 0 \implies$ badHeightInput\\
+$p.$length $\not= x \times y \implies$ badPixelValueLength
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -488,7 +509,7 @@ ThresCal
 
 \subsection{Uses}
 
-Constant Values \ref{Md_Constants}, Input in Section \ref{Md_Input}, Image Data
+Constants \ref{Md_Constants}, Input in Section \ref{Md_Input}, Image Data
 Structure \ref{Md_ImageDS}
 
 \subsection{Syntax}
@@ -502,11 +523,11 @@ Structure \ref{Md_ImageDS}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-calculation & $j: \mathbb{N}$ & - & badResult1, badResult2\\
-getMethodChoice & $c: \mathbb{N}$ & - & badChoiceInput \\
-imageIndex & - & $\mathbb{N}$ &  \\
-methodChoice & - & $\mathbb{N}$ &  \\
-validThresholds & - & boolean &\\
+calculation & $j: \mathbb{N}$ & - & skipCalculation, badResult\\
+getUserChoice & $c: \mathbb{N}$ & - & badChoiceInput \\
+frameIndex & - & $\mathbb{N}$ &  \\
+chosenThresNum & - & $\mathbb{N}$ &  \\
+isThresValid & - & boolean &\\
 k1 & - & $\mathbb{N}$ &  \\
 k2 & - & $\mathbb{N}$ &  \\
 \hline
@@ -517,11 +538,12 @@ k2 & - & $\mathbb{N}$ &  \\
 
 \subsubsection{State Variables}
 
-imageIndex: $\mathbb{N}$\\
-methodChoice: string\\
-validThresholds: boolean\\
+frameIndex: $\mathbb{N}$\\
+chosenThresNum: string\\
+isThresValid: boolean\\
 k1: $\mathbb{N}$\\
-k2: $\mathbb{N}$
+k2: $\mathbb{N}$\\
+img: imageData 
 
 \subsubsection{Environment Variables}
 
@@ -533,21 +555,21 @@ None
 
 \subsubsection{Access Routine Semantics}
 
-\noindent ThresCal.imageIndex:
+\noindent ThresCal.frameIndex:
 \begin{itemize}
-\item output: $out :=$ imageIndex
+\item output: $out :=$ frameIndex
 \item exception: none 
 \end{itemize}
 
-\noindent ThresCal.methodChoice:
+\noindent ThresCal.chosenThresNum:
 \begin{itemize}
-\item output: $out :=$ methodChoice
+\item output: $out :=$ chosenThresNum
 \item exception: none 
 \end{itemize}
 
-\noindent ThresCal.validThresholds:
+\noindent ThresCal.isThresValid:
 \begin{itemize}
-\item output: $out :=$ validThresholds
+\item output: $out :=$ isThresValid
 \item exception: none 
 \end{itemize}
 
@@ -569,90 +591,75 @@ sequence.
 \begin{itemize}
 \item transition: \wss{I don't think you need pseudo-code for this.  A state
     based specification should be possible.}
+\an{I deleted some pseudo-code and put more statements here}
 This function modifies
 the state variables using the following procedural specification:
 \begin{enumerate}
-    \item
-    imageIndex $:= j$
-    \item
-    getMethodChoice()
-    \item
-    According to chosen method, calculate $k1$ or both $k1$ and $k2$:\\
-    if methodChoice = Constants.CHOICE1,
-\begin{itemize}
-\item $k1 := k1 \in$ [1, 254]. sigma2b1($k1$) = $\max\limits_{0< t1<255}$
-sigma2b1($t1$)
-    \item $k2 := Constants.EMPTY$
-\item validThresholds $:= (k1 \in [1, 254] \implies true |\ else \implies
-false)$
-\end{itemize}
-if methodChoice = Constants.CHOICE2,
-\begin{itemize}
-\item $k1 := k1 \in [1, 254].\ k1 < k2 \land sigma2b2(k1,k2) =
-\max\limits_{0<t1<t2<255} sigma2b2(t1,t2))$
-\item $k2 := k2 \in [1, 254].\ k1 < k2 \land sigma2b2(k1,k2) =
-\max\limits_{0<t1<t2<255} sigma2b2(t1,t2)$
-\item validThresholds $:= (k1 \in$ [1, 254] $\land k2 \in$ [1, 254] $\implies$
-true $|$ else $\implies$ false)
-\end{itemize}
+\item frameIndex $:= j$
+\item If $\neg$ Input.isLoaded[$j$], set isThresValid to False, and terminate
+this method.
+\item img := Input.loadedImages[$j$]
+\item getUserChoice()
+\item According to the chosen threshold numbers, calculate k1 (and k2):\\
+if chosenThresNum = 1, use the following formula to calculate k1,\\
+sigma2b1(k1)= $\max\limits_{0< t1<255}$ sigma2b1($t1$);\\
+if chosenThresNum = 2, use the following formula to calculate k1 and k2,\\
+sigma2b2(k1,k2) =
+$\max\limits_{0<t1<t2<255}$ sigma2b2($t1,t2$)).
+\item According to the chosen threshold numbers, set isThresValid to True if
+thecalculated results follow the rules accordingly:\\
+$1 \le k1 \le 254$\\
+$1 \le k1 < k2 \le 254$
 \end{enumerate}
 \item output: none
 \item exception: $exc :=$\\
-methodChoice = Constants.CHOICE1 $\land k1 \not\in [1, 254] \implies$
-badResult1\\
-methodChoice = Constants.CHOICE2 $\land (k1 \not\in [1,k2) \lor k2 \not\in (k1,
-254] \implies$ badResult2
+$\neg$ Input.isLoaded[$j$] $\implies$ skipCalculation\\
+chosenThresNum = 1 $\land \neg (1 \le k1 \le 254) \implies$
+badResult\\
+chosenThresNum = 2 $\land \neg (1 \le k1 < k2 \le 254) \implies$ badResult
 \end{itemize}
 
-\noindent getMethodChoice($c$):
+\noindent getUserChoice($c$):
 \begin{itemize}
 \item transition:
 The parameter $c$ is a natural number representing user's choice. This function
 modifies the state variables using the following procedural specification:
 \begin{enumerate}
-    \item
-Use hardware to display a message, asking for user's input ``1" or ``2 " for
-method choice.
-    \item
-methodChoice := ($c \in \{$Constants.CHOICE1, Constants.CHOICE2$\} \implies c\
-|\ else \implies$ Constants.EMPTY)
+\item While chosenThresNum $\not\in$ Constants.numsThres, repeat the following
+two steps, until get proper choice input from the user.
+\item Use hardware to display a message, asking for user's choice from
+Constants.numsThres
+for number of thresholds.
+\item If $c \in$ Constants.numsThres, chosenThresNum := $c$
 \end{enumerate}
 \item output: none
-\item exception: $exc := c \not\in \{$Constants.CHOICE1, Constants.CHOICE2$\}
-\implies$ badChoiceInput
+\item exception: $exc := c \not\in$ Constants.numsThres
+$\implies$ badChoiceInput
 \end{itemize}
 
 \subsubsection{Local Functions}
 
-n: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}$\\
-n($i,j) \equiv +(pv.\mathbb{N} |pv \in Input.loadedImages[j].pixelValue \cdot
-(pv = i \implies 1 | else \implies 0))$\\
-p: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-p($i,j) \equiv n(i,j)/(+(i.\mathbb{N} | i \in [0,255] \cdot n(i,j)))$\\
-prb1: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-prb1($t1,j) \equiv +(i.\mathbb{N} | i \in [0,t1] \cdot p(i,j))$\\
-prb2: $\mathbb{N} \times \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-prb2($t1,t2,j) \equiv +(i.\mathbb{N} | i \in [t1+1,t2] \cdot p(i,j))$\\
-prb3: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-prb3($t2,j) \equiv +(i.\mathbb{N} | i \in [t2+1,255] \cdot p(i,j))$\\
-m1: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-m1($t1,j) \equiv (+(i.\mathbb{N} | i \in [0,t1] \cdot i \times
-p(i,j)))/prb1(t1,j)$\\
-m2: $\mathbb{N} \times \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-m2($t1,t2,j) \equiv (+(i.\mathbb{N} | i \in [t1+1,t2] \cdot i \times
-p(i,j)))/prb2(t1,t2,j)$\\
-m3: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-m3($t2,j) \equiv (+(i.\mathbb{N} | i \in [t2+1,255] \cdot i \times
-p(i,j)))/prb3(t2,j)$\\
-mg: $\mathbb{N} \rightarrow \mathbb{R}$\\
-mg($j) \equiv +(i.\mathbb{N} | i \in [0,255] \cdot i \times p(i,j))$\\
-sigma2b1: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
-sigma2b1($t1,j) \equiv prb1(t1,j) \times (m1(t1,j)-mg(j))^2 + prb2(t1,255,j)
-\times (m2(t1,255,j)-mg(j))^2$\\
-sigma2b2: $\mathbb{N} \times \mathbb{N} \times \mathbb{N} \rightarrow
+n: $\mathbb{N} \rightarrow \mathbb{N}$\\
+n($i) \equiv +(pv.\mathbb{N} |pv \in$ img.pixelValue $\cdot
+(pv = i \implies 1 |$ True $\implies 0))$\\
+p: $\mathbb{N} \rightarrow \mathbb{R}$\\
+p($i) \equiv n(i)/$(img.width $\times$ img.height)\\
+prb: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
+prb($start,end) \equiv +(i.\mathbb{N} | i \in [start,end] \cdot p(i))$\\
+m: $\mathbb{N} \times \mathbb{N} \rightarrow \mathbb{R}$\\
+m($start,end) \equiv (+(i.\mathbb{N} | i \in [start,end] \cdot i \times
+p(i)))/prb(start,end)$\\
+mg() $\equiv +(i.\mathbb{N} | i \in [0,255] \cdot i \times p(i))$\\
+sigma2b1: $\mathbb{N} \rightarrow \mathbb{R}$\\
+sigma2b1($t1) \equiv prb(0,t1) \times (m(0,t1)-mg())^2 + prb(t1+1,255)
+\times (m(t1+1,255)-mg())^2$\\
+sigma2b2: $\mathbb{N} \times \mathbb{N} \rightarrow
 \mathbb{R}$\\
-sigma2b2($t1,t2,j) \equiv prb1(t1,j) \times (m1(t1,j)-mg(j))^2 + prb2(t1,t2,j)
-\times (m2(t1,t2,j)-mg(j))^2 + prb3(t2,j) \times (m3(t2,j)-mg(j))^2$\\
+sigma2b2($t1,t2) \equiv prb(0,t1) \times (m(0,t1)-mg())^2 + prb(t1+1,t2)
+\times (m(t1+1,t2)-mg())^2 + prb(t2+1,255) \times (m(t2+1,255)-mg())^2$\\
+\an{You didn't mention I should change here. But inspired by implementation, I
+removed one parameter from every function, and got rid of 4 functions by reuse
+existing ones. I think it's much better than before.}
 
 \newpage
 
@@ -664,8 +671,8 @@ Output
 
 \subsection{Uses}
 
-Constant Values \ref{Md_Constants}, Image Data Structure \ref{Md_ImageDS},
-ThresCal in Section \ref{Md_Calculation}, Image Verification in Section
+ImageData \ref{Md_ImageDS},
+ThresCal in Section \ref{Md_Calculation}, ImageVerify in Section
 \ref{Md_Verify}
 
 \subsection{Syntax}
@@ -681,7 +688,7 @@ ThresCal in Section \ref{Md_Calculation}, Image Verification in Section
 \hline
 displayThresholds & - & - &\\
 writeOutput & $s$: string & - &
-noAccess \\
+skipSegmentation, badSegmentation, badDirectory \\
 createSegmentation & - & - &\\
 segImage & - & imageData &  \\
 \hline
@@ -692,7 +699,9 @@ segImage & - & imageData &  \\
 
 \subsubsection{State Variables}
 
-segImage: imageData
+img: imageData\\
+segImage: imageData\\
+$j$: $\mathbb{N}$
 
 \subsubsection{Environment Variables}
 
@@ -700,7 +709,9 @@ outputFile: a bitmap file
 
 \subsubsection{Assumptions}
 
-None
+If this module is intended to be used on frame $j$, than it should be called
+after using ThresCal in Section \ref{Md_Calculation} on frame $j$. The reason
+isthat this module uses ThresCal.frameIndex to get current frame number.
 
 \subsubsection{Access Routine Semantics}
 
@@ -715,13 +726,14 @@ None
 \item transition:
 This function has the following procedural specification:
 \begin{enumerate}
-    \item
-If methodChoice = Constants.CHOICE1, use Hardware-Hiding Module to display the
-following message:\\
-``Single-global-threshold method selected, the threshold value k= " + k1 + ``."    \item
-If methodChoice = Constants.CHOICE2, use Hardware-Hiding Module to display the
-following message:\\
-``Multiple-global-threshold method selected, the threshold values k1= " + k1 +
+\item If ThresCal.isThresValid(), continue.
+\item $j$ := ThresCal.frameIndex
+\item If ThresCal.chosenThresNum == 1, use Hardware-Hiding Module to display
+thefollowing message:\\
+``The single threshold value for frame $j$ is k= " + k1 + ``."
+\item If ThresCal.chosenThresNum == 2, use Hardware-Hiding Module to display
+thefollowing message:\\
+``"The multiple threshold values for frame $j$ are k1= " + k1 +
 ``, k2= " + k2 + ``."
 \end{enumerate}
 \item output: none
@@ -730,25 +742,28 @@ following message:\\
 
 \noindent writeOutput($s$):
 This method use segImage to write a outputFile to the environment using the
-following procedural specification:
+following procedural specification:\\
+
+\# The first step is not necessary for the Control Module in this document,
+which calls displayThresholds() that updates $j$, but it is necessary if
+displayThresholds() is not called in advance.
 \begin{enumerate}
-    \item createSegmentation()
-    \item
-(ImageVerify.verify1File($segImage$) = true $\implies$ continue $|$ else
-$\implies$ stop)
-    \item
-Use local references $j$ for state variable in ThresCal: $j$ =
-ThresCal.imageIndex
-    \item
-(ImageVerify.compare2Files($Input.loadedImages[j],segImage$) = true $\implies$
-continue $|$ else $\implies$ stop)
-    \item write a outputFile $s.bmp$ to the environment
+\item $j$ := ThresCal.frameIndex
+\item If ThresCal.isThresValid, continue.
+\item createSegmentation()
+\item if ImageVerify.verifyImageData(segImage) and
+ImageVerify.compareSizes(img,segImage), continue.
+\item Use data from segImage to write an outputFile to the environment
 \end{enumerate}
 \begin{itemize}
 \item transition: none
 \item output: none
-\item exception: $exc := $ no access to write a file to the output directory
-$\implies$ noAccess
+\item exception: $exc := $\\
+$\neg$ ThresCal.isThresValid $\implies$ skipSegmentation\\
+$\neg$ (ImageVerify.verifyImageData(segImage) $\land$
+ImageVerify.compareSizes(img, segImage)) $\implies$ badSegmentation\\
+fail to write a file to the output directory
+$\implies$ badDirectory\\
 \end{itemize}
 
 \noindent createSegmentation():
@@ -757,24 +772,19 @@ $\implies$ noAccess
 This function modifies the state variables using the following procedural
 specification:
 \begin{enumerate}
+\item img := Input.loadedImages[$j$]
+\item Use local references $c, k1, k2$ for state variables in ThresCal.
+\begin{itemize}
+\item $c$ = ThresCal.chosenThresNum
+\item k1 = ThresCal.ThresCal.k1
+\item k2 = ThresCal.ThresCal.k2
+\end{itemize}
+\item pixelValue := $|| (pv: \mathbb{N} | pv \in$ img.pixelValue $\cdot (c =
+1 \implies (pv > $k1$ \implies 255 |$ True $\implies 0) |\ c = 2 \implies (pv >
+k2 \implies 255 |\ $k2$ \ge pv > $k1$ \implies
+128 |$ True $\implies 0))$
     \item
-    Use local references $j, c, k1, k2$ for state variables in ThresCal.
-    \begin{itemize}
-        \item $j$ = ThresCal.imageIndex
-        \item $c$ = ThresCal.methodChoice
-        \item $k1$ = ThresCal.ThresCal.k1
-        \item $k2$ = ThresCal.ThresCal.k2
-        \item $img$ := Input.loadedImages[$j$]
-    \end{itemize}
-    \item
-    Initiate a sequence pixelValue[$img.x \times img.y$]
-    \item
-pixelValue := $|| (pv: \mathbb{N} | pv \in img.pixelValue \cdot (c =
-$Constants.CHOICE1$ \implies (pv > k1 \implies 255 |\ else \implies 0) |\ c =
-$Constants.CHOICE2$ \implies (pv > k2 \implies 255 |\ k2 \ge pv > k1 \implies
-128 |\ else \implies 0))$
-    \item
-    segImage := ImageData($img.x,img.y,pixelValue$)
+    segImage := new ImageData(img.width,img.height,pixelValue)
 \end{enumerate}
 \item output: none
 \item exception: none
@@ -794,7 +804,7 @@ ImageVerify
 
 \subsection{Uses}
 
-Constant Values \ref{Md_Constants}
+none
 
 \subsection{Syntax}
 
@@ -803,14 +813,13 @@ Constant Values \ref{Md_Constants}
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{4cm} p{2cm} p{2cm} p{6cm}}
+\begin{tabular}{p{3cm} p{3.5cm} p{2cm} p{6cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-verify1File & imageData & boolean & emptyImage, badWidth, badHeight,
+verifyImageData & $img$: imageData & boolean & badSize,
 badPixelData\\
-compare2Files & imageData, imageData & boolean & emptyImage1, emptyImage2,
-badWidth2, badHeight2\\
+compareSizes & $img1$: imageData,  $img2$: imageData & boolean & badSize2\\
 \hline
 \end{tabular}
 \end{center}
@@ -827,45 +836,37 @@ None
 
 \subsubsection{Assumptions}
 
-We only need images with width and height not less than Constants.MINX and
-Constants.MINY, and not greater than Constants.MAXX and Constants.MAXY.
-
-compare2Files(imageData, imageData) does not check if these two inputs are
+compareSizes($img1$, $img2$) does not check if these two inputs are
 valid, it assumes that during the previous steps, the software has called
-verify1File(imageData) to verify these two inputs individually. \wss{This access
-  program seems to be misnamed.  The images are only being compared to verify
+verifyImageData($img$) to verify these two inputs individually. \wss{This
+accessprogram seems to be misnamed. The images are only being compared to verify
   that they are the same size.  I assumed that returning True would mean that
   the images were the same.}
+\an{I agree. Changed the names.}
 
 \subsubsection{Access Routine Semantics}
 
-\noindent verify1File($img$):
+\noindent verifyImageData($img$):
 The parameter $img$ is an instance of Image Data Structure.
 \begin{itemize}
 \item transition: none
-\item output: $:= (img.x \in [Constants.MINX,Constants.MAXX] \land img.y \in
-[Constants.MINY,\\
-Constants.MAXY] \land
-(\forall pv \in img.pixelValue.\ pv \in [0,255] \implies true |\ else \implies
-false)$
+\item output: := $img$.width $> 0 \land img$.height $> 0 \land
+(\forall pv \in img.$pixelValue$ \cdot\ 0 \le pv \le 255)$
 \item exception: $exc :=$\\
-$img$ is an empty instance of imageData type $\implies$ emptyImage\\
-$x \not\in [Constants.MINX,Constants.MAXX] \implies$ badWidth\\
-$y \not\in [Constants.MINY,Constants.MAXY] \implies$ badHeight\\
-$\forall pv \in img.pixelValue.\ pv \not\in [0,255] \implies$ badPixelData
+$img$.width $< 0 \lor img$.height $< 0 \implies$ badSize\\
+$(\exists pv \in img.$pixelValue$ \cdot\ pv < 0 \lor pv > 255) \implies$
+badPixelData
 \end{itemize}
 
-\noindent compare2Files($img1, img2$):
+\noindent compareSizes($img1, img2$):
 The parameters $img1$ and $img2$ are instances of Image Data Structure.
 \begin{itemize}
 \item transition: none
-\item output: $:= ((img1.x = img2.x) \land (img1.y = img2.y) \implies true |\
-else \implies false)$
+\item output: := ($img1$.width = $img2$.width) $\land (img1$.height =
+$img2$.height)
 \item exception: $exc :=$\\
-$img1$ is an empty instance of imageData type $\implies$ emptyImage1\\
-$img2$ is an empty instance of imageData type $\implies$ emptyImage2\\
-$img1.x \not= img2.x \implies$ badWidth2\\
-$img1.y \not= img2.y \implies$ badHeight2
+$img1$.width $\not= img2$.width $\lor img1$.height $\not=
+img2$.height$\implies$badSize2\\
 \end{itemize}
 
 \subsubsection{Local Functions}
@@ -886,32 +887,26 @@ None
 \begin{longtable}{l p{12cm}}
 \caption{Possible Exceptions} \\
 \toprule
-\textbf{Message ID} & \textbf{Error Message} \\
+\textbf{Message ID} & \textbf{Error and Warning Message} \\
 \midrule
-emptyloadedImage & Error: The image of frame $j$ is not loaded\\
-badThresholds & Error: No correct thresholds have been calculated\\
-badMethodChoice & Error: No correct segmentation method has been chosen\\
-badWidthInput & Error: Image width must be $\in$ [Constants.MINX,
-Constants.MAXX]\\
-badHeightInput & Error: Image height must be $\in$ [Constants.MINX,
-Constants.MAXX]\\
-badPixelValueLength & Error: The length of image pixel value sequence must equal
-to Constants.MINX $\times$ Constants.MAX\\
-badResult1 & Error: $k1$ must be $\in$ [1, 254]\\
-badResult2 & Error: $k1$ and $k2$ must follow this rule: $1 \le k1 < k2 \le
-254$\\
-badChoiceInput & Error: Must choose input from the set $\{$Constants.CHOICE1,
-Constants.CHOICE2$\}$\\
-emptyImage & Error: Cannot verify an empty image\\
-badWidth & Error: Image width $\not\in$ [Constants.MINX, Constants.MAXX]\\
-badHeight & Error: Image height $\not\in$ [Constants.MINX, Constants.MAXX]\\
-badPixelData & Error: One or more pixel values $\not\in$ [0, 255]\\
-emptyImage1 & Error: Cannot verify an empty original image\\
-emptyImage2 & Error: Cannot verify an empty segmentation image\\
-badWidth2 & Error: The original image and the segmentation image do not have the
-same width\\
-badHeight2 & Error: The original image and the segmentation image do not have
-the same height\\
+badInputFileName & Error: cannot find the file $s$.\\ badInputFileFormat &
+Error: the format of file $s$ is not supported.\\
+emptyFrameJ & Warning: frame $j$ is not loaded.\\
+badWidthInput & Error: image width cannot be negative.\\
+badHeightInput & Error: image height cannot be negative.\\
+badPixelValueLength & Error: the length of image pixel value sequence must
+equalto width $\times$ height.\\
+skipCalculation & Warning: thresholds for frame $j$ are not calculated.\\
+badResult & Error: incorrect thresholds calculation for frame $j$\\
+badChoiceInput & Error: input is not a number from the set, please read the
+following instructions carefully and try again:\\
+skipSegmentation & Warning: frame $j$ is not segmented nor saved.\\
+badSegmentation & Error: frame $j$ is not correctly segmented."\\
+badDirectory & Error: Cannot write the output image to directory $s$\\
+badSize & Error: invalid image size.\\
+badPixelData & Error: One or more pixel values are outside the bound of [0,
+255].\\
+badSize2 & Error: inconsistent image sizes.\\
 \bottomrule
 \end{longtable}
 
