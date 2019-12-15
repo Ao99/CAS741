@@ -50,7 +50,6 @@ public class Output {
             ImageIO.write(img, "bmp", outputFile);
         } catch (IOException e) {
             System.out.println("Error: Cannot write the output image to directory " + s);
-            e.printStackTrace();
             return false;
         }
         return true;
