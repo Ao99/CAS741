@@ -56,7 +56,7 @@ This section records information for easy reference.
 \subsection{Table of Units}
 
 Throughout this document SI (Syst\`{e}me International d'Unit\'{e}s) is
-employedas the unit system. In addition to the basic units, several derived
+employed as the unit system. In addition to the basic units, several derived
 units are
 used as described below.  For each unit, the symbol is given followed by a
 description of the unit and the SI name.
@@ -204,14 +204,14 @@ $\mathbb{Z}$ & N/A & set of all integers
 
 Medical imaging technologies in medical diagnoses have become essential and
 effective tools for professionals in medicine. Computers are also widely used
-togenerate, process, and visualize medical images. There is a big family of
+to generate, process, and visualize medical images. There is a big family of
 computer software developed to serve these purposes.
 
 The following sections provide an overview of the Software Requirements
 Specification (SRS) for one software library - Medical Image Segmentation
 Library (\progname) - in the family of Medical Imaging Applications (\famname).
 This section explains the purpose of this document, the scope of the family,
-thecharacteristics of the intended reader, and the organization of the document.
+the characteristics of the intended reader, and the organization of the document.
 \subsection{Purpose of Document}
 
 The major purpose of this document is to describe the specifications for
@@ -223,7 +223,7 @@ being solved, but not how to solve it.
 
 This document will be used as a starting point for subsequent development
 phases, including writing the design specification and the software
-verificationand validation plan. The design document will show how the
+verification and validation plan. The design document will show how the
 requirements are to
 be realized, including decisions
 on the numerical algorithms and programming environment. The verification and
@@ -231,7 +231,7 @@ validation plan will show the steps that will be used to increase confidence in
 the software documentation and the implementation. Although the SRS fits in a
 series of documents that follow the so-called waterfall model, the actual
 development process is not constrained in any way. Even when the waterfall
-modelis not followed, as \cite{ParnasAndClements1986} point out, the most
+model is not followed, as \cite{ParnasAndClements1986} point out, the most
 logical wayto present the documentation is still to “fake” a rational design
 process.
 
@@ -297,15 +297,15 @@ Section \ref{sec_UserCharacteristics}.
 \subsection{Organization of Document}
 
 The organization of this document follows the template for an SRS for
-scientificcomputing software proposed by \cite{Parnas1972} and
+scientific computing software proposed by \cite{Parnas1972} and
 \cite{ParnasAndClements1986}. The presentation follows the standard pattern of
 presenting goals, theories, definitions, and assumptions. For readers that
-wouldlike a more bottom up approach, they can start reading the instance
+would like a more bottom up approach, they can start reading the instance
 models in Section \ref{sec_instance} and trace back to find any additional
 information they require.
 The goal statements (Section \ref{sec_goalstatements}) are refined to the
 theoretical models and the theoretical models (Section \ref{sec_theoretical})
-tothe instance models (Section \ref{sec_instance}). The instance models to be
+to the instance models (Section \ref{sec_instance}). The instance models to be
 solved are referred to as \iref{IM_singlethres}, \iref{IM_singlethresoutput},
 \iref{IM_multithres}, \iref{IM_multithresoutput}.
 
@@ -372,7 +372,7 @@ presents the assumptions, theories, definitions and finally the instance
 models.\subsection{Problem Description} \label{sec_ProblemDes}
 Segmentation, separation of structures of interest from the background and from
 each other~\cite{Bankman2000}. Image segmentation is the process of
-partitioningan image into different meaningful segments. In medical imaging,
+partitioning an image into different meaningful segments. In medical imaging,
 these segments
 often correspond to different tissue classes, organs, pathologies, or other
 biologically relevant structures~\cite{Forouzanfar2010}. Image segmentation is
@@ -400,9 +400,9 @@ Classification\end{tabular}}} \\ \hline
 tracing\\ (heuristic)\end{tabular} & • Intensity threshold \\ \hline
 \textbf{$2^{nd}$} & \begin{tabular}[c]{@{}l@{}}• Deformable models\\ • Graph
 search\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Minimal path\\ • Target
-tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular}
+tracking\\ • Graph search\\ • Neural networks\\ • Multi resolution\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means
-clustering\\ • Neural networks\\ • Multiresolution\end{tabular} \\ \hline
+clustering\\ • Neural networks\\ • Multi resolution\end{tabular} \\ \hline
 \textbf{$3^{rd}$} & \begin{tabular}[c]{@{}l@{}}• Shape models\\ • Appearance
 models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
 \begin{tabular}[c]{@{}l@{}}• Atlas-based\\ • Rule-based\end{tabular} \\ \hline
@@ -416,7 +416,7 @@ models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
 
 This subsection provides a list of terms that are used in the subsequent
 sections and their meaning, with the purpose of reducing ambiguity and making
-iteasier to correctly understand the requirements:
+it easier to correctly understand the requirements:
 
 \begin{itemize}
 
@@ -426,26 +426,26 @@ iteasier to correctly understand the requirements:
   finite and discrete, the image is called digital, shown as
   $h : \mathbb{Z}^{a} \rightarrow \mathbb{Z}^{b}$.
 \item Grayscale image: In digital photography, computer-generated imagery, and
-  colorimetry, a grayscale or greyscale image is one in which the value of each
+  colorimetry, a grayscale or grayscale image is one in which the value of each
   pixel is a single sample representing only an amount of light, that is, it
   carries only intensity information.
 \item 2D Digital Image: the computer-based generation of digital images -
-mostlyfrom two-dimensional models (such as 2D geometric models, text, and
+mostly from two-dimensional models (such as 2D geometric models, text, and
 digital
   images) and by techniques specific to them.
 \item Medical Image: visual representations of the interior of a body for
   clinical analysis and medical intervention, as well as visual representation
   of the function of some organs or tissues (physiology).
 \item Grayscale Intensity: represents gray levels, where the intensity 0
-usuallyrepresents black and the intensity 255 usually represents full
+usually represents black and the intensity 255 usually represents full
 intensity,or
   white.
 \item Shades of Gray: variations of gray or grey include achromatic grayscale
   shades, which lie exactly between white and black, and nearby colors with low
   colorfulness.
 \item Coordinates: in geometry, a coordinate system is a system that uses one
-ormore numbers, or coordinates, to uniquely determine the position of the
-pointsor other geometric elements on a manifold such as Euclidean space.
+or more numbers, or coordinates, to uniquely determine the position of the
+points or other geometric elements on a manifold such as Euclidean space.
 \item Histogram: a histogram is an accurate representation of the distribution
   of numerical data. It is an estimate of the probability distribution of a
   continuous variable.
@@ -493,7 +493,7 @@ thresholds.
 
 The instance models that govern \progname{} are presented in
 Subsection~\ref{sec_instance}. The information to understand the meaning of
-theinstance models and their derivation is also presented, so that the instance
+the instance models and their derivation is also presented, so that the instance
 models can be verified.
 
 \subsubsection{Assumptions}
@@ -518,7 +518,7 @@ values from 0 to 255.
 \subsubsection{Theoretical Models} \label{sec_theoretical}
 
 This section focuses on the general equations and laws that \progname{} is
-basedon.
+based on.
 
 ~\newline
 
@@ -874,7 +874,7 @@ since $P(C_{1}|i)=1, P(i)=p_{i}$, and $P(C_{1})=P_{1}$.
 \subsubsection{Instance Models} \label{sec_instance}    
 
 This section transforms the problem defined in Section~\ref{sec_ProblemDes}
-intoone which is expressed in mathematical terms. It uses concrete symbols
+into one which is expressed in mathematical terms. It uses concrete symbols
 defined
 in Section~\ref{sec_datadef} to replace the abstract symbols in the models
 identified in Sections~\ref{sec_theoretical}.
@@ -1043,12 +1043,12 @@ on the range of values that can be taken by the variable.  The column for
 software constraints restricts the range of inputs to reasonable values.  The
 software constraints will be helpful in the design stage for picking suitable
 algorithms. The constraints are conservative, to give the user of the model
-theflexibility to experiment with unusual situations. The column of typical
-valuesis intended to provide a feel for a common scenario. The uncertainty
+the flexibility to experiment with unusual situations. The column of typical
+values is intended to provide a feel for a common scenario. The uncertainty
 column
 provides an estimate of the confidence with which the physical quantities can
-bemeasured. This information would be part of the input if one were performing
-anuncertainty quantification exercise.
+be measured. This information would be part of the input if one were performing
+an uncertainty quantification exercise.
 
 \begin{table}[!h]
   \caption{Input Variables} \label{TblInputVar}
@@ -1085,7 +1085,7 @@ anuncertainty quantification exercise.
 
 \noindent
 A correct solution must exhibit valid optimal thresholds and a output image
-withthe same resolution as the input one and with valid pixel values.
+with the same resolution as the input one and with valid pixel values.
 
 \begin{table}[!h]
 \caption{Output Variables} \label{TblOutputVar}
@@ -1116,7 +1116,7 @@ qualities that the software is expected to exhibit.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Inputs}:] 
 \progname{} shall verify that the input data are valid. A valid input image
-mustbe 2D 12-bit or 16-bit grayscale DICOM image. An error message shall be
+must be 2D 12-bit or 16-bit grayscale DICOM image. An error message shall be
 displayed if input data are invalid.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_OutputInputs}:] 
@@ -1126,7 +1126,7 @@ input file.
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_Calculate}:]
 \progname{} shall provide correct calculate according to Instance Models
 according to the user's choice of which method to use, single or multiple
-globalthresholds. \progname{} shall also display the correct optimal threshold
+global thresholds. \progname{} shall also display the correct optimal threshold
 value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$ accordingly.
 
 \item[R\refstepcounter{reqnum}\thereqnum \label{R_VerifyOutput}:] \progname{}
@@ -1155,7 +1155,7 @@ uninstall shall be measured as documented in the SystVnvPlan \cite{Dong2019SystV
   users considered the software easy to install, you would have an improvement.
   The approach you are using in your VnV plan is a better way to specify the
   NFRs.  It might be easiest to just reference that document from the SRS?}
-\an{ajusted and cited my vnv}
+\an{adjusted and cited my vnv}
 \item[R\refstepcounter{reqnum}\thereqnum
 \label{R_correct}:]
 Correctness: The output image will be generally similar to the output from VTK.
@@ -1189,8 +1189,8 @@ standard and uses proper comments.
 \noindent \begin{itemize}
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_localthres}:]This document
-onlydescribes global threshold with Otsu's Method. It could include the method
-usinglocal thresholds in the future.
+only describes global threshold with Otsu's Method. It could include the method
+using local thresholds in the future.
 
 \item[LC\refstepcounter{lcnum}\thelcnum\label{LC_morek}:]This document only
 describes multi-threshold method with 2 thresholds. It could list more Instance
@@ -1228,7 +1228,7 @@ The purpose of the traceability matrices is to provide easy references on what
 has to be additionally modified if a certain component is changed. Every time a
 component is changed, the items in the column of that component that are marked
 with an ``X'' may have to be modified as well. Table~\ref{Table:trace} shows
-thedependencies of theoretical models, general definitions, data definitions,
+the dependencies of theoretical models, general definitions, data definitions,
 and
 instance models with each other.
 
