@@ -83,7 +83,7 @@ quality of the program is assured.
 
 Some general information such as introduction to the software and testing
 objectives are included in Section \ref{sec_geinfo}. Verification plans and
-testdescriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri},
+test descriptions are in Section \ref{sec_plan} and \ref{sec_systestdescri},
 respectively.
 
 \section{General Information} \label{sec_geinfo}
@@ -95,15 +95,15 @@ The software going through the test is Medical Imaging Segmentation
 
 Segmentation, separation of structures of interest from the background and from
 each other~\cite{Bankman2000}. Image segmentation is the process of
-partitioningan image into different meaningful segments. In medical imaging,
+partitioning an image into different meaningful segments. In medical imaging,
 these segments
 often correspond to different tissue classes, organs, pathologies, or other
 biologically relevant structures~\cite{Forouzanfar2010}.
 
 \progname{} uses one of many segmentation algorithms - the Intensity Threshold
 method. It also uses Otsu's Method to find the optimal threshold value(s).
-Afterreceiving input medical image from the users, \progname{} calculates the
-optimalthreshold value(s), and output the processed segmentation image.
+After receiving input medical image from the users, \progname{} calculates the
+optimal threshold value(s), and output the processed segmentation image.
 
 \subsection{Objectives}
 \label{Sec_objectives}
@@ -161,8 +161,8 @@ the VnV team.}
 
 The SRS can be reviewed with the help from the author's professor and
 classmates. Teamwork will be done systematically by reviewing each others SRS
-orother documents. The whole process can be done through GitHub by reviewing
-andsubmitting issues. Reviewers can give revision suggestions to the author, and
+or other documents. The whole process can be done through GitHub by reviewing
+and submitting issues. Reviewers can give revision suggestions to the author, and
 the author has the responsibility to check all the submitted issues and make
 necessary adjustments accordingly.
 
@@ -170,7 +170,7 @@ necessary adjustments accordingly.
 
 During the writing of SRS, the identification of verification activity is
 considered parallel. This enables the writer to make sure that the
-specificationin the SRS is verifiable. Any future changes to the SRS should not
+specification in the SRS is verifiable. Any future changes to the SRS should not
 compromise
 the verifiability. \wss{This last
   sentence is not a complete thought.}\an{adjusted}
@@ -189,8 +189,8 @@ The specifications and test plan shall be well-documented. There can be
 preliminary test plan to make improvements to the final plan.
 
 \wss{This is not a very specific plan. Who is going to review your design?
-Howare they going to do the review? Peter had some specific ideas for doing
-thisthat you might like to borrow.}
+How are they going to do the review? Peter had some specific ideas for doing
+this that you might like to borrow.}
 
 \an{Peter's paper only has two sentences here. I borrowed the following idea
 anyway.}
@@ -211,7 +211,7 @@ aloud to a (imaginary) rubber duck.
 \item Expert review. This verification shall be done by Prof.\ Smith and the MG
 and MIS reviewers Zhi Zhang and Sharon Wu. The design shall be verified to be
 able to meet all the requirements in the SRS. The reviewing process shall use
-anissue tracking and version control tool such as GitHub.
+an issue tracking and version control tool such as GitHub.
 
 \item Task-based peer review. This verification shall be done by Peter
 Michalskiand other interested peers, who can complete individual tasks by
@@ -240,13 +240,13 @@ LGTM (\url{https://lgtm.com/help/lgtm/about-lgtm}) and Deep Dive
 verification will be used by execution of the system or its units. By finding
 out the output test results, we can execute testings for the functional
 requirements in Section \ref{sec_funcreqtest}. By methods like questionnaire
-andinterview, we can analyze the nonfunctional requirements listed in Section
+and interview, we can analyze the nonfunctional requirements listed in Section
 \ref{sec_nonfuncreqtest}.
 
 \subsection{Software Validation Plan}
 
 One possible validation approach is interviewing Dr.\ Michael Noseworthy to
-findout if \progname{} is really what the users need.
+find out if \progname{} is really what the users need.
 
 \section{System Test Description} \label{sec_systestdescri}
 
@@ -261,7 +261,7 @@ a
 \an{I cited SRS here, and deleted the copied words}
 
 \progname{} shall verify that the input data are valid, shall guarantee that
-theoutput is consistent with the input and meet the same standard, and shall
+the output is consistent with the input and meet the same standard, and shall
 provide correct calculation and output.
 
 R1 will be tested in Section \ref{sec_inputtest}, R3 will be tested in
@@ -279,7 +279,7 @@ Part of the test for nonfunctional requirements including Robustness in Section
 \ref{sec_robustnesstest} is also done here.
 
 In this test, various types of input file will be tested, \progname{} shall
-onlytake 12-bit or 16-bit grayscale DICOM image with width and height greater
+only take 12-bit or 16-bit grayscale DICOM image with width and height greater
 than 0
 and with valid pixel values as input, as described in the Section Input Data
 Constraints in the SRS. Taken incorrect format or
@@ -305,7 +305,7 @@ Test Case Derivation: successfully display error message.
 					
 How test will be performed: it will be performed by the test team with help of
 JUnit. The test team should load the whole project with an IDE and run the
-JUnittest file /test/InputFilenameTest.java. \wss{You should make this test
+JUnit test file /test/InputFilenameTest.java. \wss{You should make this test
 automatic.
   Using a unit testing framework, a test case can be defined that is considered
   successful is the correct exception is raised.}
@@ -325,14 +325,14 @@ an invalid one to .dcm and .dcm30, but the file format is not 12-bit or 16-bit
 DICOM image.
 					
 Output: \progname{} shall display warning that this file might be damaged or
-theformat is not supported.
+the format is not supported.
 
 Test Case Derivation: successfully detect the data format in the file and
 display error message. 
 
 How test will be performed: it will be performed by the test team with help of
 JUnit. The test team should load the whole project with an IDE and run the
-JUnittest file /test/InputFormatTest.java. \wss{Again, this can be automated
+JUnit test file /test/InputFormatTest.java. \wss{Again, this can be automated
 using a
 unit
   testing framework.  It can again be handled with exceptions.}
@@ -360,15 +360,15 @@ will be repeated multiple times.
 \subsubsection{Calculation}
 \label{sec_caltest} \progname{} shall provide correct calculate according to
 Instance Models according to the user's choice of which method to use, single
-ormultiple global thresholds. \progname{} shall also display the correct
-optimalthreshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$
+or multiple global thresholds. \progname{} shall also display the correct
+optimal threshold value(s) $k^{\star}$ or $k^{\star}_{1}$ and $k^{\star}_{2}$
 accordingly.
 
 Part of the test for nonfunctional requirements including Correctness and
 Verifiability in Section \ref{sec_correctverfiabletest} is also done here.
 
 In this test, calculated values will be cross-checked with results from
-ITK-SNAPMedical Image Segmentation Tool
+ITK-SNAP Medical Image Segmentation Tool
 (\url{https://sourceforge.net/projects/itk-snap/}). \wss{I don't like the
 ``suchas'' here. Now is the time
   to make specific decisions.  If you are going to use VTK say that, if you are
@@ -408,9 +408,9 @@ Test Case Derivation: successfully detect the users' choice and display
 potentially correct number of values.
 
 How test will be performed: the same input image will be used for calculation
-inVTK, and the output optimal threshold values from VTK will be used as control
+in VTK, and the output optimal threshold values from VTK will be used as control
 value. The percentage of difference between the outputs from \progname{} and
-VTKwill be calculated. It will be performed by the test team with assistance
+VTK will be calculated. It will be performed by the test team with assistance
 from
 JUnit, and will be repeated multiple times.
 
@@ -422,7 +422,7 @@ Initial State: \progname{} is started and running, /test/sample\_image.dcm has
 been taken as the input.
 					
 Input: user shall choose the second one from the two options: Single or
-MultipleGlobal Thresholds.
+Multiple Global Thresholds.
 					
 Output: accordingly, \progname{} shall calculate and display two optimal
 threshold values - $k^{\star}_{1}$ and $k^{\star}_{2}$, where $k^{\star}_{1}
@@ -434,9 +434,9 @@ Test Case Derivation: successfully detect the users' choice and display
 potentially correct number of values.
 
 How test will be performed: the same input image will be used for calculation
-inVTK, and the output optimal threshold values from VTK will be used as control
+in VTK, and the output optimal threshold values from VTK will be used as control
 value. The percentage of difference between the outputs from \progname{} and
-VTKwill be calculated. It will be performed by the test team with assistance
+VTK will be calculated. It will be performed by the test team with assistance
 from
 JUnit, and will be repeated multiple times.
 
@@ -470,7 +470,7 @@ output file with valid filename extension.
 
 How test will be performed: it will be performed by the test team with help of
 JUnit. The test team should load the whole project with an IDE and run the
-JUnittest file /test/OutputFileWriteTest.java. \wss{This can be automated.}
+JUnit test file /test/OutputFileWriteTest.java. \wss{This can be automated.}
 \an{adjusted}
 
 \end{enumerate}
@@ -546,7 +546,7 @@ of JUnit and OpenCV Java library. The test team should load the whole project
 with an IDE and run the JUnit test file /test/OutputCorrectnessTest.java, which
 is built using OpenCV Java library for image reading and JUnit for testing. The
 resolution and pixel values of input and output images will be compared, and
-thedifference will be measured.
+the difference will be measured.
 
 \end{enumerate}
 
@@ -561,10 +561,10 @@ The functional requirements described in the SRS \cite{Dong2019SRS}.
 All the qualities of \progname{} will be tested in the following 
 subsections. Most qualities can be measured by the grade sheet in tables, such
 as Table \ref{Tb_install} for Installability. In some cases a superscript $*$
-isused to indicate that a response of this type should be accompanied by
+is used to indicate that a response of this type should be accompanied by
 explanatory text. For instance, if problems were caused by uninstall, the
 reviewer should note what problems were caused. An (I) precedes the test case
-orquestion description when its measurement requires a successful installation
+or question description when its measurement requires a successful installation
 \cite{SmithEtAl2018}.
 
 \subsubsection{Installability}
@@ -584,13 +584,13 @@ Type: Manual
 Initial State: a virtual machine of fresh Windows 10 operating system
 					
 Input/Condition: \progname{} installation package, install command and
-uninstallcommand after installation
+uninstall command after installation
 					
 Output/Result: the degree of effectiveness and efficiency with which
 \progname{}can be successfully installed and/or uninstalled
 					
 How test will be performed: Installability can be measured by the grade sheet
-inTable \ref{Tb_install}. It will be performed by the test team manually.
+in Table \ref{Tb_install}. It will be performed by the test team manually.
 
 \begin{table}[h]
 \begin{tabular}{@{}ll@{}}
@@ -616,7 +616,7 @@ Type: Manual
 Initial State: a virtual machine of fresh macOS 10.14 operating system
 					
 Input/Condition: \progname{} installation package, install command and
-uninstallcommand after installation
+uninstall command after installation
 					
 Output/Result: the degree of effectiveness and efficiency with which
 \progname{}can be successfully installed and/or uninstalled
@@ -631,7 +631,7 @@ Type: Manual
 Initial State: a virtual machine of fresh Ubuntu Linux 18.04 operating system
 					
 Input/Condition: \progname{} installation package, install command and
-uninstallcommand after installation
+uninstall command after installation
 					
 Output/Result: the degree of effectiveness and efficiency with which
 \progname{}can be successfully installed and/or uninstalled
@@ -652,7 +652,7 @@ a software can be checked or proven~\cite{SmithEtAl2018}.
 Correctness is tested in the tests for functional
 requirements included in Section \ref{sec_caltest} and
 \ref{sec_outputverifytest}. \wss{Yes I agree with assessing correctness, but
-youaren't really measuring verifiability. Your tests could be very difficult to
+you aren't really measuring verifiability. Your tests could be very difficult to
   perform.  Just running tests just not prove that the software is verifiable.}
 \an{Added more contents as follows for verifiability}
 
@@ -707,7 +707,7 @@ Overall impression? & \{1 .. 10\} \\ \bottomrule
   requirements explicitly say what to do in these input error cases.  I cannot
   remember whether your requirements are specific about these scenarios.}
 \an{I changed it to your questionnaire. Before finding an better method, I
-thinkit's the best way of measuring.}
+think it's the best way of measuring.}
 
 \subsubsection{Usability} \label{sec_usabilitytest}
 
@@ -814,14 +814,14 @@ How test will be performed: testers shall check the GitHub repo of \progname{}
 for the effectiveness of version control and issue tracking on the software and
 the documents; they shall check the existence and completeness of the documents
 such as SRS, SysVnVPlan, MG, MIS. Results will be recorded in the grade sheet
-inTable \ref{Tb_maintain}. It will be performed by the test team manually.
+in Table \ref{Tb_maintain}. It will be performed by the test team manually.
 \end{enumerate}
 
 \begin{table}[]
 \begin{tabular}{ll} \hline Questions & Sets of Answers \\ \hline Is there a
 history of multiple versions of the software? & \{yes, no, unclear\} \\
 \begin{tabular}[c]{@{}l@{}}Is there any information on how code is reviewed,
-or\\ how to contribute?\end{tabular} & \{yes*, no\} \\ Is there a changelog? &
+or\\ how to contribute?\end{tabular} & \{yes*, no\} \\ Is there a change log? &
 \{yes, no\} \\ What is the maintenance type? & \{corrective, adaptive,
 perfective, unclear\} \\ What issue tracking tool is employed?
 & \begin{tabular}[c]{@{}l@{}}\{Trac, JIRA, Redmine, e-mail, discussion board,
