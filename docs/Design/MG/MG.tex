@@ -115,7 +115,7 @@ specifies the connections between the software requirements and the
 modules. Section \ref{SecMD} gives a detailed description of the
 modules. Section \ref{SecTM} includes two traceability matrices. One checks
 the completeness of the design against the requirements provided in the SRS.
-Theother shows the relation between anticipated changes and the modules.
+The other shows the relation between anticipated changes and the modules.
 Section\ref{SecUse} describes the use relation between modules.
 
 \section{Anticipated and Unlikely Changes} \label{SecChange}
@@ -130,7 +130,7 @@ unlikely changes are listed in Section \ref{SecUchange}.
 Anticipated changes are the source of the information that is to be hidden
 inside the modules. Ideally, changing one of the anticipated changes will only
 require changing the one module that hides the associated decision. The
-approachadapted here is called design for
+approach adapted here is called design for
 change.
 
 \begin{description}
@@ -153,8 +153,8 @@ output data.
 Method, as explained in the SRS \cite{Dong2019SRS}. \wss{If you mention Otsu's
 method, then you should give a citation to
 where this method is introduced/explained. I also wonder what is the
-secrethere.Is it a secret the Otsu's method is being used, or will the
-interfaceexpose thatdecision.} \an{I suppose ``using 2 thresholds to segment theimage"
+secret here.Is it a secret the Otsu's method is being used, or will the
+interface expose that decision.} \an{I suppose ``using 2 thresholds to segment the image"
 is not a secret, but ``these 2 thresholds are calculated with Otsu's method" is
 a secret. So yes, it's a secret the Otsu's method is being used, but the
 interface won't
@@ -178,9 +178,9 @@ Classification\end{tabular}}} \\ \hline
 tracing\\ (heuristic)\end{tabular} & • Intensity threshold \\ \hline
 \textbf{$2^{nd}$} & \begin{tabular}[c]{@{}l@{}}• Deformable models\\ • Graph
 search\end{tabular} & \begin{tabular}[c]{@{}l@{}}• Minimal path\\ • Target
-tracking\\ • Graph search\\ • Neural networks\\ • Multiresolution\end{tabular}
+tracking\\ • Graph search\\ • Neural networks\\ • Multi resolution\end{tabular}
 &\begin{tabular}[c]{@{}l@{}}• Statistical pattern recognition\\ • C-means
-clustering\\ • Neural networks\\ • Multiresolution\end{tabular} \\ \hline
+clustering\\ • Neural networks\\ • Multi resolution\end{tabular} \\ \hline
 \textbf{$3^{rd}$} & \begin{tabular}[c]{@{}l@{}}• Shape models\\ • Appearance
 models\\ • Rule-based\\ • Coupled surfaces\end{tabular} & &
 \begin{tabular}[c]{@{}l@{}}• Atlas-based\\ • Rule-based\end{tabular} \\ \hline
@@ -340,7 +340,7 @@ module will be implemented by the \progname{} software.
 
 Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not
-haveto be implemented.
+have to be implemented.
 
 \subsection{Hardware Hiding Modules (\mref{mHH})}
 
@@ -504,7 +504,7 @@ R5 & \mref{mOutput}, \mref{mConstants}, \mref{mSequenceDS}, \mref{mImageDS}\\
 
 In this section, the uses hierarchy between modules is
 provided. \citet{Parnas1978} said of two programs A and B that A {\em uses} B
-ifcorrect execution of B may be necessary for A to complete the task described
+if correct execution of B may be necessary for A to complete the task described
 in
 its specification. That is, A {\em uses} B if there exist situations in which
 the correct functioning of A depends upon the availability of a correct
