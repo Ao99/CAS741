@@ -1,24 +1,12 @@
 \documentclass[12pt, titlepage]{article}
 
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks,
-    citecolor=black,
-    filecolor=black,
-    linkcolor=red,
-    urlcolor=blue
-}
-\usepackage[round]{natbib}
-
 \input{../../Comments}
 \input{../../Common}
 
 \begin{document}
 
 \title{Project Title: Unit Verification and Validation Plan for \progname{}} 
-\author{Author Name}
+\author{Ao Dong}
 \date{\today}
 	
 \maketitle
@@ -30,8 +18,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+Dec 14 & 1.0 & Initial Draft\\
 \bottomrule
 \end{tabularx}
 
@@ -40,12 +27,6 @@ Date 2 & 1.1 & Notes\\
 \tableofcontents
 
 \listoftables
-
-\wss{Do not include if not relevant}
-
-\listoffigures
-
-\wss{Do not include if not relevant}
 
 \newpage
 
@@ -60,168 +41,418 @@ Date 2 & 1.1 & Notes\\
   \bottomrule
 \end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can reference the SRS, MG or MIS
-  tables if needed}
+For the other symbols, abbreviations and acronym, see SRS Documentation at
+\url{https://github.com/Ao99/MIA/blob/master/docs/SRS/SRS.pdf}
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  unit V\&V plan}
+This document describes procedures concerning the unit testing for \progname{}
+for compliance with the requirements.
+
+Some general information such as introduction to the software and testing
+scopes are included in Section \ref{sec_geinfo}. Verification plans and
+test tools are in Section \ref{sec_plan}.
 
 \section{General Information}
+\label{sec_geinfo}
 
 \subsection{Purpose}
 
-\wss{Identify software that is being unit tested (verified).}
+The software going through the test is Medical Imaging Segmentation
+(\progname{}).
+
+Segmentation, separation of structures of interest from the background and from
+each other~\cite{Bankman2000}. Image segmentation is the process of
+partitioning an image into different meaningful segments. In medical imaging,
+these segments
+often correspond to different tissue classes, organs, pathologies, or other
+biologically relevant structures~\cite{Forouzanfar2010}.
+
+\progname{} uses one of many segmentation algorithms - the Intensity Threshold
+method. It also uses Otsu's Method to find the optimal threshold value(s).
+After receiving input medical image from the users, \progname{} calculates the
+optimal threshold value(s), and output the processed segmentation image.
 
 \subsection{Scope}
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+The Input Module relies on a library developed by others, so it will not be
+tested within the scope of this document.
+
+The modules that are going to be tested are Image Data Structure, Optimal
+Thresholds Calculation, Output Module and Image Verification.
 
 \section{Plan}
+\label{sec_plan}
 	
 \subsection{Verification and Validation Team}
 
-\wss{Probably just you.  :-)}
+\begin{itemize}
+\item Ao Dong
+\item Prof.\ Spencer Smith
+\item Peter Michalski
+\item Zhi Zhang
+\item Sasha Soraine
+\item Sharon Wu
+\end{itemize}
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.}
+The Java unit testing framework JUnit will be used to test the modules.
 
 \subsection{Non-Testing Based Verification}
 
-\wss{List any approaches like code inspection, code walkthrough, symbolic
-  execution etc.  Enter not applicable if you do not plan on any non-testing
-  based verification.}
+The non-testing based verification will be done in the System VnV.
 
 \section{Unit Test Description}
 
-\wss{Reference your MIS and explain your overall philosophy for test case
-  selection.}
+All modules should meet the specifications defined in MIS \cite{Dong2019MIS}.
 
 \subsection{Tests for Functional Requirements}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
+\subsubsection{Image Data Structure}
+\label{sec_imageData}
 
-\subsubsection{Module 1}
-
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+This is an abstract data type module. It should correctly construct a data type
+instance if valid parameters are given, and throw exceptions if invalid ones are
+given.
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{Valid parameter\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: Automatic
 					
-Initial State: 
+Initial State: none.
 					
-Input: 
+Input: SYMBOLIC\_CONSTANTS.validSize, SYMBOLIC\_CONSTANTS.validSize,
+SYMBOLIC\_CONSTANTS.validSequence
 					
-Output: \wss{The expected result for the given inputs}
+Output: A message saying that a new ImageData is successfully constructed, with
+the width, length and pixel value sequence displayed.
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: A new ImageData is successfully constructed and no
+exception is thrown.
 
-How test will be performed: 
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
 					
-\item{test-id2\\}
+\item{Invalid parameter1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: Automatic
 					
-Initial State: 
+Initial State: none.
 					
-Input: 
+Input: SYMBOLIC\_CONSTANTS.negSize, SYMBOLIC\_CONSTANTS.validSize,
+SYMBOLIC\_CONSTANTS.validSequence
 					
-Output: \wss{The expected result for the given inputs}
+Output: A message saying that a new ImageData is not successfully constructed,
+with the badWidthInput error message from MIS shown.
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: A new ImageData is not successfully constructed and the
+correct exception is thrown.
 
-How test will be performed: 
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
 
-\item{...\\}
-    
+\item{Invalid parameter2\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validSize, SYMBOLIC\_CONSTANTS.negSize,
+SYMBOLIC\_CONSTANTS.validSequence
+					
+Output: A message saying that a new ImageData is not successfully constructed,
+with the badWidthInput error message from MIS shown.
+
+Test Case Derivation: A new ImageData is not successfully constructed and the
+correct exception is thrown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Invalid parameter3\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validSize2, SYMBOLIC\_CONSTANTS.validSize2,
+SYMBOLIC\_CONSTANTS.validSequence
+					
+Output: A message saying that a new ImageData is not successfully constructed,
+with the badPixelValueLength error message from MIS shown.
+
+Test Case Derivation: A new ImageData is not successfully constructed and the
+correct exception is thrown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
 \end{enumerate}
 
-\subsubsection{Module 2}
+\subsubsection{Optimal Thresholds Calculation}
+\label{sec_ThresCal}
 
-...
+This module should update chosenThresNum according to user's choice, and show an
+error message if invalid input is given.
+
+\begin{enumerate}
+
+\item{Valid choice input\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validChoice
+					
+Output: A message saying that chosenThresNum is successfully updated, with the
+value of chosenThresNum displayed.
+
+Test Case Derivation: chosenThresNum is successfully updated and no exception is
+thrown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+					
+\item{Inalid choice input1\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.invalidChoice1
+					
+Output: A message saying that chosenThresNum is not successfully updated, with
+the badChoiceInput error message from MIS shown.
+
+Test Case Derivation: chosenThresNum is not successfully updated and the correct
+exception is thrown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Inalid choice input2\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.invalidChoice2
+					
+Output: A message saying that chosenThresNum is not successfully updated, with
+the badChoiceInput error message from MIS shown.
+
+Test Case Derivation: chosenThresNum is not successfully updated and the correct
+exception is thrown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\end{enumerate}
+
+\subsubsection{Output Module}
+\label{sec_output}
+
+This module should correctly segment input images.
+
+\begin{enumerate}
+
+\item{Segmentation\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validImg1
+					
+Output: A correctly segmented instance of ImageData, with width 100, height 100,
+and a valid pixelValue which is a sequence of $\mathbf{N}$ with elements in
+$[0,255]$
+This sequence should be the same as the one documented in This sequence is
+documented in test/segImage.txt
+
+Test Case Derivation: segImage is successfully updated and the result is
+correct.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\end{enumerate}
+
+\subsubsection{Image Verification}
+\label{sec_imageVerify}
+
+This module should correctly return verification result and throw proper
+exceptions.
+
+\begin{enumerate}
+
+\item{Valid image\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validImg1
+					
+Output: Boolean true and no error message.
+
+Test Case Derivation: a valid instance of ImageData is correctly identified.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Invalid image1\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.invalidImg1
+					
+Output: Boolean false, with the badSize error message from MIS shown.
+
+Test Case Derivation: an invalid instance of ImageData is correctly identified
+and the proper error message is shown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Invalid image2\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.invalidImg2
+					
+Output: Boolean false, with the badPixelData error message from MIS shown.
+
+Test Case Derivation: an invalid instance of ImageData is correctly identified
+and the proper error message is shown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Consistent sizes\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validImg1, SYMBOLIC\_CONSTANTS.validImg1
+					
+Output: Boolean true and no error message.
+
+Test Case Derivation: two instances of ImageData with the same size are
+correctly identified.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\item{Inconsistent sizes\\}
+
+Type: Automatic
+					
+Initial State: none.
+					
+Input: SYMBOLIC\_CONSTANTS.validImg1, SYMBOLIC\_CONSTANTS.validImg2
+					
+Output: Boolean false, with the badSize2 error message from MIS shown.
+
+Test Case Derivation: two instances of ImageData with different sizes are
+correctly identified and the proper error message is shown.
+
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
+
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
+The performance of module Optimal Thresholds Calculation will be tested.
 
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
+\subsubsection{Optimal Thresholds Calculation}
+\label{sec_thresCalPerformance}
 
-\subsubsection{Module ?}
-		
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{Max thresholds calculation speed\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+Type: Automatic
 					
-Initial State: 
+Initial State: none
 					
-Input/Condition: 
+Input: SYMBOLIC\_CONSTANTS.maxThresNum
 					
-Output/Result: 
+Output: Time used to finish the optimal thresholds calculation.
 					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+How test will be performed: It will be performed by test classes built with the
+help of JUnit.
 
 \end{enumerate}
 
-\subsubsection{Module ?}
-
-...
-
 \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
+The purpose of the traceability matrices is to provide easy references on what
+has to be additionally modified if a certain component is changed. Table
+\ref{Tb_trace} shows the
+dependencies between the test cases and the requirements.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+Test Cases & Modules \\ \midrule
+\ref{sec_imageData} & Image Data Structure \\
+\ref{sec_ThresCal}, \ref{sec_thresCalPerformance} & Optimal Thresholds
+Calculation \\
+\ref{sec_output} & Output Module \\
+\ref{sec_imageVerify} & Image Verification \\ \bottomrule
+\end{tabular}
+\caption{Traceability Matrix showing the connections between modules and
+tests}
+\label{Tb_trace}
+\end{table}
+
+\newpage
 
 \bibliographystyle{plainnat}
-
-\bibliography{SRS}
+\bibliography{../../../refs/References}
 
 \newpage
 
 \section{Appendix}
 
-\wss{This is where you can place additional information, as appropriate}
-
 \subsection{Symbolic Parameters}
 
-\wss{The definition of the test cases may call for SYMBOLIC\_CONSTANTS.
-Their values are defined in this section for easy maintenance.}
+\begin{itemize}
+\item SYMBOLIC\_CONSTANTS.negSize = -1
+\item SYMBOLIC\_CONSTANTS.validSize = 100
+\item SYMBOLIC\_CONSTANTS.validSize2 = 200
+\item SYMBOLIC\_CONSTANTS.validSequence = $<1,1,...,1>$ which is a sequence of
+$\mathbf{N}$ with length of 10000, and every element is 1.
+\item SYMBOLIC\_CONSTANTS.validChoice = 2
+\item SYMBOLIC\_CONSTANTS.invalidChoice1 = 6
+\item SYMBOLIC\_CONSTANTS.invalidChoice2 = A
+\item SYMBOLIC\_CONSTANTS.validImg1, an instance of ImageData, with width 100,
+height 100, and a valid pixelValue which is a sequence of $\mathbf{N}$ with
+elements in $[0,255]$. This sequence is documented in test/inputImage.txt
+\item SYMBOLIC\_CONSTANTS.validImg2, an instance of ImageData, with width 200,
+height 200, and a valid pixelValue which is a sequence of $\mathbf{N}$ with
+elements in $[0,255]$.
+\item SYMBOLIC\_CONSTANTS.invalidImg1, an instance of ImageData, with width -1,
+height -1, and a valid pixelValue which is a sequence of $\mathbf{N}$ with
+elements in $[0,255]$.
+\item SYMBOLIC\_CONSTANTS.invalidImg2, an instance of ImageData, with width 100,
+height 100, and a valid pixelValue which is a sequence of $\mathbf{N}$
+containing elements -1 and 256.
+\item SYMBOLIC\_CONSTANTS.maxThresNum = 2.
+\end{itemize}
 
 \end{document}
