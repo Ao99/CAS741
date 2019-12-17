@@ -3,7 +3,7 @@
 \input{../../Comments}
 \input{../../Common}
 
-\externaldocument{../../SRS/CA}
+\externaldocument{../../SRS/SRS}
 
 \begin{document}
 
@@ -62,7 +62,7 @@ multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$. This
 document has one modification to the original notations: the concatenation
 notation $||$ can be used to build a new sequence from an existing sequence.
-Forexample, s2 $:= ||(x : \mathbb{N} | x \in s1 \cdot x+1)$, where s1 =
+For example, s2 $:= ||(x : \mathbb{N} | x \in s1 \cdot x+1)$, where s1 =
 $\langle1,2,...,10 \rangle$, then s2 = $\langle 2,3,...,11 \rangle$. We adopt
 the
 notation in this way assuming that the elements in a sequence are in order
@@ -212,7 +212,7 @@ steps,
   If ThresCal.isThresValid is a Boolean, it is already True or False.  This
 comment applies elsewhere in this spec as well.}\an{I made some change so this
 part doesn't compare True or False. But for the rest of the document, I
-modifiedas you suggested.}
+modified as you suggested.}
 \item Output.writeOutput($filenameOut$)
 \wss{Our notation does not have an ``else''.  You can just say True in place of
 ``else''. This same comment applies throughout this document.}\an{I made some
@@ -225,9 +225,9 @@ document, I modified as you suggested.}
 
 \wss{Your exception covers the same ground as given in your pseudo code.  You
 shouldn't really repeat this here, especially since it is ambiguous in the
-wayyou have worded it. I suggest you replace the exception information you have
+way you have worded it. I suggest you replace the exception information you have
 with a note that points the reader to the transition field for the definition
-ofthe exception behaviour.}
+of the exception behaviour.}
 \an{I've moved all exception to other modules, so not anymore a problem here,
 but I'll also make sure not a problem in other parts.}
 
@@ -607,7 +607,7 @@ if chosenThresNum = 2, use the following formula to calculate k1 and k2,\\
 sigma2b2(k1,k2) =
 $\max\limits_{0<t1<t2<255}$ sigma2b2($t1,t2$)).
 \item According to the chosen threshold numbers, set isThresValid to True if
-thecalculated results follow the rules accordingly:\\
+the calculated results follow the rules accordingly:\\
 $1 \le k1 \le 254$\\
 $1 \le k1 < k2 \le 254$
 \end{enumerate}
@@ -711,7 +711,7 @@ outputFile: a bitmap file
 
 If this module is intended to be used on frame $j$, than it should be called
 after using ThresCal in Section \ref{Md_Calculation} on frame $j$. The reason
-isthat this module uses ThresCal.frameIndex to get current frame number.
+is that this module uses ThresCal.frameIndex to get current frame number.
 
 \subsubsection{Access Routine Semantics}
 
@@ -729,7 +729,7 @@ This function has the following procedural specification:
 \item If ThresCal.isThresValid(), continue.
 \item $j$ := ThresCal.frameIndex
 \item If ThresCal.chosenThresNum == 1, use Hardware-Hiding Module to display
-thefollowing message:\\
+the following message:\\
 ``The single threshold value for frame $j$ is k= " + k1 + ``."
 \item If ThresCal.chosenThresNum == 2, use Hardware-Hiding Module to display
 thefollowing message:\\
@@ -839,7 +839,7 @@ None
 compareSizes($img1$, $img2$) does not check if these two inputs are
 valid, it assumes that during the previous steps, the software has called
 verifyImageData($img$) to verify these two inputs individually. \wss{This
-accessprogram seems to be misnamed. The images are only being compared to verify
+access program seems to be misnamed. The images are only being compared to verify
   that they are the same size.  I assumed that returning True would mean that
   the images were the same.}
 \an{I agree. Changed the names.}
