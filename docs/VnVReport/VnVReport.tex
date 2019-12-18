@@ -56,9 +56,13 @@ Detailed descriptions of the tests executed can be found in SystVnVPlan
 
 \section{Functional Requirements Evaluation}
 
+This evaluation will be done in the future with the guidance from SystVnVPlan
+\cite{Dong2019SystVnV}.
+
 \section{Nonfunctional Requirements Evaluation}
 
-\subsection{Usability}
+\subsection{Installability}
+\label{sec_Installability}
 
 \begin{longtable}{p{10cm} l l}
 \toprule
@@ -77,6 +81,7 @@ Overall Impression & \{1 .. 10\} & 6\\
 \end{longtable}
 
 \subsection{Correctness and Verifiability}
+\label{sec_CorrectnessVerifiability}
 
 \begin{longtable}{p{8cm} l p{5cm}}
 \toprule
@@ -100,6 +105,7 @@ Overall impression? & \{1 .. 10\} & 10\\
 \end{longtable}
 
 \subsection{Robustness}
+\label{sec_Robustness}
 
 \begin{longtable}{p{10cm} l l}
 \toprule
@@ -118,6 +124,7 @@ Overall impression? & \{1 .. 10\} & 8\\
 \end{longtable}
 
 \subsection{Usability}
+\label{sec_Usability}
 
 \an{I didn't have a tester to do the new user test, so some results are faked.}
 Percentages of improvements in indicators which are the less the better (such
@@ -170,6 +177,7 @@ record of steps can be added\\
 \end{longtable}
 
 \subsection{Maintainability}
+\label{sec_Maintainability}
 
 \begin{longtable}{p{7cm} p{4cm} l}
 \hline Questions & Sets of Answers & Answers \\ \hline
@@ -193,7 +201,8 @@ Overall impression? & \{1 .. 10\} & 7\\ \hline
 \label{Tb_maintainability}
 \end{longtable}
 
-\subsection{}
+\subsection{Portability}
+\label{sec_Portability}
 
 \begin{longtable}{p{7cm} p{4cm} p{4cm}}
 \toprule
@@ -217,6 +226,7 @@ Overall impression? & \{1 .. 10\} & 10\\ \bottomrule
 \end{longtable}
 
 \subsection{Understandability}
+\label{sec_Understandability}
 
 \begin{longtable}{p{7cm} p{3cm} p{5cm}}
 \toprule
@@ -242,19 +252,79 @@ Overall impression? & \{1 .. 10\} & 10\\ \bottomrule
 
 \section{Comparison to Existing Implementation}	
 
-This section will not be appropriate for every project.
+This comparison will be done between \progname{} and VTK in the future with the
+guidance from SystVnVPlan \cite{Dong2019SystVnV}.
 
 \section{Unit Testing}
 
+This test will be done in the future with the guidance from UnitVnVPlan
+\cite{Dong2019UnitVnV}.
+
 \section{Changes Due to Testing}
 
+No changes have been done yet. However, there might be changes due to the future
+tests.
+
 \section{Automated Testing}
+
+This section will be finished in the future with the guidance from SystVnVPlan
+\cite{Dong2019SystVnV} and UnitVnVPlan \cite{Dong2019UnitVnV}.
 		
 \section{Trace to Requirements}
-		
+
+\begin{longtable}{l l}
+\toprule
+Requirements \cite{Dong2019SRS} & Test sections\\
+\midrule
+R1 & \\
+R2 & \\
+R3 & \\
+R4 & \\
+R5 & \\
+R6 & \ref{sec_Installability}\\
+R7 & \ref{sec_CorrectnessVerifiability}\\
+R8 & \ref{sec_CorrectnessVerifiability}\\
+R9 & \ref{sec_Robustness}\\
+R10 & \ref{sec_Usability}\\
+R11 & \ref{sec_Maintainability}\\
+R12 & \ref{sec_Portability}\\
+R13 & \ref{sec_Understandability}\\
+\bottomrule
+\caption{Traceability Matrix showing the connections between requirements and
+tests}
+\label{Tb_traceRequirements}
+\end{longtable}
+
 \section{Trace to Modules}		
 
+\begin{longtable}{l l}
+\toprule
+Modules \cite{Dong2019MIS} & Test sections\\
+\midrule
+Hardware-Hiding Module & - \\
+Input Module & \ref{sec_CorrectnessVerifiability}, \ref{sec_Robustness},
+\ref{sec_Usability}, \ref{sec_Maintainability}, \ref{sec_Understandability}\\
+Output Module & \ref{sec_CorrectnessVerifiability}, \ref{sec_Usability},
+\ref{sec_Maintainability}, \ref{sec_Understandability}\\
+Optimal Thresholds Calculation & \ref{sec_CorrectnessVerifiability},
+\ref{sec_Usability}, \ref{sec_Maintainability}, \ref{sec_Understandability}\\
+Image Verification & \ref{sec_CorrectnessVerifiability},
+\ref{sec_Maintainability}, \ref{sec_Understandability}\\
+Constant Values & \ref{sec_Maintainability}, \ref{sec_Understandability} \\
+Control Module & \ref{sec_Maintainability}, \ref{sec_Understandability} \\
+Sequence Data Structure & - \\
+Image Data Structure & \ref{sec_CorrectnessVerifiability},
+\ref{sec_Maintainability}, \ref{sec_Understandability}\\
+\bottomrule
+\caption{Traceability Matrix showing the connections between modules and
+tests}
+\label{Tb_traceModules}
+\end{longtable}
+
 \section{Code Coverage Metrics}
+
+This section will be finished in the future with the guidance from SystVnVPlan
+\cite{Dong2019SystVnV} and UnitVnVPlan \cite{Dong2019UnitVnV}.
 
 \newpage
 
