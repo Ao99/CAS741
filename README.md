@@ -2,6 +2,8 @@
 
 This project is a implementation of segmentation for medical images.
 
+<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/30/Java_programming_language_logo.svg/300px-Java_programming_language_logo.svg.png" alt="Python" width="200">
+
  -   Documented software requirements specifications
     
  -   Designed and documented system & unit test plans, modules, and interfaces
@@ -16,4 +18,3 @@ This project is a implementation of segmentation for medical images.
  - refs - References
  - src - Source codes for the implementation
  - test - Files for testing
- 
